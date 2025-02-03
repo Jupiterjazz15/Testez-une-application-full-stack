@@ -52,6 +52,21 @@ describe('RegisterComponent', () => {
     expect(debugElement.nativeElement.textContent.trim()).toBe('Register');
   });
 
-  // Ne puis-je pas
+   // Vérifier que l'input email a la classe "ng-invalid" si l'email est incorrect
+   it('should add "ng-invalid" class when email is incorrect', () => {
+    // Récupérer l'élément input de l'email
+    const emailInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="email"]'));
+
+    // Modifier la valeur du champ email avec un email invalide
+    component.form.controls['email'].setValue('invalid-email');
+
+    // Déclencher la détection des changements
+    fixture.detectChanges();
+
+    // Vérifier que l'élément a bien la classe "ng-invalid"
+    expect(emailInput.nativeElement.classList).toContain('ng-invalid');
+  });
+
+
 
 });
