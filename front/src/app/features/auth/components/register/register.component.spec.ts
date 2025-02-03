@@ -8,7 +8,9 @@ import { MatInputModule } from '@angular/material/input'; // Champs de saisie Ma
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Gestion des animations Material
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { fakeAsync, flush } from '@angular/core/testing'; // pour forcer Jest à attendre les MAJ du DOM
 import { expect } from '@jest/globals'; // Fonction d'assertion pour Jest
+
 
 import { RegisterComponent } from './register.component'; // Import du composant à tester
 
@@ -44,29 +46,46 @@ describe('RegisterComponent', () => {
   });
 
   it('should have a mat-card-title with text "Register"', () => {
-    // Récupérer l'élément contenant la classe mat-card-title
-    const debugElement: DebugElement = fixture.debugElement.query(By.css('.mat-card-title'));
-    // Vérifier que l'élément est trouvé
-    expect(debugElement).toBeTruthy();
-    // Vérifier que le texte est bien "Register"
-    expect(debugElement.nativeElement.textContent.trim()).toBe('Register');
+
+    const registerCardTitle: DebugElement = fixture.debugElement.query(By.css('.mat-card-title')); // Récupérer l'élément contenant la classe mat-card-title
+    expect(registerCardTitle).toBeTruthy(); // Vérifier que l'élément est trouvé
+    expect(registerCardTitle.nativeElement.textContent.trim()).toBe('Register'); // Vérifier que le texte est bien "Register"
+
   });
 
-   // Vérifier que l'input email a la classe "ng-invalid" si l'email est incorrect
-   it('should add "ng-invalid" class when email is incorrect', () => {
-    // Récupérer l'élément input de l'email
-    const emailInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="email"]'));
-
-    // Modifier la valeur du champ email avec un email invalide
-    component.form.controls['email'].setValue('invalid-email');
-
-    // Déclencher la détection des changements
+  it('should add "ng-invalid" class when last name is empty', () => {
+    const lastNameInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="lastName"]'));  // Récupérer l'élément de l'input "Last name"
+    expect(lastNameInput).toBeTruthy(); // Vérifier que l'élément a été trouvé
+    component.form.controls['lastName'].setValue(''); // S'assurer que le champ est vide
     fixture.detectChanges();
+    expect(lastNameInput.nativeElement.classList).toContain('ng-invalid'); // Vérifier que la classe "ng-invalid" est bien ajoutée au champ
 
-    // Vérifier que l'élément a bien la classe "ng-invalid"
-    expect(emailInput.nativeElement.classList).toContain('ng-invalid');
   });
 
+  it('should set aria-invalid to "true" if email is invalid', fakeAsync(() => {
+    const emailInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="email"]')); // Récupérer l'élément de l'input "email"
+    expect(emailInput).toBeTruthy();
 
+    component.form.controls['email'].setValue('testemail.com'); // Définir une valeur incorrecte (sans '@')
+    component.form.controls['email'].markAsTouched(); // Marquer le champ comme touché
+    fixture.detectChanges();
+    flush(); // Attendre toutes les mises à jour Angular
+
+    expect(component.form.controls['email'].invalid).toBeTruthy(); // Vérifier que le champ est invalide
+    expect(emailInput.nativeElement.getAttribute('aria-invalid')).toBe('true'); // Vérifier que l'attribut aria-invalid est bien "true"
+  }));
+
+  it('should set aria-invalid to "false" if email is valid', fakeAsync(() => {
+    const emailInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="email"]')); // Récupérer l'élément de l'input "email"
+    expect(emailInput).toBeTruthy();
+
+    component.form.controls['email'].setValue('test@email.com'); // Définir une valeur correcte (avec '@')
+    component.form.controls['email'].markAsTouched(); // Marquer le champ comme touché
+    fixture.detectChanges();
+    flush(); // Attendre toutes les mises à jour Angular
+
+    expect(component.form.controls['email'].valid).toBeTruthy(); // Vérifier que le champ est valide
+    expect(emailInput.nativeElement.getAttribute('aria-invalid')).toBe('false'); // Vérifier que l'attribut aria-invalid est bien "false"
+  }));
 
 });
