@@ -12,14 +12,28 @@ import { SessionApiService } from '../../services/session-api.service';
 })
 export class ListComponent {
 
-  public sessions$: Observable<Session[]> = this.sessionApiService.all();
+  public sessions$: Observable<Session[]>;
 
   constructor(
     private sessionService: SessionService,
     private sessionApiService: SessionApiService
-  ) { }
+  ) {
+    // Initialisation de sessions$
+    this.sessions$ = this.sessionApiService.all();
+
+    // Vérification si les sessions sont bien récupérées
+    this.sessions$.subscribe(sessions => {
+      console.log('📌 Sessions reçues dans ListComponent:', sessions); // 🔍 Vérifier si les sessions sont bien récupérées
+    });
+  }
 
   get user(): SessionInformation | undefined {
     return this.sessionService.sessionInformation;
   }
+
+  logButtonState() {
+    console.log(' 👉 Bouton Edit cliqué');
+  }
+
+
 }

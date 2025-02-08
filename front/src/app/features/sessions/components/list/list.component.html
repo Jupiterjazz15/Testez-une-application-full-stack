@@ -28,8 +28,8 @@
             <mat-icon>search</mat-icon>
             <span class="ml1">Detail</span>
           </button>
-          <button *ngIf="user!.admin" mat-raised-button color="primary"
-                  [routerLink]="['update',session.id]">
+          <p *ngIf="user?.admin" style="color: red;">Admin mode ON</p>
+          <button *ngIf="user?.admin" mat-raised-button color="primary" (click)="logButtonState()">
             <mat-icon>edit</mat-icon>
             <span class="ml1">Edit</span>
           </button>
