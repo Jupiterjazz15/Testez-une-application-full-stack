@@ -78,23 +78,37 @@ describe('DetailComponent', () => {
   });
 
   it('should display the Delete button if the user is an admin', () => {
-    // Vérifier que l'utilisateur est admin
     component.isAdmin = true; // Simuler un admin
-    fixture.detectChanges(); // Déclencher le rafraîchissement du DOM
+    fixture.detectChanges(); // Mettre à jour le DOM
 
     const deleteButton = fixture.nativeElement.querySelector('button[color="warn"]');
-    expect(deleteButton).toBeTruthy(); // Le bouton doit exister
+    expect(deleteButton).toBeTruthy();
     expect(deleteButton.textContent).toContain('Delete');
   });
 
   it('should not display the Delete button if the user is not an admin', () => {
-    // Vérifier que l'utilisateur n'est PAS admin
     component.isAdmin = false; // Simuler un utilisateur non-admin
     fixture.detectChanges();
 
     const deleteButton = fixture.nativeElement.querySelector('button[color="warn"]');
-    expect(deleteButton).toBeFalsy(); // Le bouton ne doit pas être affiché
+    expect(deleteButton).toBeFalsy();
   });
 
+  it('should call delete() when Delete button is clicked', () => {
+    // ✅ Simuler un admin pour voir le bouton Delete
+    component.isAdmin = true;
+    fixture.detectChanges();
+
+    // ✅ Espionner la méthode `delete()`
+    jest.spyOn(component, 'delete');
+
+    // ✅ Trouver et cliquer sur le bouton Delete
+    const deleteButton = fixture.debugElement.query(By.css('button[color="warn"]'));
+    deleteButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+
+    // ✅ Vérifier que `delete()` a bien été appelée
+    expect(component.delete).toHaveBeenCalled();
+  });
 
 });
