@@ -9,6 +9,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TeacherService } from 'src/app/services/teacher.service';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { expect } from '@jest/globals';
 
@@ -24,6 +26,10 @@ describe('FormComponent', () => {
     sessionInformation: {
       admin: true
     }
+  };
+
+  const mockTeacherService = {
+    all: jest.fn().mockReturnValue(of([])) // ✅ Simuler un retour vide pour éviter l'erreur
   };
 
   const mockSessionApiService = {
@@ -58,14 +64,16 @@ describe('FormComponent', () => {
         ReactiveFormsModule,
         MatSnackBarModule,
         MatSelectModule,
-        BrowserAnimationsModule
+        NoopAnimationsModule, // ✅ Désactiver les animations pour éviter l'erreur
       ],
       providers: [
         { provide: SessionService, useValue: mockSessionService },
-        { provide: SessionApiService, useValue: mockSessionApiService }
+        { provide: SessionApiService, useValue: mockSessionApiService },
+        { provide: TeacherService, useValue: mockTeacherService }
       ],
       declarations: [FormComponent]
     }).compileComponents();
+
 
     fixture = TestBed.createComponent(FormComponent);
     component = fixture.componentInstance;
@@ -95,5 +103,38 @@ describe('FormComponent', () => {
     const submitButton = fixture.nativeElement.querySelector('button[type="submit"]');
     expect(submitButton.disabled).toBeFalsy();
   });
-  
+
+  it('should show an error if a required field is missing', async () => {
+    await fixture.whenStable();
+    expect(component.sessionForm).toBeDefined();
+
+    // ❌ Oublier un champ obligatoire
+    component.sessionForm!.setValue({
+      name: '',
+      date: '',
+      teacher_id: '',
+      description: ''
+    });
+
+    // 🔹 Marquer les champs comme "touchés" pour déclencher l'affichage des erreurs
+    Object.keys(component.sessionForm!.controls).forEach(field => {
+      const control = component.sessionForm!.get(field);
+      control?.markAsTouched();   // ✅ Forcer Angular à afficher les erreurs
+      control?.updateValueAndValidity(); // ✅ Mettre à jour la validation
+    });
+
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    // ✅ Vérifier que le bouton est bien désactivé
+    const submitButton = fixture.nativeElement.querySelector('button[type="submit"]');
+    expect(submitButton.disabled).toBeTruthy();
+
+    // ✅ Vérifier qu'un message d'erreur est affiché
+    const errorMessages = fixture.nativeElement.querySelectorAll('mat-error');
+    console.log("Nombre d'erreurs détectées :", errorMessages.length); // Debugging
+    expect(errorMessages.length).toBeGreaterThan(0);
+  });
+
+
 });
