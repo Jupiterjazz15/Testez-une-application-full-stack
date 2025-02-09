@@ -77,4 +77,24 @@ describe('DetailComponent', () => {
     expect(attendeesElement.textContent).toContain(mockSession.users.length.toString());
   });
 
+  it('should display the Delete button if the user is an admin', () => {
+    // Vérifier que l'utilisateur est admin
+    component.isAdmin = true; // Simuler un admin
+    fixture.detectChanges(); // Déclencher le rafraîchissement du DOM
+
+    const deleteButton = fixture.nativeElement.querySelector('button[color="warn"]');
+    expect(deleteButton).toBeTruthy(); // Le bouton doit exister
+    expect(deleteButton.textContent).toContain('Delete');
+  });
+
+  it('should not display the Delete button if the user is not an admin', () => {
+    // Vérifier que l'utilisateur n'est PAS admin
+    component.isAdmin = false; // Simuler un utilisateur non-admin
+    fixture.detectChanges();
+
+    const deleteButton = fixture.nativeElement.querySelector('button[color="warn"]');
+    expect(deleteButton).toBeFalsy(); // Le bouton ne doit pas être affiché
+  });
+
+
 });
