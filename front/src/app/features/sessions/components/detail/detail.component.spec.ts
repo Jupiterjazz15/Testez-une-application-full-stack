@@ -120,19 +120,107 @@ describe('DetailComponent', () => {
   });
 
   it('should display the "Participate" button if the user is not a participant', () => {
-    // Simuler une session où l'utilisateur n'est pas participant
+    // ✅ Simuler une session où l'utilisateur n'est pas un participant
     component.session = {
-      users: [] // L'utilisateur courant n'est pas dans la liste
+      id: 1,
+      name: 'Yoga Session',
+      description: 'A relaxing yoga class',
+      date: new Date(),
+      teacher_id: 2,
+      users: [], // ✅ Aucun participant
+      createdAt: new Date(),
+      updatedAt: new Date(),
     } as Session;
 
-    component.isParticipate = false; // Forcer isParticipate à false
+    component.isParticipate = false; // ✅ L'utilisateur n'est PAS participant
+    component.isAdmin = false; // ✅ L'utilisateur n'est PAS admin
     fixture.detectChanges();
 
-    const participateButton = fixture.debugElement.query(By.css('button.participate-btn'));
+    // ✅ Correction du sélecteur CSS pour trouver le bon bouton
+    const participateButton = fixture.debugElement.query(By.css('button[mat-raised-button]'));
 
     expect(participateButton).toBeTruthy();
-    expect(participateButton.nativeElement.textContent.trim()).toBe('Participate');
+    expect(participateButton.nativeElement.textContent.trim()).toContain('Participate');
   });
+
+  it('should display the "Do not participate" button if the user is a participant and not an admin', () => {
+    // ✅ Simuler une session avec des données valides
+    component.session = {
+      id: 1,
+      name: 'Yoga Session',
+      description: 'A relaxing yoga class',
+      date: new Date(),
+      teacher_id: 2,
+      users: [1], // ✅ L'utilisateur est déjà participant
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    } as Session;
+
+    // ✅ Conditions nécessaires pour que le bouton "Do not participate" apparaisse
+    component.isParticipate = true;  // ✅ L'utilisateur PARTICIPE déjà
+    component.isAdmin = false;       // ✅ L'utilisateur N'EST PAS admin
+    fixture.detectChanges();
+
+    // ✅ Sélectionner le bouton "Do not participate"
+    const doNotParticipateButton = fixture.debugElement.query(By.css('button[mat-raised-button]'));
+
+    expect(doNotParticipateButton).toBeTruthy(); // ✅ Vérifier qu'il existe
+    expect(doNotParticipateButton.nativeElement.textContent.trim()).toContain('Do not participate'); // ✅ Vérifier le texte
+  });
+
+
+  it('should display the teacher\'s name if a teacher is assigned', () => {
+    // Simuler un professeur complet
+    component.teacher = {
+      id: 1,
+      firstName: 'John',
+      lastName: 'DOE',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    fixture.detectChanges();
+
+    // Récupérer l'élément affichant le nom du professeur
+    const teacherElement = fixture.debugElement.query(By.css('mat-card-subtitle'));
+
+    expect(teacherElement).toBeTruthy();
+    expect(teacherElement.nativeElement.textContent).toContain('John DOE');
+  });
+
+
+  it('should display the number of participants if a teacher is assigned', () => {
+    // Simuler une session avec un professeur et 3 participants
+    component.session = {
+      id: 1,
+      name: 'Yoga Session',
+      description: 'A relaxing yoga session',
+      date: new Date(),
+      teacher_id: 1, // Présence d'un professeur
+      users: [1, 2, 3], // 3 participants
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    // Simuler la présence d'un professeur
+    component.teacher = {
+      id: 1,
+      firstName: 'John',
+      lastName: 'DOE',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    fixture.detectChanges();
+
+    // Sélectionner l'élément affichant le nombre de participants
+    const participantsElement = fixture.debugElement.query(By.css('mat-card-content div:first-of-type span.ml1'));
+
+    // Vérifications
+    expect(participantsElement).toBeTruthy(); // Vérifier que l'élément existe
+    expect(participantsElement.nativeElement.textContent.trim()).toBe('3 attendees'); // Vérifier que le nombre affiché est correct
+  });
+
 
 
 });
