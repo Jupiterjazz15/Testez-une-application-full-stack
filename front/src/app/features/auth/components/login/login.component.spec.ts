@@ -50,6 +50,16 @@ describe('LoginComponent', () => {
 
   });
 
+  it('should contain an email input field', () => {
+    const emailInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="email"]'));
+    expect(emailInput).toBeTruthy();
+  });
+
+  it('should contain a password input field', () => {
+    const passwordInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="password"]'));
+    expect(passwordInput).toBeTruthy();
+  });
+
   it('should set aria-invalid="false" when the password is not empty', () => {
     const passwordInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="password"]')); // Récupérer l'élément de l'input
     expect(passwordInput).toBeTruthy(); // Vérifier que l'élément a été trouvé
@@ -68,6 +78,13 @@ describe('LoginComponent', () => {
     fixture.detectChanges(); // Déclencher la mise à jour du DOM
 
     expect(passwordInput.nativeElement.classList).toContain('ng-invalid'); // Vérifier que la classe "ng-invalid" est bien ajoutée
+  });
+
+
+  it('should contain a button with text "Submit"', () => {
+    const submitButton: DebugElement = fixture.debugElement.query(By.css('button[type="submit"]'));
+    expect(submitButton).toBeTruthy();
+    expect(submitButton.nativeElement.textContent.trim()).toBe('Submit');
   });
 
 })
