@@ -62,6 +62,14 @@ describe('DetailComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should display a back arrow button', () => {
+    const backButton = fixture.debugElement.query(By.css('button mat-icon'));
+
+    expect(backButton).toBeTruthy();
+    expect(backButton.nativeElement.textContent.trim()).toBe('arrow_back');
+  });
+
+
   it('should display the session name correctly', () => {
     const nameElement = fixture.nativeElement.querySelector('h1');
     expect(nameElement.textContent).toContain(mockSession.name);
@@ -110,5 +118,21 @@ describe('DetailComponent', () => {
     // ✅ Vérifier que `delete()` a bien été appelée
     expect(component.delete).toHaveBeenCalled();
   });
+
+  it('should display the "Participate" button if the user is not a participant', () => {
+    // Simuler une session où l'utilisateur n'est pas participant
+    component.session = {
+      users: [] // L'utilisateur courant n'est pas dans la liste
+    } as Session;
+
+    component.isParticipate = false; // Forcer isParticipate à false
+    fixture.detectChanges();
+
+    const participateButton = fixture.debugElement.query(By.css('button.participate-btn'));
+
+    expect(participateButton).toBeTruthy();
+    expect(participateButton.nativeElement.textContent.trim()).toBe('Participate');
+  });
+
 
 });
