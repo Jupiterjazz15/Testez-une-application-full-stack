@@ -53,6 +53,32 @@ describe('RegisterComponent', () => {
 
   });
 
+  it('should have an input field for "First name"', () => {
+    const firstNameInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="firstName"]'));
+    expect(firstNameInput).toBeTruthy();
+  });
+
+  it('should have an input field for "Last name"', () => {
+    const lastNameInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="lastName"]'));
+    expect(lastNameInput).toBeTruthy();
+  });
+
+  it('should have an input field for "Email"', () => {
+    const emailInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="email"]'));
+    expect(emailInput).toBeTruthy();
+  });
+
+  it('should have an input field for "Password"', () => {
+    const passwordInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="password"]'));
+    expect(passwordInput).toBeTruthy();
+  });
+
+  it('should have a submit button', () => {
+    const submitButton: DebugElement = fixture.debugElement.query(By.css('button[type="submit"]'));
+    expect(submitButton).toBeTruthy();
+    expect(submitButton.nativeElement.textContent.trim()).toBe('Submit');
+  });
+
   it('should add "ng-invalid" class when last name is empty', () => {
     const lastNameInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="lastName"]'));  // Récupérer l'élément de l'input "Last name"
     expect(lastNameInput).toBeTruthy(); // Vérifier que l'élément a été trouvé
@@ -86,6 +112,26 @@ describe('RegisterComponent', () => {
 
     expect(component.form.controls['email'].valid).toBeTruthy(); // Vérifier que le champ est valide
     expect(emailInput.nativeElement.getAttribute('aria-invalid')).toBe('false'); // Vérifier que l'attribut aria-invalid est bien "false"
+  }));
+
+  it('should enable the submit button when all fields are filled', fakeAsync(() => {
+    const submitButton: DebugElement = fixture.debugElement.query(By.css('button[type="submit"]'));
+    expect(submitButton).toBeTruthy();
+
+    // Vérifier que le bouton est désactivé au départ
+    expect(submitButton.nativeElement.disabled).toBeTruthy();
+
+    // Remplir tous les champs du formulaire
+    component.form.controls['firstName'].setValue('Coralie');
+    component.form.controls['lastName'].setValue('Haller');
+    component.form.controls['email'].setValue('coralie@test.com');
+    component.form.controls['password'].setValue('azerty');
+
+    fixture.detectChanges();
+    flush(); // Forcer les mises à jour Angular
+
+    // Vérifier que le bouton est maintenant activé
+    expect(submitButton.nativeElement.disabled).toBeFalsy();
   }));
 
 });
