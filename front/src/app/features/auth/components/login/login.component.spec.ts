@@ -80,11 +80,27 @@ describe('LoginComponent', () => {
     expect(passwordInput.nativeElement.classList).toContain('ng-invalid'); // Vérifier que la classe "ng-invalid" est bien ajoutée
   });
 
-
   it('should contain a button with text "Submit"', () => {
     const submitButton: DebugElement = fixture.debugElement.query(By.css('button[type="submit"]'));
     expect(submitButton).toBeTruthy();
     expect(submitButton.nativeElement.textContent.trim()).toBe('Submit');
+  });
+
+  it('should enable the submit button when all fields are filled', () => {
+    const submitButton: DebugElement = fixture.debugElement.query(By.css('button[type="submit"]'));
+    expect(submitButton).toBeTruthy();
+
+    // Vérifier que le bouton est désactivé au départ
+    expect(submitButton.nativeElement.disabled).toBeTruthy();
+
+    // Remplir tous les champs du formulaire
+    component.form.controls['email'].setValue('test@email.com');
+    component.form.controls['password'].setValue('StrongPassword123');
+
+    fixture.detectChanges(); // Mettre à jour le DOM après modification du formulaire
+
+    // Vérifier que le bouton est maintenant activé
+    expect(submitButton.nativeElement.disabled).toBeFalsy();
   });
 
 })
