@@ -63,6 +63,13 @@ describe('MeComponent', () => {
     expect(component).toBeDefined();
   });
 
+  it('should display the back arrow button', () => {
+    const backButton = fixture.debugElement.query(By.css('button mat-icon'));
+    expect(backButton).toBeTruthy();
+    expect(backButton.nativeElement.textContent.trim()).toBe('arrow_back');
+  });
+
+
   it('should display "User information" in the h1', () => {
     const h1Element = fixture.debugElement.query(By.css('h1')).nativeElement;
     expect(h1Element.textContent.trim()).toBe('User information');
