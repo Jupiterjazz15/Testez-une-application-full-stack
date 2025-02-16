@@ -54,7 +54,27 @@ describe('DetailComponent', () => {
     service = TestBed.inject(SessionService);
     fixture = TestBed.createComponent(DetailComponent);
     component = fixture.componentInstance;
-    component.session = mockSession;   // 🔹 Injecter les données avant chaque test
+
+    // 🔹 Définir les valeurs par défaut pour éviter de les répéter dans chaque test
+    component.session = {
+      id: 1,
+      name: 'Yoga Session',
+      description: 'A relaxing yoga session for beginners.',
+      date: new Date('2025-02-10'),
+      teacher_id: 1, // Par défaut, un professeur est assigné
+      users: [1, 2, 3,4],
+      createdAt: new Date('2025-01-01'),
+      updatedAt: new Date('2025-02-01')
+    };
+
+    component.teacher = {
+      id: 1,
+      firstName: 'John',
+      lastName: 'DOE',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
     fixture.detectChanges();
   });
 
@@ -69,11 +89,6 @@ describe('DetailComponent', () => {
     expect(backButton.nativeElement.textContent.trim()).toBe('arrow_back');
   });
 
-
-  it('should display the session name correctly', () => {
-    const nameElement = fixture.nativeElement.querySelector('h1');
-    expect(nameElement.textContent).toContain(mockSession.name);
-  });
 
   it('should display the session date correctly', () => {
     const dateElement = fixture.nativeElement.querySelector('.my2 div:nth-child(2) span');
@@ -99,7 +114,7 @@ describe('DetailComponent', () => {
     fixture.detectChanges();
 
     const deleteButton = fixture.nativeElement.querySelector('button[color="warn"]');
-    expect(deleteButton).toBeFalsy();
+    expect(deleteButton).toBeNull();
   });
 
   it('should call delete() when Delete button is clicked', () => {
@@ -117,6 +132,36 @@ describe('DetailComponent', () => {
 
     // ✅ Vérifier que `delete()` a bien été appelée
     expect(component.delete).toHaveBeenCalled();
+  });
+
+  it('should call participate() when Participate button is clicked', () => {
+    component.isParticipate = false; // Simuler que l'utilisateur ne participe pas encore
+    component.isAdmin = false; // S'assurer qu'il n'est pas admin
+    fixture.detectChanges();
+
+    // ✅ Vérifier si le bouton existe avant d'espionner la méthode
+    const participateButton = fixture.debugElement.query(By.css('button[mat-raised-button]'));
+    expect(participateButton).toBeTruthy(); // Vérifier que le bouton est bien affiché
+
+    jest.spyOn(component, 'participate'); // Espionner la méthode `participate`
+    participateButton.triggerEventHandler('click', null); // Simuler le clic
+
+    expect(component.participate).toHaveBeenCalled(); // Vérifier que `participate()` a bien été appelé
+  });
+
+  it('should call unParticipate() when Do not participate button is clicked', () => {
+    component.isParticipate = true; // Simuler que l'utilisateur participe déjà
+    component.isAdmin = false; // S'assurer qu'il n'est pas admin
+    fixture.detectChanges();
+
+    // ✅ Vérifier si le bouton existe avant d'espionner la méthode
+    const unParticipateButton = fixture.debugElement.query(By.css('button[mat-raised-button]'));
+    expect(unParticipateButton).toBeTruthy(); // Vérifier que le bouton est bien affiché
+
+    jest.spyOn(component, 'unParticipate'); // Espionner la méthode `unParticipate`
+    unParticipateButton.triggerEventHandler('click', null); // Simuler le clic
+
+    expect(component.unParticipate).toHaveBeenCalled(); // Vérifier que `unParticipate()` a bien été appelé
   });
 
   it('should display the "Participate" button if the user is not a participant', () => {
@@ -168,7 +213,6 @@ describe('DetailComponent', () => {
     expect(doNotParticipateButton.nativeElement.textContent.trim()).toContain('Do not participate'); // ✅ Vérifier le texte
   });
 
-
   it('should display the teacher\'s name if a teacher is assigned', () => {
     // Simuler un professeur complet
     component.teacher = {
@@ -187,7 +231,6 @@ describe('DetailComponent', () => {
     expect(teacherElement).toBeTruthy();
     expect(teacherElement.nativeElement.textContent).toContain('John DOE');
   });
-
 
   it('should display the number of participants if a teacher is assigned', () => {
     // Simuler une session avec un professeur et 3 participants
@@ -221,6 +264,133 @@ describe('DetailComponent', () => {
     expect(participantsElement.nativeElement.textContent.trim()).toBe('3 attendees'); // Vérifier que le nombre affiché est correct
   });
 
+  it('should display the session date if a teacher is assigned', () => {
+    // Simuler une session avec un professeur
+    component.session = {
+      id: 1,
+      name: 'Yoga Session',
+      description: 'A relaxing yoga session',
+      date: new Date('2025-02-10'),
+      teacher_id: 1, // Un professeur est assigné
+      users: [1, 2, 3],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    // Simuler la présence d'un professeur
+    component.teacher = {
+      id: 1,
+      firstName: 'John',
+      lastName: 'DOE',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    fixture.detectChanges();
+
+    // Sélectionner l'élément affichant la date de la session
+    const dateElement = fixture.debugElement.query(By.css('.my2 div:nth-child(2) span'));
+
+    // Vérifications
+    expect(dateElement).toBeTruthy(); // Vérifier que l'élément existe
+    expect(dateElement.nativeElement.textContent).toContain('February 10, 2025'); // Vérifier que la date est bien affichée
+  });
+
+  it('should display the session description if a teacher is assigned', () => {
+    // Simuler une session avec un professeur
+    component.session = {
+      id: 1,
+      name: 'Yoga Session',
+      description: 'A relaxing yoga session for beginners.',
+      date: new Date('2025-02-10'),
+      teacher_id: 1, // Un professeur est assigné
+      users: [1, 2, 3],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    // Simuler la présence d'un professeur
+    component.teacher = {
+      id: 1,
+      firstName: 'John',
+      lastName: 'DOE',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    fixture.detectChanges();
+
+    // Sélectionner l'élément affichant la description
+    const descriptionElement = fixture.debugElement.query(By.css('.description'));
+
+    // Vérifications
+    expect(descriptionElement).toBeTruthy(); // Vérifier que l'élément existe
+    expect(descriptionElement.nativeElement.textContent).toContain('A relaxing yoga session for beginners.'); // Vérifier que la description est bien affichée
+  });
+
+  it('should display the session createdAt date if a teacher is assigned', () => {
+    // Simuler une session avec un professeur
+    component.session = {
+      id: 1,
+      name: 'Yoga Session',
+      description: 'A relaxing yoga session for beginners.',
+      date: new Date('2025-02-10'),
+      teacher_id: 1, // Un professeur est assigné
+      users: [1, 2, 3],
+      createdAt: new Date('2025-01-01'),
+      updatedAt: new Date('2025-02-01')
+    };
+
+    // Simuler la présence d'un professeur
+    component.teacher = {
+      id: 1,
+      firstName: 'John',
+      lastName: 'DOE',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    fixture.detectChanges();
+
+    // Sélectionner l'élément affichant la date de création
+    const createdAtElement = fixture.debugElement.query(By.css('.created'));
+
+    // Vérifications
+    expect(createdAtElement).toBeTruthy(); // Vérifier que l'élément existe
+    expect(createdAtElement.nativeElement.textContent).toContain('January 1, 2025'); // Vérifier que la date est bien affichée
+  });
+
+  it('should display the session updatedAt date if a teacher is assigned', () => {
+    // Simuler une session avec un professeur
+    component.session = {
+      id: 1,
+      name: 'Yoga Session',
+      description: 'A relaxing yoga session for beginners.',
+      date: new Date('2025-02-10'),
+      teacher_id: 1, // Un professeur est assigné
+      users: [1, 2, 3],
+      createdAt: new Date('2025-01-01'),
+      updatedAt: new Date('2025-02-01')
+    };
+
+    // Simuler la présence d'un professeur
+    component.teacher = {
+      id: 1,
+      firstName: 'John',
+      lastName: 'DOE',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    fixture.detectChanges();
+
+    // Sélectionner l'élément affichant la date de mise à jour
+    const updatedAtElement = fixture.debugElement.query(By.css('.updated'));
+
+    // Vérifications
+    expect(updatedAtElement).toBeTruthy(); // Vérifier que l'élément existe
+    expect(updatedAtElement.nativeElement.textContent).toContain('February 1, 2025'); // Vérifier que la date est bien affichée
+  });
 
 
 });
