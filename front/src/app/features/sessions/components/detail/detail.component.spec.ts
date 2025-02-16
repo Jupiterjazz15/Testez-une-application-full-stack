@@ -89,7 +89,6 @@ describe('DetailComponent', () => {
     expect(backButton.nativeElement.textContent.trim()).toBe('arrow_back');
   });
 
-
   it('should display the session date correctly', () => {
     const dateElement = fixture.nativeElement.querySelector('.my2 div:nth-child(2) span');
     expect(dateElement.textContent).toContain('February 10, 2025');
@@ -132,21 +131,6 @@ describe('DetailComponent', () => {
 
     // ✅ Vérifier que `delete()` a bien été appelée
     expect(component.delete).toHaveBeenCalled();
-  });
-
-  it('should call participate() when Participate button is clicked', () => {
-    component.isParticipate = false; // Simuler que l'utilisateur ne participe pas encore
-    component.isAdmin = false; // S'assurer qu'il n'est pas admin
-    fixture.detectChanges();
-
-    // ✅ Vérifier si le bouton existe avant d'espionner la méthode
-    const participateButton = fixture.debugElement.query(By.css('button[mat-raised-button]'));
-    expect(participateButton).toBeTruthy(); // Vérifier que le bouton est bien affiché
-
-    jest.spyOn(component, 'participate'); // Espionner la méthode `participate`
-    participateButton.triggerEventHandler('click', null); // Simuler le clic
-
-    expect(component.participate).toHaveBeenCalled(); // Vérifier que `participate()` a bien été appelé
   });
 
   it('should call unParticipate() when Do not participate button is clicked', () => {
@@ -391,6 +375,26 @@ describe('DetailComponent', () => {
     expect(updatedAtElement).toBeTruthy(); // Vérifier que l'élément existe
     expect(updatedAtElement.nativeElement.textContent).toContain('February 1, 2025'); // Vérifier que la date est bien affichée
   });
+  
+  it('should call participate() when Participate button is clicked', () => {
+    component.isParticipate = false; // Simuler que l'utilisateur ne participe pas encore
+    component.isAdmin = false; // S'assurer qu'il n'est pas admin
+    fixture.detectChanges(); // Mettre à jour le DOM
 
+    // ✅ Correction du sélecteur CSS pour utiliser `data-testid`
+    const participateButton = fixture.debugElement.query(By.css('[data-testid="participate-button"]'));
+
+    expect(participateButton).toBeTruthy(); // Vérifier que le bouton existe
+
+    jest.spyOn(component, 'participate'); // Espionner la méthode `participate`
+
+    // ✅ Vérifier si le bouton a bien été trouvé avant de déclencher l'événement
+    if (participateButton) {
+      participateButton.nativeElement.click(); // Simuler le clic
+      fixture.detectChanges();
+    }
+
+    expect(component.participate).toHaveBeenCalled(); // Vérifier que `participate()` a bien été appelé
+  });
 
 });
