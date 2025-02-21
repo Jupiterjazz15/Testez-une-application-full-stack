@@ -1,46 +1,72 @@
-import { HttpClientModule } from '@angular/common/http'; // Module HTTP pour les requêtes API
-import { ComponentFixture, TestBed } from '@angular/core/testing'; // Outils de test Angular
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms'; // Gestion des formulaires réactifs
-import { MatCardModule } from '@angular/material/card'; // Module Angular Material pour les cartes
-import { MatFormFieldModule } from '@angular/material/form-field'; // Champs de formulaire Material
-import { MatIconModule } from '@angular/material/icon'; // Icônes Material
-import { MatInputModule } from '@angular/material/input'; // Champs de saisie Material
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Gestion des animations Material
+import { HttpClientModule } from '@angular/common/http';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {  ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { fakeAsync, flush } from '@angular/core/testing'; // pour forcer Jest à attendre les MAJ du DOM
-import { expect } from '@jest/globals'; // Fonction d'assertion pour Jest
+import { fakeAsync, flush } from '@angular/core/testing';
+import { RegisterRequest } from '../../interfaces/registerRequest.interface';
+import { AuthService } from '../../services/auth.service';
+import { of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
+import { expect } from '@jest/globals';
+import { throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
-import { RegisterComponent } from './register.component'; // Import du composant à tester
+import { RegisterComponent } from './register.component';
 
 describe('RegisterComponent', () => {
-  let component: RegisterComponent; // Variable pour stocker l'instance du composant
-  let fixture: ComponentFixture<RegisterComponent>; // Fixture pour interagir avec le composant
+  let component: RegisterComponent;
+  let fixture: ComponentFixture<RegisterComponent>;
+  let registerRequest: RegisterRequest;
+  let mockAuthService: any;
+  let router: Router; // ✅ Déclarer router ici
 
-  // Avant chaque test, on configure l'environnement de test
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [RegisterComponent], // Déclaration du composant à tester
-      imports: [
-        BrowserAnimationsModule, // Nécessaire pour les animations dans les composants Material
-        HttpClientModule, // Permet d'utiliser HttpClient dans le test
-        ReactiveFormsModule, // Activation des formulaires réactifs
-        MatCardModule, // Ajout du module Material pour l'affichage des cartes
-        MatFormFieldModule, // Ajout du module Material pour les champs de formulaire
-        MatIconModule, // Ajout du module Material pour les icônes
-        MatInputModule // Ajout du module Material pour les champs de saisie
-      ]
-    })
-      .compileComponents(); // Compilation des composants Angular avant exécution du test
+    mockAuthService = {
+      register: jest.fn().mockReturnValue(of({})), // ✅ Mock de l'authService avant l'initialisation de TestBed
+    };
 
-    // Création d'une instance du composant pour le test
+    await TestBed.configureTestingModule({
+      declarations: [RegisterComponent],
+      imports: [
+        BrowserAnimationsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        RouterTestingModule, // ✅ Ajout du module de test pour gérer `router`
+      ],
+      providers: [
+        { provide: AuthService, useValue: mockAuthService },
+      ],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(RegisterComponent);
-    component = fixture.componentInstance; // Récupération de l'instance du composant ?? qu'est ce que componentInstance ?
-    fixture.detectChanges(); // Déclenchement de la détection des changements pour rendre le template
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+    // ✅ Injection correcte après la configuration
+    router = TestBed.inject(Router);
+
+    registerRequest = {
+      email: 'test@example.com',
+      firstName: 'John',
+      lastName: 'Doe',
+      password: 'password123',
+    };
   });
 
-  // Test de base : Vérifier que le composant est bien créé
+
+  // TESTS UNITAIRES
   it('should create', () => {
     expect(component).toBeTruthy(); // Vérifie que l'instance du composant est bien instanciée
   });
@@ -133,5 +159,93 @@ describe('RegisterComponent', () => {
     // Vérifier que le bouton est maintenant activé
     expect(submitButton.nativeElement.disabled).toBeFalsy();
   }));
+
+  // TESTS D'INTEGRATION
+
+  it('should call authService.register', () => {
+    jest.spyOn(mockAuthService, 'register'); // ✅ Espionner l'appel
+
+    component.form.patchValue({
+      email: 'test@example.com',
+      firstName: 'John',
+      lastName: 'Doe',
+      password: 'password123'
+    });
+
+    component.submit(); // ✅ Exécuter la soumission du formulaire
+
+    expect(mockAuthService.register).toHaveBeenCalledTimes(1); // ✅ Vérifier qu'il a bien été appelé
+    expect(mockAuthService.register).toHaveBeenCalledWith({
+      email: 'test@example.com',
+      firstName: 'John',
+      lastName: 'Doe',
+      password: 'password123'
+    });
+  });
+
+  it('should call authService.register() with a valid RegisterRequest object', () => {
+    const registerSpy = jest.spyOn(mockAuthService, 'register');
+
+    component.form.patchValue({
+      email: 'test@example.com',
+      firstName: 'John',
+      lastName: 'Doe',
+      password: 'password123'
+    });
+
+    component.submit();
+
+    expect(registerSpy).toHaveBeenCalledWith(expect.objectContaining({
+      email: 'test@example.com',
+      firstName: 'John',
+      lastName: 'Doe',
+      password: 'password123'
+    }));
+  });
+
+  it('should navigate to "/login" on successful registration', () => {
+    const navigateSpy = jest.spyOn(router, 'navigate').mockResolvedValue(true);
+    component.form.patchValue(registerRequest);
+    component.submit();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/login']);
+  });
+
+  it('should NOT navigate to "/login" if registration fails', () => {
+    const navigateSpy = jest.spyOn(router, 'navigate');
+
+    jest.spyOn(mockAuthService, 'register').mockReturnValue(
+      throwError(() => new HttpErrorResponse({ status: 500, statusText: 'Server Error' }))
+    );
+
+    component.form.patchValue({
+      email: 'test@example.com',
+      firstName: 'John',
+      lastName: 'Doe',
+      password: 'password123'
+    });
+
+    component.submit();
+
+    expect(navigateSpy).not.toHaveBeenCalled(); // ✅ Vérifier que la navigation ne s'est pas produite
+  });
+
+  it('should set onError to true on registration error', () => {
+    jest
+      .spyOn(mockAuthService, 'register') // ✅ Espionner `register`
+      .mockReturnValue(
+        throwError(
+          () => new HttpErrorResponse({ status: 500, statusText: 'Server Error' })
+        )
+      );
+
+    component.submit(); // ✅ Tenter une soumission de formulaire avec une erreur
+
+    expect(component.onError).toBeTruthy(); // ✅ Vérifier que l'erreur a bien été détectée
+  });
+
+
+
+
 
 });

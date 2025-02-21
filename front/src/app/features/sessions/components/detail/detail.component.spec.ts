@@ -375,7 +375,7 @@ describe('DetailComponent', () => {
     expect(updatedAtElement).toBeTruthy(); // Vérifier que l'élément existe
     expect(updatedAtElement.nativeElement.textContent).toContain('February 1, 2025'); // Vérifier que la date est bien affichée
   });
-  
+
   it('should call participate() when Participate button is clicked', () => {
     component.isParticipate = false; // Simuler que l'utilisateur ne participe pas encore
     component.isAdmin = false; // S'assurer qu'il n'est pas admin

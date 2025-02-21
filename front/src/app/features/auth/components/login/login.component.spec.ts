@@ -11,17 +11,50 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { expect } from '@jest/globals';
 import { SessionService } from 'src/app/services/session.service';
-
+import { SessionInformation} from "../../../../interfaces/sessionInformation.interface";
 import { LoginComponent } from './login.component';
+import { AuthService } from '../../services/auth.service';
+import {of} from "rxjs";
+import {Router} from "@angular/router";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
+  let sessionService: SessionService;
+  let mockAuthService: any;
+  let router: Router;
+
+  const mockRouter = {
+    navigate: jest.fn(),
+  };
+
+  const mockSessionService = {
+    logIn: jest.fn(),
+  };
+
+  const mockSessionInfo: SessionInformation = {
+    id: 1,
+    token: 'mockToken',
+    type: 'mockType',
+    username: 'mockUsername',
+    firstName: 'John',
+    lastName: 'Doe',
+    admin: false,
+  };
 
   beforeEach(async () => {
+    mockAuthService = {
+      login: jest.fn().mockReturnValue(of(mockSessionInfo)), // ✅ Ajout de login
+      register: jest.fn().mockReturnValue(of({})),
+    };
+
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      providers: [SessionService],
+      providers: [
+        { provide: AuthService, useValue: mockAuthService },
+        { provide: SessionService, useValue: mockSessionService },
+        { provide: Router, useValue: mockRouter }, // ✅ Ajout du mock du Router
+      ],
       imports: [
         RouterTestingModule,
         BrowserAnimationsModule,
@@ -35,8 +68,11 @@ describe('LoginComponent', () => {
       .compileComponents();
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
+    sessionService = TestBed.inject(SessionService);
     fixture.detectChanges();
   });
+
+
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -59,6 +95,8 @@ describe('LoginComponent', () => {
     const passwordInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="password"]'));
     expect(passwordInput).toBeTruthy();
   });
+
+  //TESTS UNITAIRES//
 
   it('should set aria-invalid="false" when the password is not empty', () => {
     const passwordInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="password"]')); // Récupérer l'élément de l'input
@@ -102,5 +140,23 @@ describe('LoginComponent', () => {
     // Vérifier que le bouton est maintenant activé
     expect(submitButton.nativeElement.disabled).toBeFalsy();
   });
+
+// TESTS D'INTEGRATION //
+
+  it('should call SessionService logIn and navigate on successful login', () => {
+    const logInSpy = jest
+      .spyOn(sessionService, 'logIn')
+      .mockImplementation(() => {});
+
+    component.form.patchValue({
+      email: 'test@example.com',
+      password: 'password',
+    });
+    component.submit();
+
+    expect(logInSpy).toHaveBeenCalledWith(mockSessionInfo);
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['/sessions']);
+  });
+
 
 })
