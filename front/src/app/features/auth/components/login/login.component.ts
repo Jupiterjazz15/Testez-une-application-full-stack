@@ -38,6 +38,13 @@ export class LoginComponent {
               private sessionService: SessionService) {
   }
 
+
+  ngOnInit(): void {
+    if (this.sessionService.sessionInformation?.token) {
+      this.router.navigate(['/sessions']); // 🔄 Redirection automatique
+    }
+  }
+
   public submit(): void {
     const loginRequest = this.form.value as LoginRequest;
     this.authService.login(loginRequest).subscribe({

@@ -27,11 +27,12 @@ export class ListComponent {
     });
   }
 
-  get user(): SessionInformation | undefined {
-    return this.sessionService.sessionInformation;
-  }
+    get user(): SessionInformation | undefined {
+      return this.sessionService.sessionInformation ?? undefined;
+    }
 
-  logButtonState() {
+
+    logButtonState() {
     console.log(' 👉 Bouton Edit cliqué');
   }
 

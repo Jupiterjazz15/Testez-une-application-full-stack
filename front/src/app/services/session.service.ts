@@ -8,7 +8,16 @@ import { SessionInformation } from '../interfaces/sessionInformation.interface';
 export class SessionService {
 
   public isLogged = false;
-  public sessionInformation: SessionInformation | undefined;
+
+  private _sessionInformation: SessionInformation | null = null;
+
+  public get sessionInformation(): SessionInformation | null {
+    return this._sessionInformation;
+  }
+
+  public set sessionInformation(value: SessionInformation | null) {
+    this._sessionInformation = value;
+  }
 
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
 
@@ -23,7 +32,7 @@ export class SessionService {
   }
 
   public logOut(): void {
-    this.sessionInformation = undefined;
+    this.sessionInformation = null;
     this.isLogged = false;
     this.next();
   }

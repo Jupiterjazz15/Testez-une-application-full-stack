@@ -11,11 +11,12 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { expect } from '@jest/globals';
 import { SessionService } from 'src/app/services/session.service';
-import { SessionInformation} from "../../../../interfaces/sessionInformation.interface";
+import { SessionInformation } from "../../../../interfaces/sessionInformation.interface";
 import { LoginComponent } from './login.component';
 import { AuthService } from '../../services/auth.service';
-import {of} from "rxjs";
-import {Router} from "@angular/router";
+import { of, throwError } from "rxjs";
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from "@angular/router";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -44,7 +45,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     mockAuthService = {
-      login: jest.fn().mockReturnValue(of(mockSessionInfo)), // ✅ Ajout de login
+      login: jest.fn().mockReturnValue(of(mockSessionInfo)),
       register: jest.fn().mockReturnValue(of({})),
     };
 
@@ -53,7 +54,7 @@ describe('LoginComponent', () => {
       providers: [
         { provide: AuthService, useValue: mockAuthService },
         { provide: SessionService, useValue: mockSessionService },
-        { provide: Router, useValue: mockRouter }, // ✅ Ajout du mock du Router
+        { provide: Router, useValue: mockRouter },
       ],
       imports: [
         RouterTestingModule,
@@ -63,12 +64,14 @@ describe('LoginComponent', () => {
         MatIconModule,
         MatFormFieldModule,
         MatInputModule,
-        ReactiveFormsModule]
-    })
-      .compileComponents();
+        ReactiveFormsModule
+      ]
+    }).compileComponents();
+
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     sessionService = TestBed.inject(SessionService);
+    router = TestBed.inject(Router);
     fixture.detectChanges();
   });
 
@@ -141,12 +144,9 @@ describe('LoginComponent', () => {
     expect(submitButton.nativeElement.disabled).toBeFalsy();
   });
 
-// TESTS D'INTEGRATION //
-
+  // ✅ TESTS D'INTEGRATION : Vérifier si login et redirection fonctionnent
   it('should call SessionService logIn and navigate on successful login', () => {
-    const logInSpy = jest
-      .spyOn(sessionService, 'logIn')
-      .mockImplementation(() => {});
+    const logInSpy = jest.spyOn(sessionService, 'logIn').mockImplementation(() => {});
 
     component.form.patchValue({
       email: 'test@example.com',
@@ -158,5 +158,36 @@ describe('LoginComponent', () => {
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/sessions']);
   });
 
+  // ✅ TEST D'INTEGRATION : Vérifier la gestion d'erreur
+  it('should set onError to true on login error', () => {
+    jest.spyOn(mockAuthService, 'login').mockReturnValue(
+      throwError(() => new HttpErrorResponse({ status: 500, statusText: 'Server Error' }))
+    );
 
-})
+    component.submit();
+
+    expect(component.onError).toBeTruthy();
+  });
+
+  // ✅ TEST D'INTEGRATION : Vérifier redirection si déjà connecté
+  it('should redirect to /sessions if already logged in and modify the URL to go back to /login', () => {
+    Object.defineProperty(sessionService, 'sessionInformation', {
+      get: jest.fn(() => ({
+        id: 1,
+        token: 'mockToken',
+        type: 'Bearer',
+        username: 'mockUser',
+        firstName: 'John',
+        lastName: 'Doe',
+        admin: false
+      } as SessionInformation))
+    });
+
+    const routerSpy = jest.spyOn(router, 'navigate');
+
+    component.ngOnInit();
+
+    expect(routerSpy).toHaveBeenCalledWith(['/sessions']);
+  });
+
+});
