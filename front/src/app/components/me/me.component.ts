@@ -31,13 +31,21 @@ export class MeComponent implements OnInit {
   }
 
   public delete(): void {
-    this.userService
-      .delete(this.sessionService.sessionInformation!.id.toString())
-      .subscribe((_) => {
+    console.log("🔹 Avant appel de logOut()"); // ✅ Debug
+
+    this.userService.delete(this.sessionService.sessionInformation!.id.toString()).subscribe({
+      next: () => {
+        console.log("✅ Suppression réussie, avant logOut() !"); // ✅ Nouveau Debug
         this.matSnackBar.open("Your account has been deleted !", 'Close', { duration: 3000 });
-        this.sessionService.logOut();
+        console.log('⚠️logOut() appelé'); // ✅ Debug - Devrait apparaître
+        this.sessionService.logOut(); // ✅ Devrait être exécuté
+        console.log("✅ logOut() a été appelé !"); // ✅ Debug final
         this.router.navigate(['/']);
-      })
+      },
+      error: error => {
+        console.error("❌ Erreur suppression:", error); // ✅ Debug en cas d'échec
+      }
+    });
   }
 
 }
