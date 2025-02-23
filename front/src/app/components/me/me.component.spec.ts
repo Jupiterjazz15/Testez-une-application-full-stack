@@ -152,6 +152,23 @@ describe('MeComponent', () => {
 
   // TESTS D'INTEGRATION //
 
+
+  describe('ngOnInit method', () => {
+    it('should call userService.getById() with the correct ID', fakeAsync(() => {
+      component.ngOnInit();
+      tick();
+      flush();
+      expect(mockUserService.getById).toHaveBeenCalledWith('1');
+    }));
+
+    it('should update the user property after fetching user data', fakeAsync(() => {
+      component.ngOnInit();
+      tick();
+      flush();
+      expect(component.user).toEqual(mockUser); //  Vérifie que `component.user` est bien mis à jour
+    }));
+  });
+
   it('should go back when back arrow is clicked', () => {
     const historySpy = jest.spyOn(window.history, 'back'); // ✅ Espionne window.history.back()
 
@@ -198,20 +215,5 @@ describe('MeComponent', () => {
     }));
   });
 
-  describe('ngOnInit method', () => {
-    it('should call userService.getById() with the correct ID', fakeAsync(() => {
-      component.ngOnInit();
-      tick();
-      flush();
-      expect(mockUserService.getById).toHaveBeenCalledWith('1');
-    }));
-
-    it('should update the user property after fetching user data', fakeAsync(() => {
-      component.ngOnInit();
-      tick();
-      flush();
-      expect(component.user).toEqual(mockUser); //  Vérifie que `component.user` est bien mis à jour
-    }));
-  });
 
 });

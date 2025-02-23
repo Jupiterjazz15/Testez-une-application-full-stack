@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import {  ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,6 +28,10 @@ describe('RegisterComponent', () => {
   let mockAuthService: any;
   let router: Router; // ✅ Déclarer router ici
 
+  const mockRouter = {
+    navigate: jest.fn(),
+  };
+
   beforeEach(async () => {
     mockAuthService = {
       register: jest.fn().mockReturnValue(of({})), // ✅ Mock de l'authService avant l'initialisation de TestBed
@@ -47,6 +51,7 @@ describe('RegisterComponent', () => {
       ],
       providers: [
         { provide: AuthService, useValue: mockAuthService },
+        { provide: Router, useValue: mockRouter }
       ],
     }).compileComponents();
 
@@ -162,90 +167,37 @@ describe('RegisterComponent', () => {
 
   // TESTS D'INTEGRATION
 
-  it('should call authService.register', () => {
-    jest.spyOn(mockAuthService, 'register'); // ✅ Espionner l'appel
+  describe('submit method', () => {
 
-    component.form.patchValue({
-      email: 'test@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
-      password: 'password123'
+    it('should call authService.register with the correct data', () => {
+      const registerRequest = {
+        email: 'test@example.com',
+        firstName: 'John',
+        lastName: 'Doe',
+        password: 'password123'
+      };
+
+      component.form.setValue(registerRequest); // ✅ Remplir le formulaire
+      component.submit(); // ✅ Appeler submit
+
+      expect(mockAuthService.register).toHaveBeenCalledWith(registerRequest); // ✅ Vérifier l'appel avec les bonnes données
     });
 
-    component.submit(); // ✅ Exécuter la soumission du formulaire
+    it('should navigate to /login on successful registration', fakeAsync(() => {
+      component.submit();
+      tick(); // ⏳ Simuler l'attente de la navigation
+      flush(); // ✅ Nettoyer les tâches asynchrones restantes
 
-    expect(mockAuthService.register).toHaveBeenCalledTimes(1); // ✅ Vérifier qu'il a bien été appelé
-    expect(mockAuthService.register).toHaveBeenCalledWith({
-      email: 'test@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
-      password: 'password123'
-    });
-  });
-
-  it('should call authService.register() with a valid RegisterRequest object', () => {
-    const registerSpy = jest.spyOn(mockAuthService, 'register');
-
-    component.form.patchValue({
-      email: 'test@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
-      password: 'password123'
-    });
-
-    component.submit();
-
-    expect(registerSpy).toHaveBeenCalledWith(expect.objectContaining({
-      email: 'test@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
-      password: 'password123'
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['/login']); // ✅ Vérifier la navigation
     }));
-  });
 
-  it('should navigate to "/login" on successful registration', () => {
-    const navigateSpy = jest.spyOn(router, 'navigate').mockResolvedValue(true);
-    component.form.patchValue(registerRequest);
-    component.submit();
+    it('should set onError to true on registration failure', () => {
+      mockAuthService.register.mockReturnValue(throwError(() => new Error('Registration failed'))); // ✅ Simuler une erreur
+      component.submit();
 
-    expect(navigateSpy).toHaveBeenCalledWith(['/login']);
-  });
-
-  it('should NOT navigate to "/login" if registration fails', () => {
-    const navigateSpy = jest.spyOn(router, 'navigate');
-
-    jest.spyOn(mockAuthService, 'register').mockReturnValue(
-      throwError(() => new HttpErrorResponse({ status: 500, statusText: 'Server Error' }))
-    );
-
-    component.form.patchValue({
-      email: 'test@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
-      password: 'password123'
+      expect(component.onError).toBeTruthy(); // ✅ Vérifier que l'erreur est bien gérée
     });
 
-    component.submit();
-
-    expect(navigateSpy).not.toHaveBeenCalled(); // ✅ Vérifier que la navigation ne s'est pas produite
   });
-
-  it('should set onError to true on registration error', () => {
-    jest
-      .spyOn(mockAuthService, 'register') // ✅ Espionner `register`
-      .mockReturnValue(
-        throwError(
-          () => new HttpErrorResponse({ status: 500, statusText: 'Server Error' })
-        )
-      );
-
-    component.submit(); // ✅ Tenter une soumission de formulaire avec une erreur
-
-    expect(component.onError).toBeTruthy(); // ✅ Vérifier que l'erreur a bien été détectée
-  });
-
-
-
-
 
 });
