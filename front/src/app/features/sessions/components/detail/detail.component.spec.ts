@@ -1,4 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -17,6 +18,7 @@ import { DetailComponent } from './detail.component';
 describe('DetailComponent', () => {
   let component: DetailComponent;
   let fixture: ComponentFixture<DetailComponent>;
+  let httpTestingController: HttpTestingController;
   let service: SessionService;
 
   const mockSessionService = {
@@ -78,6 +80,9 @@ describe('DetailComponent', () => {
     fixture.detectChanges();
   });
 
+
+  // TESTS UNITAIRES //
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -114,38 +119,6 @@ describe('DetailComponent', () => {
 
     const deleteButton = fixture.nativeElement.querySelector('button[color="warn"]');
     expect(deleteButton).toBeNull();
-  });
-
-  it('should call delete() when Delete button is clicked', () => {
-    // ✅ Simuler un admin pour voir le bouton Delete
-    component.isAdmin = true;
-    fixture.detectChanges();
-
-    // ✅ Espionner la méthode `delete()`
-    jest.spyOn(component, 'delete');
-
-    // ✅ Trouver et cliquer sur le bouton Delete
-    const deleteButton = fixture.debugElement.query(By.css('button[color="warn"]'));
-    deleteButton.triggerEventHandler('click', null);
-    fixture.detectChanges();
-
-    // ✅ Vérifier que `delete()` a bien été appelée
-    expect(component.delete).toHaveBeenCalled();
-  });
-
-  it('should call unParticipate() when Do not participate button is clicked', () => {
-    component.isParticipate = true; // Simuler que l'utilisateur participe déjà
-    component.isAdmin = false; // S'assurer qu'il n'est pas admin
-    fixture.detectChanges();
-
-    // ✅ Vérifier si le bouton existe avant d'espionner la méthode
-    const unParticipateButton = fixture.debugElement.query(By.css('button[mat-raised-button]'));
-    expect(unParticipateButton).toBeTruthy(); // Vérifier que le bouton est bien affiché
-
-    jest.spyOn(component, 'unParticipate'); // Espionner la méthode `unParticipate`
-    unParticipateButton.triggerEventHandler('click', null); // Simuler le clic
-
-    expect(component.unParticipate).toHaveBeenCalled(); // Vérifier que `unParticipate()` a bien été appelé
   });
 
   it('should display the "Participate" button if the user is not a participant', () => {
@@ -376,6 +349,53 @@ describe('DetailComponent', () => {
     expect(updatedAtElement.nativeElement.textContent).toContain('February 1, 2025'); // Vérifier que la date est bien affichée
   });
 
+
+  // TESTS D'INTEGRAGTION //
+
+  it('should go back when back arrow is clicked', () => {
+    const historySpy = jest.spyOn(window.history, 'back'); // ✅ Espionner `window.history.back()`
+
+    const backButton = fixture.debugElement.query(By.css('button[mat-icon-button]'));
+    expect(backButton).toBeTruthy(); // ✅ Vérifier que le bouton existe
+
+    backButton.triggerEventHandler('click', null); // ✅ Simuler un clic
+    fixture.detectChanges();
+
+    expect(historySpy).toHaveBeenCalled(); // ✅ Vérifier que la fonction est bien appelée
+  });
+
+  it('should call delete() when Delete button is clicked', () => {
+    // ✅ Simuler un admin pour voir le bouton Delete
+    component.isAdmin = true;
+    fixture.detectChanges();
+
+    // ✅ Espionner la méthode `delete()`
+    jest.spyOn(component, 'delete');
+
+    // ✅ Trouver et cliquer sur le bouton Delete
+    const deleteButton = fixture.debugElement.query(By.css('button[color="warn"]'));
+    deleteButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+
+    // ✅ Vérifier que `delete()` a bien été appelée
+    expect(component.delete).toHaveBeenCalled();
+  });
+
+  it('should call unParticipate() when Do not participate button is clicked', () => {
+    component.isParticipate = true; // Simuler que l'utilisateur participe déjà
+    component.isAdmin = false; // S'assurer qu'il n'est pas admin
+    fixture.detectChanges();
+
+    // ✅ Vérifier si le bouton existe avant d'espionner la méthode
+    const unParticipateButton = fixture.debugElement.query(By.css('button[mat-raised-button]'));
+    expect(unParticipateButton).toBeTruthy(); // Vérifier que le bouton est bien affiché
+
+    jest.spyOn(component, 'unParticipate'); // Espionner la méthode `unParticipate`
+    unParticipateButton.triggerEventHandler('click', null); // Simuler le clic
+
+    expect(component.unParticipate).toHaveBeenCalled(); // Vérifier que `unParticipate()` a bien été appelé
+  });
+
   it('should call participate() when Participate button is clicked', () => {
     component.isParticipate = false; // Simuler que l'utilisateur ne participe pas encore
     component.isAdmin = false; // S'assurer qu'il n'est pas admin
@@ -396,5 +416,38 @@ describe('DetailComponent', () => {
 
     expect(component.participate).toHaveBeenCalled(); // Vérifier que `participate()` a bien été appelé
   });
+
+//   it('should fetch session data from API and update component', () => {
+//     // ✅ Définir la session attendue
+//     const mockSession: Session = {
+//       id: 1,
+//       name: 'Yoga Session',
+//       description: 'A relaxing yoga session',
+//       date: new Date('2025-02-10'),
+//       teacher_id: 101,
+//       users: [1, 2, 3],
+//       createdAt: new Date('2025-01-01'),
+//       updatedAt: new Date('2025-02-01'),
+//     };
+//
+//     // ✅ Lancer la méthode fetchSession()
+//     component.fetchSession(1);
+//     fixture.detectChanges();
+//
+//     // ✅ Intercepter la requête HTTP sortante
+//     const req = httpTestingController.expectOne(`/api/sessions/1`);
+//     expect(req.request.method).toBe('GET');
+//
+//     // ✅ Simuler la réponse de l'API
+//     req.flush(mockSession);
+//
+//     // ✅ Vérifier que `component.session` est mis à jour avec les données de l'API
+//     expect(component.session).toEqual(mockSession);
+//
+//     // ✅ Vérifier qu'aucune requête HTTP supplémentaire ne reste en attente
+//     httpTestingController.verify();
+//   });
+// });
+
 
 });

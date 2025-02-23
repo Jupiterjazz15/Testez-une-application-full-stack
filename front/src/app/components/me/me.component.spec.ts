@@ -1,11 +1,10 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';  // ✅ Import du module pour désactiver les animations
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
 import { MeComponent } from './me.component';
 import { By } from '@angular/platform-browser';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
-import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -33,16 +32,21 @@ describe('MeComponent', () => {
 
   const mockSessionService = {
     sessionInformation: { id: 1 },
-    logOut: jest.fn(() => console.log("✅ Mock logOut() appelé !")),
+    logOut: jest.fn(),
   };
+
+  const mockMatSnackBar = {
+    open:jest.fn(),
+  };
+
 
   const mockUserService = {
     getById: jest.fn().mockReturnValue(of(mockUser)),
-    delete: jest.fn().mockReturnValue(of({})), // ✅ Ajout du mock pour delete()
+    delete: jest.fn().mockReturnValue(of({})), //  Ajout du mock pour delete()
   };
 
   const mockRouter = {
-    navigate: jest.fn(), // ✅ Ajout du mock pour la navigation
+    navigate: jest.fn(), // Ajout du mock pour la navigation
   };
 
   beforeEach(async () => {
@@ -50,18 +54,19 @@ describe('MeComponent', () => {
       declarations: [MeComponent],
       imports: [
         NoopAnimationsModule,
-        BrowserAnimationsModule,
-        MatSnackBarModule,
         HttpClientModule,
+        MatSnackBarModule,
         MatCardModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule
       ],
+
       providers: [
         { provide: SessionService, useValue: mockSessionService },
         { provide: UserService, useValue: mockUserService },
-        { provide: Router, useValue: mockRouter } // ✅ Ajout du mock du Router
+        { provide: Router, useValue: mockRouter },
+        { provide: MatSnackBar, useValue: mockMatSnackBar}//  Ajout du mock du Router
       ],
     }).compileComponents();
 
@@ -71,7 +76,7 @@ describe('MeComponent', () => {
     fixture.detectChanges();
   });
 
-  // ✅ TESTS UNITAIRES
+  // TESTS UNITAIRES
 
   it('should create the component', () => {
     expect(component).toBeDefined();
@@ -145,30 +150,39 @@ describe('MeComponent', () => {
 
   // TESTS D'INTEGRATION //
 
-  // Problème au niveau de l'animation //
+  describe('delete method', () => {
+    it('should call userservice delete method with correct id', fakeAsync(() => {
+      component.delete();
+      tick();
+      flush(); // ✅ Vide les timers restants
+      expect(mockUserService.delete).toHaveBeenCalledWith('1');
+    }));
 
-  /**
-   * it('should call delete() and perform all necessary actions', fakeAsync(() => {
-   *   const deleteSpy = jest.spyOn(mockUserService, 'delete').mockReturnValue(of({}));
-   *   const snackBarSpy = jest.spyOn(component['matSnackBar'], 'open');
-   *   const logOutSpy = jest.spyOn(mockSessionService, 'logOut').mockImplementation(() => {});
-   *   const routerSpy = jest.spyOn(component['router'], 'navigate');
-   *
-   *   console.log(`🔹 Avant appel de delete()`);
-   *   component.delete();
-   *   console.log(`✅ Après appel de delete()`);
-   *
-   *   tick(3000); // ✅ Attendre que l'animation de la snackbar et toutes les opérations asynchrones se terminent
-   *   fixture.detectChanges();
-   *
-   *   console.log(`logOutSpy calls after test: ${logOutSpy.mock.calls.length}`);
-   *
-   *   expect(deleteSpy).toHaveBeenCalledWith(mockSessionService.sessionInformation.id.toString());
-   *   expect(snackBarSpy).toHaveBeenCalledWith("Your account has been deleted !", 'Close', { duration: 3000 });
-   *   expect(logOutSpy).toHaveBeenCalled();
-   *   expect(routerSpy).toHaveBeenCalledWith(['/']);
-   * }));
-   */
+    it('should open matSnackBar with delete confirmation message', fakeAsync(() => {
+      component.delete();
+      tick(3000); // ⏳ Simule l'attente de la fermeture du snackbar
+
+      expect(mockMatSnackBar.open).toHaveBeenCalledWith(
+        '🌻 Your account has been deleted !', 'Close', { duration: 3000 }
+      );
+
+      flush(); // ✅ Vide toutes les tâches asynchrones restantes
+    }));
+
+    it('should call sessionService logOut method', fakeAsync(() => {
+      component.delete();
+      tick();
+      flush(); // ✅ Vide tous les timers avant la vérification
+      expect(mockSessionService.logOut).toHaveBeenCalled();
+    }));
+
+    it('should navigate to homepage', fakeAsync(() => {
+      component.delete();
+      tick();
+      flush(); // ✅ Assure que la navigation est bien déclenchée
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['/']);
+    }));
+  });
 
   it('should go back when back arrow is clicked', () => {
     const historySpy = jest.spyOn(window.history, 'back'); // ✅ Espionne window.history.back()
@@ -180,9 +194,5 @@ describe('MeComponent', () => {
 
     expect(historySpy).toHaveBeenCalled(); // ✅ Vérifie que la fonction est bien appelée
   });
-
-
-
-
-
+  
 });
