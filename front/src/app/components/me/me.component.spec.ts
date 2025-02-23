@@ -19,17 +19,6 @@ describe('MeComponent', () => {
   let fixture: ComponentFixture<MeComponent>;
   let router: Router;
 
-  const mockUser = {
-    id: 1,
-    firstName: 'Coralie',
-    lastName: 'Haller',
-    email: 'coralie@test.com',
-    password: 'coralie',
-    admin: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  };
-
   const mockSessionService = {
     sessionInformation: { id: 1 },
     logOut: jest.fn(),
@@ -37,6 +26,17 @@ describe('MeComponent', () => {
 
   const mockMatSnackBar = {
     open:jest.fn(),
+  };
+
+  const mockUser = {
+    id: 1,
+    firstName: 'Coralie',
+    lastName: 'Haller',
+    email: 'coralie.haller@example.com',
+    password: 'azerty',
+    admin: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   };
 
 
@@ -69,6 +69,8 @@ describe('MeComponent', () => {
         { provide: MatSnackBar, useValue: mockMatSnackBar}//  Ajout du mock du Router
       ],
     }).compileComponents();
+
+    jest.spyOn(mockUserService, 'getById').mockReturnValue(of(mockUser));
 
     fixture = TestBed.createComponent(MeComponent);
     component = fixture.componentInstance;
@@ -150,7 +152,19 @@ describe('MeComponent', () => {
 
   // TESTS D'INTEGRATION //
 
+  it('should go back when back arrow is clicked', () => {
+    const historySpy = jest.spyOn(window.history, 'back'); // ✅ Espionne window.history.back()
+
+    const backButton = fixture.debugElement.query(By.css('button[mat-icon-button]'));
+    expect(backButton).toBeTruthy(); // ✅ Vérifie que le bouton existe
+
+    backButton.triggerEventHandler('click', null); // ✅ Simule le clic
+
+    expect(historySpy).toHaveBeenCalled(); // ✅ Vérifie que la fonction est bien appelée
+  });
+
   describe('delete method', () => {
+
     it('should call userservice delete method with correct id', fakeAsync(() => {
       component.delete();
       tick();
@@ -184,15 +198,20 @@ describe('MeComponent', () => {
     }));
   });
 
-  it('should go back when back arrow is clicked', () => {
-    const historySpy = jest.spyOn(window.history, 'back'); // ✅ Espionne window.history.back()
+  describe('ngOnInit method', () => {
+    it('should call userService.getById() with the correct ID', fakeAsync(() => {
+      component.ngOnInit();
+      tick();
+      flush();
+      expect(mockUserService.getById).toHaveBeenCalledWith('1');
+    }));
 
-    const backButton = fixture.debugElement.query(By.css('button[mat-icon-button]'));
-    expect(backButton).toBeTruthy(); // ✅ Vérifie que le bouton existe
-
-    backButton.triggerEventHandler('click', null); // ✅ Simule le clic
-
-    expect(historySpy).toHaveBeenCalled(); // ✅ Vérifie que la fonction est bien appelée
+    it('should update the user property after fetching user data', fakeAsync(() => {
+      component.ngOnInit();
+      tick();
+      flush();
+      expect(component.user).toEqual(mockUser); //  Vérifie que `component.user` est bien mis à jour
+    }));
   });
-  
+
 });
