@@ -366,6 +366,19 @@ describe('DetailComponent', () => {
 
   // TEST D'INTEGRATION //
 
+  describe('ngOnInit method', () => {
+    beforeEach(() => {
+      jest.spyOn(mockSessionApiService, 'detail').mockReturnValue(of(mockSession)); // ✅ Mock de sessionApiService.detail()
+    });
+
+    it('should call fetchSession and retrieve session data', () => {
+      component.ngOnInit(); // ✅ Appelle `ngOnInit()`
+
+      expect(mockSessionApiService.detail).toHaveBeenCalledWith('1'); // ✅ Vérifie que l'API a été appelée avec l'ID correct
+      expect(component.session).toEqual(mockSession); // ✅ Vérifie que la session a bien été récupérée
+    });
+  });
+
   it('should go back when back arrow is clicked', () => {
     const historySpy = jest.spyOn(window.history, 'back'); // ✅ Espionne `window.history.back()`
 
@@ -376,7 +389,6 @@ describe('DetailComponent', () => {
 
     expect(historySpy).toHaveBeenCalled(); // ✅ Vérifie que la fonction est bien appelée
   });
-
 
   describe('delete method', () => {
 
