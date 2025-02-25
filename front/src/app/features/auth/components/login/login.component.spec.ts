@@ -1,6 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,21 +14,71 @@ import { SessionInformation } from "../../../../interfaces/sessionInformation.in
 import { LoginComponent } from './login.component';
 import { AuthService } from '../../services/auth.service';
 import { of, throwError } from "rxjs";
-import { HttpErrorResponse } from '@angular/common/http';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from "@angular/router";
 
 describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
   let sessionService: SessionService;
   let mockAuthService: any;
   let router: Router;
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
+  let routerSpy: jest.SpyInstance;
+  let authServiceSpy: jest.SpyInstance;
+  let sessionServiceSpy: jest.SpyInstance;
+
+  beforeEach(async () => {
+    // ✅ Réinitialisation des mocks avant chaque test
+    jest.resetAllMocks();
+    jest.clearAllMocks();
+
+    // ✅ Définition des valeurs mockées
+    mockAuthService = {
+      login: jest.fn().mockReturnValue(of(mockSessionInfo)), // ✅ Mock de la réponse
+      register: jest.fn().mockReturnValue(of({})),
+    };
+
+    mockSessionService.sessionInformation = { token: 'validToken' }; // ✅ Simule un utilisateur connecté
+    mockRouter.navigate = jest.fn(); // ✅ Simule la navigation
+
+    await TestBed.configureTestingModule({
+      declarations: [LoginComponent],
+      providers: [
+        { provide: AuthService, useValue: mockAuthService },
+        { provide: SessionService, useValue: mockSessionService },
+        { provide: Router, useValue: mockRouter },
+        FormBuilder, // ✅ Ajout de FormBuilder pour éviter l'erreur `No provider for FormBuilder!`
+      ],
+      imports: [
+        RouterTestingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatCardModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+      ]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(LoginComponent);
+    component = fixture.componentInstance;
+    sessionService = TestBed.inject(SessionService);
+    router = TestBed.inject(Router);
+    fixture.detectChanges();
+
+    // ✅ Espionner les méthodes après l'initialisation des services
+    routerSpy = jest.spyOn(mockRouter, 'navigate');
+    authServiceSpy = jest.spyOn(mockAuthService, 'login');
+  });
+
 
   const mockRouter = {
     navigate: jest.fn(),
   };
 
-  const mockSessionService = {
+  const mockSessionService: { sessionInformation: { token?: string | null } | null, logIn: jest.Mock } = {
+    sessionInformation: null, // ✅ Initialisé à null, mais peut aussi être un objet avec `token`
     logIn: jest.fn(),
   };
 
@@ -43,39 +92,9 @@ describe('LoginComponent', () => {
     admin: false,
   };
 
-  beforeEach(async () => {
-    mockAuthService = {
-      login: jest.fn().mockReturnValue(of(mockSessionInfo)),
-      register: jest.fn().mockReturnValue(of({})),
-    };
-
-    await TestBed.configureTestingModule({
-      declarations: [LoginComponent],
-      providers: [
-        { provide: AuthService, useValue: mockAuthService },
-        { provide: SessionService, useValue: mockSessionService },
-        { provide: Router, useValue: mockRouter },
-      ],
-      imports: [
-        RouterTestingModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        MatCardModule,
-        MatIconModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule
-      ]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    sessionService = TestBed.inject(SessionService);
-    router = TestBed.inject(Router);
-    fixture.detectChanges();
-  });
 
 
+  //TESTS UNITAIRES//
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -98,8 +117,6 @@ describe('LoginComponent', () => {
     const passwordInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="password"]'));
     expect(passwordInput).toBeTruthy();
   });
-
-  //TESTS UNITAIRES//
 
   it('should set aria-invalid="false" when the password is not empty', () => {
     const passwordInput: DebugElement = fixture.debugElement.query(By.css('input[formControlName="password"]')); // Récupérer l'élément de l'input
@@ -144,50 +161,67 @@ describe('LoginComponent', () => {
     expect(submitButton.nativeElement.disabled).toBeFalsy();
   });
 
-  // ✅ TESTS D'INTEGRATION : Vérifier si login et redirection fonctionnent
-  it('should call SessionService logIn and navigate on successful login', () => {
-    const logInSpy = jest.spyOn(sessionService, 'logIn').mockImplementation(() => {});
+  //  TESTS D'INTEGRATION
 
-    component.form.patchValue({
-      email: 'test@example.com',
-      password: 'password',
-    });
-    component.submit();
+  describe('ngOnInit method', () => {
 
-    expect(logInSpy).toHaveBeenCalledWith(mockSessionInfo);
-    expect(mockRouter.navigate).toHaveBeenCalledWith(['/sessions']);
-  });
-
-  // ✅ TEST D'INTEGRATION : Vérifier la gestion d'erreur
-  it('should set onError to true on login error', () => {
-    jest.spyOn(mockAuthService, 'login').mockReturnValue(
-      throwError(() => new HttpErrorResponse({ status: 500, statusText: 'Server Error' }))
-    );
-
-    component.submit();
-
-    expect(component.onError).toBeTruthy();
-  });
-
-  // ✅ TEST D'INTEGRATION : Vérifier redirection si déjà connecté
-  it('should redirect to /sessions if already logged in and modify the URL to go back to /login', () => {
-    Object.defineProperty(sessionService, 'sessionInformation', {
-      get: jest.fn(() => ({
-        id: 1,
-        token: 'mockToken',
-        type: 'Bearer',
-        username: 'mockUser',
-        firstName: 'John',
-        lastName: 'Doe',
-        admin: false
-      } as SessionInformation))
+    beforeEach(() => {
+      mockRouter.navigate = jest.fn(); // ✅ Modification correcte
+      routerSpy = jest.spyOn(mockRouter, 'navigate'); // ✅ Espionne la navigation
     });
 
-    const routerSpy = jest.spyOn(router, 'navigate');
+    // Je dois remettre un beforeEach ici, car mockSessionService.sessionInformation = { token: 'validToken' }; du beforeEach globale pose problème pour le test
+    // 'should NOT navigate if sessionService.sessionInformation is null'
 
-    component.ngOnInit();
+    it('should navigate to "/sessions" if sessionService.sessionInformation token is valid', () => {
+      mockSessionService.sessionInformation = { token: 'validToken' }; // ✅ Modification correcte
 
-    expect(routerSpy).toHaveBeenCalledWith(['/sessions']);
+      component.ngOnInit(); // ✅ Appel de la méthode
+
+      expect(routerSpy).toHaveBeenCalledWith(['/sessions']); // ✅ Vérifie la redirection
+    });
+
+    it('should NOT navigate if sessionService.sessionInformation is null', () => {
+      mockSessionService.sessionInformation = null; // ✅ Modification correcte
+
+      component.ngOnInit();
+
+      expect(routerSpy).not.toHaveBeenCalled(); // ✅ Vérifie qu'il n'y a pas eu de redirection
+    });
+
+
+  });
+
+  describe('submit method', () => {
+
+    it('should call authService.login with form values', () => {
+      const loginRequest = { email: 'test@example.com', password: 'password' };
+      component.form.setValue(loginRequest);
+
+      component.submit(); // ✅ Appel de la méthode
+
+      expect(authServiceSpy).toHaveBeenCalledWith(loginRequest);
+    });
+
+    it('should call sessionService.logIn and navigate on successful login', () => {
+      const mockResponse = { token: 'validToken' };
+      authServiceSpy.mockReturnValue(of(mockResponse)); // ✅ Simule une réponse de connexion
+
+      const sessionSpy = jest.spyOn(mockSessionService, 'logIn');
+
+      component.submit();
+
+      expect(sessionSpy).toHaveBeenCalledWith(mockResponse);
+      expect(routerSpy).toHaveBeenCalledWith(['/sessions']);
+    });
+
+    it('should set onError to true if login fails', () => {
+      authServiceSpy.mockReturnValue(throwError(() => new Error('Invalid credentials')));
+
+      component.submit();
+
+      expect(component.onError).toBeTruthy();
+    });
   });
 
 });
