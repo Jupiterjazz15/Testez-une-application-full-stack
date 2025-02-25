@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';  // ✅ Import du module pour désactiver les animations
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MeComponent } from './me.component';
 import { By } from '@angular/platform-browser';
@@ -38,7 +38,6 @@ describe('MeComponent', () => {
     createdAt: new Date(),
     updatedAt: new Date(),
   };
-
 
   const mockUserService = {
     getById: jest.fn().mockReturnValue(of(mockUser)),
@@ -151,7 +150,6 @@ describe('MeComponent', () => {
   });
 
   // TESTS D'INTEGRATION //
-
 
   describe('ngOnInit method', () => {
     it('should call userService.getById() with the correct ID', fakeAsync(() => {

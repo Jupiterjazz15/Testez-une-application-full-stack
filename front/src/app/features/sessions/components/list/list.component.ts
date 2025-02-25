@@ -23,7 +23,6 @@ export class ListComponent {
 
     // Vérification si les sessions sont bien récupérées
     this.sessions$.subscribe(sessions => {
-      console.log('📌 Sessions reçues dans ListComponent:', sessions); // 🔍 Vérifier si les sessions sont bien récupérées
     });
   }
 
@@ -31,9 +30,7 @@ export class ListComponent {
       return this.sessionService.sessionInformation ?? undefined;
     }
 
-
     logButtonState() {
-    console.log(' 👉 Bouton Edit cliqué');
   }
 
 

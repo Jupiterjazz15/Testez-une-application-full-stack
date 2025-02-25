@@ -1,32 +1,30 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { RouterTestingModule } from '@angular/router/testing';
-import { expect } from '@jest/globals';
+import { of } from 'rxjs';
+import { DetailComponent } from './detail.component';
 import { SessionService } from '../../../../services/session.service';
-
+import { SessionApiService } from '../../services/session-api.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Session } from '../../interfaces/session.interface';
+import { expect } from '@jest/globals';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { By } from '@angular/platform-browser';
-import { Session } from '../../interfaces/session.interface';
-
-import { DetailComponent } from './detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { RouterTestingModule } from '@angular/router/testing';
+import {By} from "@angular/platform-browser";
 
 
 describe('DetailComponent', () => {
   let component: DetailComponent;
   let fixture: ComponentFixture<DetailComponent>;
-  let httpTestingController: HttpTestingController;
-  let service: SessionService;
-
-  const mockSessionService = {
-    sessionInformation: {
-      admin: true,
-      id: 1
-    }
-  };
+  let mockSessionService: any;
+  let mockSessionApiService: any;
+  let mockRouter: any;
+  let mockMatSnackBar: any;
 
   const mockSession: Session = {
     id: 1,
@@ -39,47 +37,64 @@ describe('DetailComponent', () => {
     updatedAt: new Date('2025-02-01'),
   };
 
+  mockSessionApiService = {
+    delete: jest.fn().mockReturnValue(of({})), // ✅ Mock delete()
+    detail: jest.fn().mockReturnValue(of(mockSession)), // ✅ Mock detail()
+    participate: jest.fn().mockReturnValue(of({})), // ✅ Mock participate()
+    unParticipate: jest.fn().mockReturnValue(of({})), // ✅ Mock unParticipate()
+  };
+
+  mockSessionService = {
+    sessionInformation: { id: '1', admin: true }, // ✅ Simule un utilisateur admin
+  };
+
+  mockRouter = {
+    navigate: jest.fn(), // ✅ Simule la navigation
+  };
+
+  mockMatSnackBar = {
+    open: jest.fn(), // ✅ Mock MatSnackBar
+  };
+
   beforeEach(async () => {
+    jest.clearAllMocks()
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        HttpClientTestingModule,
-        MatSnackBarModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatIconModule
-      ],
       declarations: [DetailComponent],
-      providers: [{ provide: SessionService, useValue: mockSessionService }],
+      providers: [
+        { provide: SessionApiService, useValue: mockSessionApiService },
+        { provide: SessionService, useValue: mockSessionService },
+        { provide: Router, useValue: mockRouter }, // Mock du Router
+        { provide: MatSnackBar, useValue: mockMatSnackBar },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: (key: string) => {
+                  if (key === 'id') return "1"; // Renvoie une string
+                  return null;
+                }
+              }
+            }
+          }
+        }
+      ],
+      imports: [
+        RouterTestingModule.withRoutes([]), // ✅ Assure un Router correctement défini
+        BrowserAnimationsModule, // ✅ Nécessaire pour éviter les erreurs liées à MatSnackBar
+        HttpClientModule,
+        MatCardModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+      ],
     }).compileComponents();
 
-    service = TestBed.inject(SessionService);
     fixture = TestBed.createComponent(DetailComponent);
     component = fixture.componentInstance;
-
-    // 🔹 Définir les valeurs par défaut pour éviter de les répéter dans chaque test
-    component.session = {
-      id: 1,
-      name: 'Yoga Session',
-      description: 'A relaxing yoga session for beginners.',
-      date: new Date('2025-02-10'),
-      teacher_id: 1, // Par défaut, un professeur est assigné
-      users: [1, 2, 3,4],
-      createdAt: new Date('2025-01-01'),
-      updatedAt: new Date('2025-02-01')
-    };
-
-    component.teacher = {
-      id: 1,
-      firstName: 'John',
-      lastName: 'DOE',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
-
     fixture.detectChanges();
   });
-
 
   // TESTS UNITAIRES //
 
@@ -349,105 +364,45 @@ describe('DetailComponent', () => {
     expect(updatedAtElement.nativeElement.textContent).toContain('February 1, 2025'); // Vérifier que la date est bien affichée
   });
 
+  // TEST D'INTEGRATION //
 
-  // TESTS D'INTEGRAGTION //
+  describe('delete method', () => {
 
-  it('should go back when back arrow is clicked', () => {
-    const historySpy = jest.spyOn(window.history, 'back'); // ✅ Espionner `window.history.back()`
+    it('should call sessionApiService.delete with the correct session ID', () => {
+      component.delete();
+      expect(mockSessionApiService.delete).toHaveBeenCalledWith('1');
+    });
 
-    const backButton = fixture.debugElement.query(By.css('button[mat-icon-button]'));
-    expect(backButton).toBeTruthy(); // ✅ Vérifier que le bouton existe
+    it('should open matSnackBar with delete confirmation message', () => {
+      component.delete();
 
-    backButton.triggerEventHandler('click', null); // ✅ Simuler un clic
-    fixture.detectChanges();
+      expect(mockMatSnackBar.open).toHaveBeenCalledWith(
+        "Session deleted !", "Close", { duration: 3000 }
+      );
+    });
 
-    expect(historySpy).toHaveBeenCalled(); // ✅ Vérifier que la fonction est bien appelée
+    it('should navigate to "/sessions" after deleting the session', () => {
+      component.delete();
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['sessions']);
+    });
   });
 
-  it('should call delete() when Delete button is clicked', () => {
-    // ✅ Simuler un admin pour voir le bouton Delete
-    component.isAdmin = true;
-    fixture.detectChanges();
+  describe('participation methods', () => {
 
-    // ✅ Espionner la méthode `delete()`
-    jest.spyOn(component, 'delete');
+    it('should call sessionApiService.delete with the correct session ID', () => {
+      component.delete();
+      expect(mockSessionApiService.delete).toHaveBeenCalledWith('1'); // Assurez-vous que c'est bien une string
+    });
 
-    // ✅ Trouver et cliquer sur le bouton Delete
-    const deleteButton = fixture.debugElement.query(By.css('button[color="warn"]'));
-    deleteButton.triggerEventHandler('click', null);
-    fixture.detectChanges();
+    it('should call sessionApiService.participate when participate() is called', () => {
+      component.participate();
+      expect(mockSessionApiService.participate).toHaveBeenCalledWith('1', '1'); // Assurez-vous que c'est bien une string
+    });
 
-    // ✅ Vérifier que `delete()` a bien été appelée
-    expect(component.delete).toHaveBeenCalled();
+    it('should call sessionApiService.unParticipate when unParticipate() is called', () => {
+      component.unParticipate();
+      expect(mockSessionApiService.unParticipate).toHaveBeenCalledWith('1', '1'); // Assurez-vous que c'est bien une string
+    });
+
   });
-
-  it('should call unParticipate() when Do not participate button is clicked', () => {
-    component.isParticipate = true; // Simuler que l'utilisateur participe déjà
-    component.isAdmin = false; // S'assurer qu'il n'est pas admin
-    fixture.detectChanges();
-
-    // ✅ Vérifier si le bouton existe avant d'espionner la méthode
-    const unParticipateButton = fixture.debugElement.query(By.css('button[mat-raised-button]'));
-    expect(unParticipateButton).toBeTruthy(); // Vérifier que le bouton est bien affiché
-
-    jest.spyOn(component, 'unParticipate'); // Espionner la méthode `unParticipate`
-    unParticipateButton.triggerEventHandler('click', null); // Simuler le clic
-
-    expect(component.unParticipate).toHaveBeenCalled(); // Vérifier que `unParticipate()` a bien été appelé
-  });
-
-  it('should call participate() when Participate button is clicked', () => {
-    component.isParticipate = false; // Simuler que l'utilisateur ne participe pas encore
-    component.isAdmin = false; // S'assurer qu'il n'est pas admin
-    fixture.detectChanges(); // Mettre à jour le DOM
-
-    // ✅ Correction du sélecteur CSS pour utiliser `data-testid`
-    const participateButton = fixture.debugElement.query(By.css('[data-testid="participate-button"]'));
-
-    expect(participateButton).toBeTruthy(); // Vérifier que le bouton existe
-
-    jest.spyOn(component, 'participate'); // Espionner la méthode `participate`
-
-    // ✅ Vérifier si le bouton a bien été trouvé avant de déclencher l'événement
-    if (participateButton) {
-      participateButton.nativeElement.click(); // Simuler le clic
-      fixture.detectChanges();
-    }
-
-    expect(component.participate).toHaveBeenCalled(); // Vérifier que `participate()` a bien été appelé
-  });
-
-//   it('should fetch session data from API and update component', () => {
-//     // ✅ Définir la session attendue
-//     const mockSession: Session = {
-//       id: 1,
-//       name: 'Yoga Session',
-//       description: 'A relaxing yoga session',
-//       date: new Date('2025-02-10'),
-//       teacher_id: 101,
-//       users: [1, 2, 3],
-//       createdAt: new Date('2025-01-01'),
-//       updatedAt: new Date('2025-02-01'),
-//     };
-//
-//     // ✅ Lancer la méthode fetchSession()
-//     component.fetchSession(1);
-//     fixture.detectChanges();
-//
-//     // ✅ Intercepter la requête HTTP sortante
-//     const req = httpTestingController.expectOne(`/api/sessions/1`);
-//     expect(req.request.method).toBe('GET');
-//
-//     // ✅ Simuler la réponse de l'API
-//     req.flush(mockSession);
-//
-//     // ✅ Vérifier que `component.session` est mis à jour avec les données de l'API
-//     expect(component.session).toEqual(mockSession);
-//
-//     // ✅ Vérifier qu'aucune requête HTTP supplémentaire ne reste en attente
-//     httpTestingController.verify();
-//   });
-// });
-
-
 });

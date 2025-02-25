@@ -25,8 +25,6 @@ describe('ListComponent', () => {
   beforeEach(async () => {
     // Simulation d'un BehaviorSubject pour `sessions$`
     mockSessionSubject = new BehaviorSubject<Session[]>([]); // Commence vide
-    console.log('📌 Sessions avant push:', mockSessionSubject.getValue()); // 🔍 Vérifier l'état initial
-
     const mockSessionService = {
       sessionInformation: {
         token: 'mock-token',
@@ -52,7 +50,6 @@ describe('ListComponent', () => {
 
     // Simuler l'envoi des sessions après l'initialisation
     mockSessionSubject.next(mockSessions);
-    console.log('📌 Sessions après push:', mockSessionSubject.getValue()); // 🔍 Vérifier l'état après push
   });
 
 
@@ -89,37 +86,5 @@ describe('ListComponent', () => {
       expect(sessions.length).toBe(mockSessions.length); // Vérifier que les sessions sont bien chargées
     });
   });
-
-
-  // it('should display the list of sessions', (done) => {
-  //   fixture.detectChanges(); // Déclencher la détection initiale des changements
-  //
-  //   // Attendre un court instant pour que les données soient mises à jour
-  //   setTimeout(() => {
-  //     fixture.detectChanges(); // Mettre à jour le DOM après l'attente
-  //
-  //     let sessionsData: Session[] | undefined;
-  //
-  //     component.sessions$.subscribe(sessions => {
-  //       console.log('💫 Sessions récupérées par le composant:', sessions);
-  //       sessionsData = sessions;
-  //     });
-  //
-  //     setTimeout(() => {
-  //       fixture.detectChanges(); // Deuxième mise à jour après réception des données
-  //
-  //       // Vérifier que les sessions existent
-  //       expect(sessionsData).toBeDefined();
-  //       expect(sessionsData!.length).toBe(mockSessions.length);
-  //
-  //       // Vérifier si les boutons "Edit" sont bien affichés
-  //       const editButtons = fixture.debugElement.queryAll(By.css('button[routerLink^="update"]'));
-  //       expect(editButtons.length).toBe(mockSessions.length);
-  //
-  //       done(); // Indiquer que le test est terminé
-  //     }, 500); // Un léger délai pour laisser le DOM se stabiliser
-  //
-  //   }, 300); // Un premier délai pour s'assurer que les données sont reçues
-  // });
 
 });

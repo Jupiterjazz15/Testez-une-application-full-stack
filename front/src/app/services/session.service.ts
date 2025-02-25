@@ -32,7 +32,6 @@ export class SessionService {
   }
 
   public logOut(): void {
-    console.log("✅ logOut() exécuté dans session.service.ts !"); // ✅ Ajout du log
     this.sessionInformation = null;
     this.isLogged = false;
     this.next();

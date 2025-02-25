@@ -16,7 +16,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { expect } from '@jest/globals';
 import { throwError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 
 
 import { RegisterComponent } from './register.component';
