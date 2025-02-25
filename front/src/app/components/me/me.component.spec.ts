@@ -168,14 +168,14 @@ describe('MeComponent', () => {
   });
 
   it('should go back when back arrow is clicked', () => {
-    const historySpy = jest.spyOn(window.history, 'back'); // ✅ Espionne window.history.back()
+    const historySpy = jest.spyOn(window.history, 'back'); // Espionne window.history.back()
 
     const backButton = fixture.debugElement.query(By.css('button[mat-icon-button]'));
-    expect(backButton).toBeTruthy(); // ✅ Vérifie que le bouton existe
+    expect(backButton).toBeTruthy(); //  Vérifie que le bouton existe
 
-    backButton.triggerEventHandler('click', null); // ✅ Simule le clic
+    backButton.triggerEventHandler('click', null); //  Simule le clic
 
-    expect(historySpy).toHaveBeenCalled(); // ✅ Vérifie que la fonction est bien appelée
+    expect(historySpy).toHaveBeenCalled(); //  Vérifie que la fonction est bien appelée
   });
 
   describe('delete method', () => {

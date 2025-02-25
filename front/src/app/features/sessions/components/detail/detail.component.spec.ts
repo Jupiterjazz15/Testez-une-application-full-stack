@@ -366,6 +366,18 @@ describe('DetailComponent', () => {
 
   // TEST D'INTEGRATION //
 
+  it('should go back when back arrow is clicked', () => {
+    const historySpy = jest.spyOn(window.history, 'back'); // ✅ Espionne `window.history.back()`
+
+    const backButton = fixture.debugElement.query(By.css('[data-testid="back-button"]')); // ✅ Utilisation du `data-testid`
+    expect(backButton).toBeTruthy(); // ✅ Vérifie que le bouton existe
+
+    backButton.triggerEventHandler('click', null); // ✅ Simule le clic
+
+    expect(historySpy).toHaveBeenCalled(); // ✅ Vérifie que la fonction est bien appelée
+  });
+
+
   describe('delete method', () => {
 
     it('should call sessionApiService.delete with the correct session ID', () => {
@@ -385,9 +397,10 @@ describe('DetailComponent', () => {
       component.delete();
       expect(mockRouter.navigate).toHaveBeenCalledWith(['sessions']);
     });
+
   });
 
-  describe('participation methods', () => {
+  describe('participate methods', () => {
 
     it('should call sessionApiService.delete with the correct session ID', () => {
       component.delete();
@@ -405,4 +418,6 @@ describe('DetailComponent', () => {
     });
 
   });
+
+
 });
