@@ -66,12 +66,18 @@ export class DetailComponent implements OnInit {
     this.sessionApiService
       .detail(this.sessionId)
       .subscribe((session: Session) => {
+
         this.session = session;
-        this.isParticipate = session.users.some(u => u === this.sessionService.sessionInformation!.id);
+        this.isParticipate = session.users.some(u => u === Number(this.sessionService.sessionInformation!.id));
+
         this.teacherService
           .detail(session.teacher_id.toString())
-          .subscribe((teacher: Teacher) => this.teacher = teacher);
+          .subscribe((teacher: Teacher) => {
+            console.log('🔎 teacher reçu:', teacher);
+            this.teacher = teacher;
+          });
       });
   }
+
 
 }

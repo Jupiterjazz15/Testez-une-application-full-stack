@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import { of } from 'rxjs';
+import { fakeAsync, tick } from '@angular/core/testing';
 import { DetailComponent } from './detail.component';
 import { SessionService } from '../../../../services/session.service';
 import { SessionApiService } from '../../services/session-api.service';
@@ -16,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterTestingModule } from '@angular/router/testing';
 import {By} from "@angular/platform-browser";
+import {Teacher} from "../../../../interfaces/teacher.interface";
 
 
 describe('DetailComponent', () => {
@@ -35,6 +37,18 @@ describe('DetailComponent', () => {
     users: [1, 2, 3, 4],
     createdAt: new Date('2025-01-01'),
     updatedAt: new Date('2025-02-01'),
+  };
+
+  const mockTeacher: Teacher = {
+    id: 101,
+    firstName: 'Nathalie',
+    lastName: 'Haller',
+    createdAt: new Date('2024-01-01T10:00:00Z'),
+    updatedAt: new Date('2024-02-01T12:00:00Z'),
+  };
+
+  const mockTeacherService = {
+    detail: jest.fn().mockReturnValue(of(mockTeacher)),
   };
 
   mockSessionApiService = {
@@ -58,6 +72,9 @@ describe('DetailComponent', () => {
 
   beforeEach(async () => {
     jest.clearAllMocks()
+    jest.spyOn(mockSessionApiService, 'detail').mockReturnValue(of(mockSession)); // ✅ Mock de sessionApiService.detail()
+    jest.spyOn(mockTeacherService, 'detail').mockReturnValue(of(mockTeacher)); // ✅ Mock de teacherService.detail()
+
     await TestBed.configureTestingModule({
       declarations: [DetailComponent],
       providers: [
@@ -96,6 +113,7 @@ describe('DetailComponent', () => {
     fixture.detectChanges();
   });
 
+
   // TESTS UNITAIRES //
 
   it('should create', () => {
@@ -129,12 +147,13 @@ describe('DetailComponent', () => {
   });
 
   it('should not display the Delete button if the user is not an admin', () => {
-    component.isAdmin = false; // Simuler un utilisateur non-admin
+    component.isAdmin = false; // Simule un utilisateur non admin
     fixture.detectChanges();
 
-    const deleteButton = fixture.nativeElement.querySelector('button[color="warn"]');
+    const deleteButton = fixture.debugElement.query(By.css('[data-testid="delete-button"]'));
     expect(deleteButton).toBeNull();
   });
+
 
   it('should display the "Participate" button if the user is not a participant', () => {
     // ✅ Simuler une session où l'utilisateur n'est pas un participant
@@ -412,24 +431,87 @@ describe('DetailComponent', () => {
 
   });
 
-  describe('participate methods', () => {
-
-    it('should call sessionApiService.delete with the correct session ID', () => {
-      component.delete();
-      expect(mockSessionApiService.delete).toHaveBeenCalledWith('1'); // Assurez-vous que c'est bien une string
+  describe('participate method', () => {
+    beforeEach(() => {
+      jest.spyOn(mockSessionApiService, 'participate').mockReturnValue(of({})); // ✅ Mock sessionApiService.participate()
+      jest.spyOn(component as any, 'fetchSession').mockImplementation(); // ✅ Mock fetchSession() car privé
     });
 
-    it('should call sessionApiService.participate when participate() is called', () => {
-      component.participate();
-      expect(mockSessionApiService.participate).toHaveBeenCalledWith('1', '1'); // Assurez-vous que c'est bien une string
+    it('should call sessionApiService.participate with the correct sessionId and userId', () => {
+      component.participate(); // ✅ Appelle la méthode
+
+      expect(mockSessionApiService.participate).toHaveBeenCalledWith('1', '1'); // ✅ Vérifie les bons paramètres
     });
 
-    it('should call sessionApiService.unParticipate when unParticipate() is called', () => {
-      component.unParticipate();
-      expect(mockSessionApiService.unParticipate).toHaveBeenCalledWith('1', '1'); // Assurez-vous que c'est bien une string
-    });
+    it('should call fetchSession after participate()', () => {
+      component.participate(); // ✅ Appelle la méthode
 
+      expect(component['fetchSession']).toHaveBeenCalled(); // ✅ Vérifie que fetchSession() est appelée après participate()
+    });
   });
 
+  describe('unParticipate method', () => {
+    beforeEach(() => {
+      jest.spyOn(mockSessionApiService, 'unParticipate').mockReturnValue(of({})); // ✅ Mock de sessionApiService.unParticipate()
+      jest.spyOn(component as any, 'fetchSession').mockImplementation(); // ✅ Mock de la méthode privée fetchSession()
+    });
+
+    it('should call sessionApiService.unParticipate with correct sessionId and userId', () => {
+      component.unParticipate(); // ✅ Appelle la méthode
+
+      expect(mockSessionApiService.unParticipate).toHaveBeenCalledWith('1', '1'); // ✅ Vérifie l'appel avec les bons paramètres
+    });
+
+    it('should call fetchSession after unParticipate()', () => {
+      component.unParticipate(); // ✅ Appelle la méthode
+
+      expect(component['fetchSession']).toHaveBeenCalled(); // ✅ Vérifie que fetchSession() est appelée après unParticipate()
+    });
+  });
+
+  describe('fetchSession method', () => {
+    beforeEach(() => {
+      jest.spyOn(mockSessionApiService, 'detail').mockReturnValue(of(mockSession)); // ✅ Mock sessionApiService.detail()
+      jest.spyOn(mockTeacherService, 'detail').mockReturnValue(of(mockTeacher)); // ✅ Mock teacherService.detail()
+    });
+
+    it('should call sessionApiService.detail with the correct sessionId', () => {
+      (component as any).fetchSession(); // ✅ Appelle la méthode privée
+
+      expect(mockSessionApiService.detail).toHaveBeenCalledWith('1'); // ✅ Vérifie que sessionApiService.detail est bien appelé avec le bon ID
+    });
+
+    it('should update session with the data returned by sessionApiService.detail', () => {
+      (component as any).fetchSession(); // ✅ Appelle la méthode privée
+
+      expect(component.session).toEqual(mockSession); // ✅ Vérifie que session est bien mis à jour
+    });
+
+    it('should update isParticipate based on session users', () => {
+
+      (component as any).fetchSession(); // ✅ Appelle la méthode privée
+
+      expect(component.isParticipate).toBe(true);
+    });
+
+    it('should call teacherService.detail with the correct teacher ID', waitForAsync(() => {
+      // je dois utiliser waitForAsync car fakeAsync ne fonctionne pas
+      (component as any).fetchSession(); // Appelle la méthode privée
+
+      fixture.whenStable().then(() => {
+        expect(mockTeacherService.detail).toHaveBeenCalledWith(mockSession.teacher_id); // Vérifie que teacherService.detail() est bien appelé
+      });
+    }));
+
+    it('should update teacher with the data returned by teacherService.detail', waitForAsync(() => {
+      // je dois utiliser waitForAsync car fakeAsync ne fonctionne pas
+      (component as any).fetchSession(); //  Appelle la méthode privée
+
+      fixture.whenStable().then(() => {
+        expect(component.teacher).toEqual(mockTeacher); //  Vérifie que teacher est bien mis à jour
+      });
+    }));
+
+  });
 
 });

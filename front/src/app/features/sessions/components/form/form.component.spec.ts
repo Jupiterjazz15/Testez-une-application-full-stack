@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -47,10 +46,9 @@ describe('FormComponent', () => {
       if (typeof message === 'string' && message.includes('XMLHttpRequest')) {
         return;
       }
-      console.warn(message); // 🔹 Cette ligne est remplacée ci-dessous
-    });
+      console.warn(message);
 
-    // ✅ Suppression des warnings liés aux erreurs réseau
+    //  Suppression des warnings liés aux erreurs réseau
     jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     await TestBed.configureTestingModule({
@@ -105,3 +103,5 @@ describe('FormComponent', () => {
   });
 
 });
+
+})
