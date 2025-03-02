@@ -111,7 +111,7 @@ describe('ListComponent', () => {
       } as unknown as SessionService;
 
       const mockSessionApiService = {
-        all: jest.fn().mockReturnValue(of([])) // ✅ Simule un appel à `all()`
+        all: jest.fn().mockReturnValue(of([])) //  Simule un appel à `all()`
       } as unknown as SessionApiService;
 
       const testComponent = new ListComponent(mockSessionService, mockSessionApiService);

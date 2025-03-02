@@ -58,7 +58,7 @@ export class RegisterComponent {
     const registerRequest = this.form.value as RegisterRequest;
 
     this.authService.register(registerRequest).subscribe({
-      next: (_: void) => this.ngZone.run(() => this.router.navigate(['/login'])), // ✅ Dans Angular Zone
+      next: (_: void) => this.ngZone.run(() => this.router.navigate(['/login'])), // Dans Angular Zone
       error: _ => this.onError = true
     });
   }

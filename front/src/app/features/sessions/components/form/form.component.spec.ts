@@ -32,7 +32,7 @@ describe('FormComponent', () => {
   };
 
   const mockTeacherService = {
-    all: jest.fn().mockReturnValue(of([])) // ✅ Simuler un retour vide pour éviter l'erreur
+    all: jest.fn().mockReturnValue(of([])) // Simuler un retour vide pour éviter l'erreur
   };
 
   const mockSessionApiService = {
@@ -59,7 +59,7 @@ describe('FormComponent', () => {
   mockRouter = {
     navigate: jest.fn(),
     get url() {
-      return '/sessions/create'; // ✅ Propriété avec un getter
+      return '/sessions/create'; // Propriété avec un getter
     }
   };
 
@@ -75,7 +75,7 @@ describe('FormComponent', () => {
     // Suppression des warnings liés aux erreurs réseau
     jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    // ✅ Configuration Jest et création du composant AVANT de faire fixture.detectChanges()
+    // Configuration Jest et création du composant AVANT de faire fixture.detectChanges()
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([]),
@@ -100,7 +100,7 @@ describe('FormComponent', () => {
             snapshot: {
               paramMap: {
                 get: (key: string) => {
-                  if (key === 'id') return '1'; // ✅ Simulation d'un ID si besoin
+                  if (key === 'id') return '1'; // Simulation d'un ID si besoin
                   return null;
                 }
               }
@@ -160,25 +160,25 @@ describe('FormComponent', () => {
       mockSessionService.sessionInformation.admin = false;
       const navigateSpy = jest.spyOn(mockRouter, 'navigate');
 
-      component.ngOnInit(); // ✅ Appelle `ngOnInit()`
+      component.ngOnInit(); // Appelle `ngOnInit()`
 
-      expect(navigateSpy).toHaveBeenCalledWith(['/sessions']); // ✅ Vérifie la redirection
+      expect(navigateSpy).toHaveBeenCalledWith(['/sessions']); // Vérifie la redirection
     });
 
     it('should set onUpdate to true if the URL contains "update"', () => {
       Object.defineProperty(mockRouter, 'url', {
-        get: jest.fn(() => '/sessions/update/1') // ✅ Correcte manière de mocker un getter
+        get: jest.fn(() => '/sessions/update/1') // Correcte manière de mocker un getter
       });
 
       component.ngOnInit();
 
-      expect(component.onUpdate).toBe(true); // ✅ Vérifie que `onUpdate` est bien activé
-      expect(mockSessionApiService.detail).toHaveBeenCalledWith('1'); // ✅ Vérifie que l'API est appelée avec l'ID correct
+      expect(component.onUpdate).toBe(true); // Vérifie que `onUpdate` est bien activé
+      expect(mockSessionApiService.detail).toHaveBeenCalledWith('1'); // Vérifie que l'API est appelée avec l'ID correct
     });
 
     it('should initialize the form with session details if updating', () => {
       Object.defineProperty(mockRouter, 'url', {
-        get: jest.fn(() => '/sessions/update/1') // ✅ Correcte manière de mocker un getter
+        get: jest.fn(() => '/sessions/update/1') // Correcte manière de mocker un getter
       });
 
       component.ngOnInit();
@@ -188,12 +188,12 @@ describe('FormComponent', () => {
         date: '2025-02-10',
         teacher_id: 101,
         description: 'Relaxing yoga session'
-      }); // ✅ Vérifie que le formulaire est bien rempli avec la session
+      }); // Vérifie que le formulaire est bien rempli avec la session
     });
 
     it('should initialize an empty form if not updating', () => {
       Object.defineProperty(mockRouter, 'url', {
-        get: jest.fn(() => '/sessions/create') // ✅ Bonne URL pour un test de création
+        get: jest.fn(() => '/sessions/create') // Bonne URL pour un test de création
       });
 
       component.ngOnInit();
@@ -203,19 +203,19 @@ describe('FormComponent', () => {
         date: '',
         teacher_id: '',
         description: ''
-      }); // ✅ Vérifie que le formulaire est vide en mode création
+      }); // Vérifie que le formulaire est vide en mode création
     });
   });
 
   describe('submit method', () => {
     beforeEach(() => {
-      jest.spyOn(mockSessionApiService, 'create').mockReturnValue(of({})); // ✅ Mock création
-      jest.spyOn(mockSessionApiService, 'update').mockReturnValue(of({})); // ✅ Mock mise à jour
-      jest.spyOn(component as any, 'exitPage').mockImplementation(); // ✅ Empêche la navigation réelle
+      jest.spyOn(mockSessionApiService, 'create').mockReturnValue(of({})); // Mock création
+      jest.spyOn(mockSessionApiService, 'update').mockReturnValue(of({})); // Mock mise à jour
+      jest.spyOn(component as any, 'exitPage').mockImplementation(); // Empêche la navigation réelle
     });
 
     it('should call sessionApiService.create when creating a new session', () => {
-      component.onUpdate = false; // ✅ Simule un mode création
+      component.onUpdate = false; // Simule un mode création
 
       component.sessionForm?.setValue({
         name: 'Yoga Class',
@@ -224,21 +224,21 @@ describe('FormComponent', () => {
         description: 'Relaxing yoga session'
       });
 
-      component.submit(); // ✅ Appelle la méthode submit()
+      component.submit(); // Appelle la méthode submit()
 
       expect(mockSessionApiService.create).toHaveBeenCalledWith({
         name: 'Yoga Class',
         date: '2025-02-10',
         teacher_id: 101,
         description: 'Relaxing yoga session'
-      }); // ✅ Vérifie que create() a été appelé avec les bonnes valeurs
+      }); // Vérifie que create() a été appelé avec les bonnes valeurs
 
-      expect(component['exitPage']).toHaveBeenCalledWith('Session created !'); // ✅ Vérifie que exitPage() est bien appelé
+      expect(component['exitPage']).toHaveBeenCalledWith('Session created !'); // Vérifie que exitPage() est bien appelé
     });
 
     it('should call sessionApiService.update when updating a session', () => {
-      component.onUpdate = true; // ✅ Simule un mode mise à jour
-      (component as any).id = '1'; // ✅ Forcer l'accès à la propriété privée
+      component.onUpdate = true; // Simule un mode mise à jour
+      (component as any).id = '1'; // Forcer l'accès à la propriété privée
 
       component.sessionForm?.setValue({
         name: 'Updated Class',
@@ -247,16 +247,16 @@ describe('FormComponent', () => {
         description: 'Updated description'
       });
 
-      component.submit(); // ✅ Appelle la méthode submit()
+      component.submit(); // Appelle la méthode submit()
 
       expect(mockSessionApiService.update).toHaveBeenCalledWith('1', {
         name: 'Updated Class',
         date: '2025-03-15',
         teacher_id: 202,
         description: 'Updated description'
-      }); // ✅ Vérifie que update() a été appelé avec les bonnes valeurs
+      }); // Vérifie que update() a été appelé avec les bonnes valeurs
 
-      expect(component['exitPage']).toHaveBeenCalledWith('Session updated !'); // ✅ Vérifie que exitPage() est bien appelé
+      expect(component['exitPage']).toHaveBeenCalledWith('Session updated !'); // Vérifie que exitPage() est bien appelé
     });
   });
 
@@ -269,7 +269,7 @@ describe('FormComponent', () => {
         date: '',
         teacher_id: '',
         description: ''
-      }); // ✅ Vérifie que le formulaire est bien vide
+      }); // Vérifie que le formulaire est bien vide
     });
 
     it('should initialize the form with session values when a session is provided', () => {
@@ -289,7 +289,7 @@ describe('FormComponent', () => {
         date: '2025-04-20',
         teacher_id: 202,
         description: 'Pilates session for beginners'
-      }); // ✅ Vérifie que le formulaire est bien rempli avec la session
+      }); // Vérifie que le formulaire est bien rempli avec la session
     });
 
     it('should apply required validators on all fields', () => {
@@ -314,7 +314,7 @@ describe('FormComponent', () => {
     });
 
     it('should display a snackbar message and navigate to /sessions', () => {
-      (component as any).exitPage('Test message'); // ✅ Appelle exitPage()
+      (component as any).exitPage('Test message'); // Appelle exitPage()
 
       expect(snackBarSpy).toHaveBeenCalledWith('Test message', 'Close', { duration: 3000 });
       expect(routerSpy).toHaveBeenCalledWith(['sessions']);

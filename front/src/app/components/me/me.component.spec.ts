@@ -183,7 +183,7 @@ describe('MeComponent', () => {
     it('should call userservice delete method with correct id', fakeAsync(() => {
       component.delete();
       tick();
-      flush(); // ✅ Vide les timers restants
+      flush(); // Vide les timers restants
       expect(mockUserService.delete).toHaveBeenCalledWith('1');
     }));
 
@@ -195,20 +195,20 @@ describe('MeComponent', () => {
         '🌻 Your account has been deleted !', 'Close', { duration: 3000 }
       );
 
-      flush(); // ✅ Vide toutes les tâches asynchrones restantes
+      flush(); // Vide toutes les tâches asynchrones restantes
     }));
 
     it('should call sessionService logOut method', fakeAsync(() => {
       component.delete();
       tick();
-      flush(); // ✅ Vide tous les timers avant la vérification
+      flush(); // Vide tous les timers avant la vérification
       expect(mockSessionService.logOut).toHaveBeenCalled();
     }));
 
     it('should navigate to homepage', fakeAsync(() => {
       component.delete();
       tick();
-      flush(); // ✅ Assure que la navigation est bien déclenchée
+      flush(); // Assure que la navigation est bien déclenchée
       expect(mockRouter.navigate).toHaveBeenCalledWith(['/']);
     }));
   });

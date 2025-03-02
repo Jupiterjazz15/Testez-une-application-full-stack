@@ -25,7 +25,7 @@ describe('RegisterComponent', () => {
   let fixture: ComponentFixture<RegisterComponent>;
   let registerRequest: RegisterRequest;
   let mockAuthService: any;
-  let router: Router; // ✅ Déclarer router ici
+  let router: Router; // Déclarer router ici
 
   const mockRouter = {
     navigate: jest.fn(),
@@ -33,7 +33,7 @@ describe('RegisterComponent', () => {
 
   beforeEach(async () => {
     mockAuthService = {
-      register: jest.fn().mockReturnValue(of({})), // ✅ Mock de l'authService avant l'initialisation de TestBed
+      register: jest.fn().mockReturnValue(of({})), // Mock de l'authService avant l'initialisation de TestBed
     };
 
     await TestBed.configureTestingModule({
@@ -46,7 +46,7 @@ describe('RegisterComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
-        RouterTestingModule, // ✅ Ajout du module de test pour gérer `router`
+        RouterTestingModule, // Ajout du module de test pour gérer `router`
       ],
       providers: [
         { provide: AuthService, useValue: mockAuthService },
@@ -58,7 +58,7 @@ describe('RegisterComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    // ✅ Injection correcte après la configuration
+    // Injection correcte après la configuration
     router = TestBed.inject(Router);
 
     registerRequest = {
@@ -176,25 +176,25 @@ describe('RegisterComponent', () => {
         password: 'password123'
       };
 
-      component.form.setValue(registerRequest); // ✅ Remplir le formulaire
-      component.submit(); // ✅ Appeler submit
+      component.form.setValue(registerRequest); // Remplir le formulaire
+      component.submit(); // Appeler submit
 
-      expect(mockAuthService.register).toHaveBeenCalledWith(registerRequest); // ✅ Vérifier l'appel avec les bonnes données
+      expect(mockAuthService.register).toHaveBeenCalledWith(registerRequest); // Vérifier l'appel avec les bonnes données
     });
 
     it('should navigate to /login on successful registration', fakeAsync(() => {
       component.submit();
-      tick(); // ⏳ Simuler l'attente de la navigation
-      flush(); // ✅ Nettoyer les tâches asynchrones restantes
+      tick(); // Simuler l'attente de la navigation
+      flush(); // Nettoyer les tâches asynchrones restantes
 
-      expect(mockRouter.navigate).toHaveBeenCalledWith(['/login']); // ✅ Vérifier la navigation
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['/login']); // Vérifier la navigation
     }));
 
     it('should set onError to true on registration failure', () => {
-      mockAuthService.register.mockReturnValue(throwError(() => new Error('Registration failed'))); // ✅ Simuler une erreur
+      mockAuthService.register.mockReturnValue(throwError(() => new Error('Registration failed'))); // Simuler une erreur
       component.submit();
 
-      expect(component.onError).toBeTruthy(); // ✅ Vérifier que l'erreur est bien gérée
+      expect(component.onError).toBeTruthy(); // Vérifier que l'erreur est bien gérée
     });
 
   });
