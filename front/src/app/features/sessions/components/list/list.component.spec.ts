@@ -4,23 +4,24 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject, of} from 'rxjs';
 import { expect } from '@jest/globals';
 import { Session } from '../../interfaces/session.interface';
 import { SessionService } from 'src/app/services/session.service';
 import { ListComponent } from './list.component';
+import {SessionApiService} from "../../services/session-api.service";
 
 describe('ListComponent', () => {
   let component: ListComponent; // Instance du composant
   let fixture: ComponentFixture<ListComponent>; // Fixture pour interagir avec le composant
   let mockSessionSubject: BehaviorSubject<Session[]>; // Simule les sessions
-  let mockSessionService: Partial<SessionService>; // Service mocké
 
   // Définition des sessions mockées
   const mockSessions: Session[] = [
     { id: 1, name: 'Session 1', date: new Date(), description: 'Yoga beginner', teacher_id: 101, users: [1, 2, 3], createdAt: new Date(), updatedAt: new Date() },
     { id: 2, name: 'Session 2', date: new Date(), description: 'Advanced yoga', teacher_id: 102, users: [4, 5], createdAt: new Date(), updatedAt: new Date() }
   ];
+
 
   beforeEach(async () => {
     // Simulation d'un BehaviorSubject pour `sessions$`
@@ -52,6 +53,8 @@ describe('ListComponent', () => {
     mockSessionSubject.next(mockSessions);
   });
 
+
+  // TESTS UNITAIRES
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -86,5 +89,36 @@ describe('ListComponent', () => {
       expect(sessions.length).toBe(mockSessions.length); // Vérifier que les sessions sont bien chargées
     });
   });
+
+  // TEST D'INTEGRATION
+
+  describe('user method', () => {
+    it('should return the current user session information', () => {
+      expect(component.user).toEqual({
+        token: 'mock-token',
+        type: 'Bearer',
+        id: 1,
+        username: 'testUser',
+        firstName: 'Test',
+        lastName: 'User',
+        admin: true
+      });
+    });
+
+    it('should return undefined if session information is not available', () => {
+      const mockSessionService = {
+        sessionInformation: undefined
+      } as unknown as SessionService;
+
+      const mockSessionApiService = {
+        all: jest.fn().mockReturnValue(of([])) // ✅ Simule un appel à `all()`
+      } as unknown as SessionApiService;
+
+      const testComponent = new ListComponent(mockSessionService, mockSessionApiService);
+
+      expect(testComponent.user).toBeUndefined();
+    });
+  });
+
 
 });

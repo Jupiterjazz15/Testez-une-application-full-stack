@@ -142,8 +142,6 @@ describe('FormComponent', () => {
     expect(submitButton.disabled).toBeFalsy();
   });
 
-  // TESTS D'INTEGRATION
-
 // TESTS D'INTEGRATION
 
   describe('ngOnInit method', () => {
