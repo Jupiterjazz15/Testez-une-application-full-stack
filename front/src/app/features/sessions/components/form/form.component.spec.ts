@@ -10,6 +10,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Session } from '../../interfaces/session.interface';
+import { Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { expect } from '@jest/globals';
 
@@ -41,6 +43,17 @@ describe('FormComponent', () => {
     all: jest.fn().mockReturnValue(of([])),
     participate: jest.fn().mockReturnValue(of({})),
     unParticipate: jest.fn().mockReturnValue(of({}))
+  };
+
+  const mockSession: Session = {
+    id: 1,
+    name: 'Yoga Session',
+    date: new Date('2025-02-10'),
+    description: 'A relaxing yoga session for beginners.',
+    teacher_id: 101,
+    users: [1, 2, 3, 4],
+    createdAt: new Date('2025-01-01'),
+    updatedAt: new Date('2025-02-01'),
   };
 
   mockRouter = {
@@ -196,6 +209,120 @@ describe('FormComponent', () => {
     });
   });
 
-  
+  describe('submit method', () => {
+    beforeEach(() => {
+      jest.spyOn(mockSessionApiService, 'create').mockReturnValue(of({})); // ✅ Mock création
+      jest.spyOn(mockSessionApiService, 'update').mockReturnValue(of({})); // ✅ Mock mise à jour
+      jest.spyOn(component as any, 'exitPage').mockImplementation(); // ✅ Empêche la navigation réelle
+    });
+
+    it('should call sessionApiService.create when creating a new session', () => {
+      component.onUpdate = false; // ✅ Simule un mode création
+
+      component.sessionForm?.setValue({
+        name: 'Yoga Class',
+        date: '2025-02-10',
+        teacher_id: 101,
+        description: 'Relaxing yoga session'
+      });
+
+      component.submit(); // ✅ Appelle la méthode submit()
+
+      expect(mockSessionApiService.create).toHaveBeenCalledWith({
+        name: 'Yoga Class',
+        date: '2025-02-10',
+        teacher_id: 101,
+        description: 'Relaxing yoga session'
+      }); // ✅ Vérifie que create() a été appelé avec les bonnes valeurs
+
+      expect(component['exitPage']).toHaveBeenCalledWith('Session created !'); // ✅ Vérifie que exitPage() est bien appelé
+    });
+
+    it('should call sessionApiService.update when updating a session', () => {
+      component.onUpdate = true; // ✅ Simule un mode mise à jour
+      (component as any).id = '1'; // ✅ Forcer l'accès à la propriété privée
+
+      component.sessionForm?.setValue({
+        name: 'Updated Class',
+        date: '2025-03-15',
+        teacher_id: 202,
+        description: 'Updated description'
+      });
+
+      component.submit(); // ✅ Appelle la méthode submit()
+
+      expect(mockSessionApiService.update).toHaveBeenCalledWith('1', {
+        name: 'Updated Class',
+        date: '2025-03-15',
+        teacher_id: 202,
+        description: 'Updated description'
+      }); // ✅ Vérifie que update() a été appelé avec les bonnes valeurs
+
+      expect(component['exitPage']).toHaveBeenCalledWith('Session updated !'); // ✅ Vérifie que exitPage() est bien appelé
+    });
+  });
+
+  describe('initForm method', () => {
+    it('should initialize the form with empty values when no session is provided', () => {
+      (component as any).initForm();
+
+      expect(component.sessionForm?.value).toEqual({
+        name: '',
+        date: '',
+        teacher_id: '',
+        description: ''
+      }); // ✅ Vérifie que le formulaire est bien vide
+    });
+
+    it('should initialize the form with session values when a session is provided', () => {
+      const mockSession: Session = {
+        id: 1,
+        name: 'Pilates Class',
+        date: new Date('2025-04-20'),
+        teacher_id: 202,
+        description: 'Pilates session for beginners',
+        users: [1, 2]
+      };
+
+      (component as any).initForm(mockSession);
+
+      expect(component.sessionForm?.value).toEqual({
+        name: 'Pilates Class',
+        date: '2025-04-20',
+        teacher_id: 202,
+        description: 'Pilates session for beginners'
+      }); // ✅ Vérifie que le formulaire est bien rempli avec la session
+    });
+
+    it('should apply required validators on all fields', () => {
+      (component as any).initForm();
+
+      expect(component.sessionForm?.controls['name'].hasValidator(Validators.required)).toBe(true);
+      expect(component.sessionForm?.controls['date'].hasValidator(Validators.required)).toBe(true);
+      expect(component.sessionForm?.controls['teacher_id'].hasValidator(Validators.required)).toBe(true);
+      expect(component.sessionForm?.controls['description'].hasValidator(Validators.required)).toBe(true);
+    });
+
+
+  });
+
+  describe('exitPage method', () => {
+    let snackBarSpy: jest.SpyInstance;
+    let routerSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+      snackBarSpy = jest.spyOn(component['matSnackBar'], 'open');
+      routerSpy = jest.spyOn(component['router'], 'navigate');
+    });
+
+    it('should display a snackbar message and navigate to /sessions', () => {
+      (component as any).exitPage('Test message'); // ✅ Appelle exitPage()
+
+      expect(snackBarSpy).toHaveBeenCalledWith('Test message', 'Close', { duration: 3000 });
+      expect(routerSpy).toHaveBeenCalledWith(['sessions']);
+    });
+  });
+
+
 });
 
