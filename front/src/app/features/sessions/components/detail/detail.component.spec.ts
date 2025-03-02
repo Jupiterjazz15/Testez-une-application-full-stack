@@ -1,6 +1,5 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import { of } from 'rxjs';
-import { fakeAsync, tick } from '@angular/core/testing';
 import { DetailComponent } from './detail.component';
 import { SessionService } from '../../../../services/session.service';
 import { SessionApiService } from '../../services/session-api.service';
@@ -77,6 +76,7 @@ describe('DetailComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [DetailComponent],
+
       providers: [
         { provide: SessionApiService, useValue: mockSessionApiService },
         { provide: SessionService, useValue: mockSessionService },
