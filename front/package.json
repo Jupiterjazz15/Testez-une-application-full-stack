@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "start": "ng serve",
-    "test": "jest",
+    "test": "ng test",
+    "test:coverage": "ng test --code-coverage",
     "test:watch": "jest --watch",
     "lint": "ng lint",
     "e2e": "ng e2e",
