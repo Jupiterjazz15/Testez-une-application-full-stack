@@ -32,7 +32,7 @@ describe('UserService Unit Tests Suite', () => {
   });
 
   // TESTS D'INTEGRATION
-  
+
   it("should get the user", done => {
 
     const mockedUser = {
