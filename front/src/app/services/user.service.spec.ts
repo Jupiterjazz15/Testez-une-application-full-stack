@@ -25,15 +25,14 @@ describe('UserService Unit Tests Suite', () => {
     httpTestingController.verify();
   });
 
-  // TESTS UNITAIRES
+  // TEST UNITAIRE
 
   it('should be created', () => {
     expect(userService).toBeTruthy();
   });
 
   // TESTS D'INTEGRATION
-
-
+  
   it("should get the user", done => {
 
     const mockedUser = {
