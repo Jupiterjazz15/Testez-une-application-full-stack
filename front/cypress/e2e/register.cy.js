@@ -1,6 +1,6 @@
 describe('Register Form', () => {
   beforeEach(() => {
-    cy.visit('/register'); // Modifier l'URL selon ton application
+    cy.visit('/register'); // Modifier l'URL selon votre application
   });
 
   it('should validate email format', () => {
@@ -38,6 +38,12 @@ describe('Register Form', () => {
     const email = "johndoe@example.com";
     const password = "Password123"; // Doit respecter la longueur requise
 
+    // Intercepter la requête API pour la simuler
+    cy.intercept('POST', '/api/auth/register', {
+      statusCode: 201, // Simule une réponse réussie
+      body: {} // Vous pouvez ajouter un corps de réponse si nécessaire
+    }).as('registerRequest');
+
     cy.get('[data-cy="first-name"]').type(firstName);
     cy.get('[data-cy="last-name"]').type(lastName);
     cy.get('[data-cy="email"]').type(email);
@@ -45,6 +51,10 @@ describe('Register Form', () => {
 
     cy.get('[data-cy="submit-button"]').click();
 
+    // Attendre la requête simulée
+    cy.wait('@registerRequest');
+
+    // Vérifier la redirection vers /login
     cy.url().should('eq', Cypress.config('baseUrl') + '/login');
 
     // Vérification que l'alerte XSS ne s'est pas affichée

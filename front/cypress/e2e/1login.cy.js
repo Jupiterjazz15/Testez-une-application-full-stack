@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 
 describe('Login Form', () => {
     beforeEach(() => {
