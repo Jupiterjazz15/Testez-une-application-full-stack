@@ -1,31 +1,31 @@
-
 describe('Login Form', () => {
-    beforeEach(() => {
-        cy.visit('/login'); // On commence sur la page de login
+  beforeEach(() => {
+    cy.visit('/login'); // Modifier l'URL selon votre application
+  });
 
-        // ⚡ MOCKER l'API pour éviter l'erreur 401
-        cy.intercept('POST', '/api/auth/login', {
-            statusCode: 200, // Force une réponse réussie
-            body: { token: 'fake-jwt-token' }, // Simule un token JWT
-        }).as('mockLoginRequest');
-    });
+  it('should validate email format', () => {
+    cy.get('[data-cy="email"]').type('invalid-email');
+    cy.get('[data-cy="email"]').should('have.class', 'ng-invalid');
+  });
 
-    it('should fill the login form and be redirected to /sessions', () => {
-        const email = faker.internet.email();
-        const password = faker.internet.password({ length: 12 });
+  it('should validate password length', () => {
+    cy.get('[data-cy="password"]').type('12'); // 2 caractères (trop court)
+    cy.get('[data-cy="password"]').should('have.class', 'ng-invalid');
+  });
 
-        // Vérifie que l'URL est bien sur /login avant le test
-        cy.location('pathname').should('eq', '/login');
+  it('should fill the form and submit, then be redirected', () => {
+    cy.intercept('POST', '/api/auth/login', { statusCode: 200 }).as('loginRequest');
 
-        // Remplir les champs du formulaire
-        cy.get('[data-cy="email"]').type(email);
-        cy.get('[data-cy="password"]').type(password);
-        cy.get('[data-cy="submit-button"]').click();
+    const email = "johndoe@example.com";
+    const password = "Password123"; // Doit respecter la longueur requise
 
-        // Attendre la requête API et vérifier qu'elle a été appelée
-        cy.wait('@mockLoginRequest');
+    cy.get('[data-cy="email"]').type(email);
+    cy.get('[data-cy="password"]').type(password);
 
-        // Vérifier que l'utilisateur est redirigé vers /sessions
-        cy.url().should('eq', Cypress.config('baseUrl') + '/sessions');
-    });
+    cy.get('[data-cy="submit-button"]').click();
+
+    cy.wait('@loginRequest');
+
+    cy.url().should('eq', Cypress.config('baseUrl') + '/sessions');
+  });
 });
