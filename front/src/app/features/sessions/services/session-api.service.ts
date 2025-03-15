@@ -16,6 +16,10 @@ export class SessionApiService {
   }
 
   public all(): Observable<Session[]> {
+    this.httpClient.get<Session[]>(this.pathService).subscribe(sessions => {
+      this.sessionsSubject.next(sessions); // 🔹 Met à jour le BehaviorSubject avec les nouvelles sessions
+    });
+
     return this.sessions$;
   }
 
