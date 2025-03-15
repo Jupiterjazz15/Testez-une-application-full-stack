@@ -29,7 +29,7 @@
             <span class="ml1">Detail</span>
           </button>
           <p *ngIf="user?.admin" style="color: red;">Admin mode ON</p>
-          <button *ngIf="user?.admin" mat-raised-button color="primary" (click)="logButtonState()">
+          <button *ngIf="user?.admin" mat-raised-button color="primary" [routerLink]="['/sessions/update', session.id]" data-cy="session-edit">
             <mat-icon>edit</mat-icon>
             <span class="ml1">Edit</span>
           </button>
