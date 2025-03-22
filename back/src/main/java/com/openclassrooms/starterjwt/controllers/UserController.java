@@ -61,4 +61,26 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<?> findByEmail(@PathVariable("email") String email) {
+        User user = userService.findByEmail(email);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(userMapper.toDto(user));
+    }
+
+    @DeleteMapping("/email/{email}")
+    public ResponseEntity<?> deleteByEmail(@PathVariable("email") String email) {
+        User user = userService.findByEmail(email);
+
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        userService.delete(user.getId());
+        return ResponseEntity.ok().build();
+    }
+
 }

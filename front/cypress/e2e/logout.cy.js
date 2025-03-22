@@ -3,8 +3,8 @@ describe('Logout Test', () => {
     cy.visit('/login');
 
     // 🔹 Connexion de l'utilisateur
-    cy.get('input[formControlName=email]').type('metest@test.com');
-    cy.get('input[formControlName=password]').type('azerty{enter}{enter}');
+    cy.get('input[formControlName=email]').type('yoga@studio.com');
+    cy.get('input[formControlName=password]').type('test!1234{enter}{enter}');
 
     // 🔹 Vérification de la redirection vers /sessions
     cy.url().should('include', '/sessions');
