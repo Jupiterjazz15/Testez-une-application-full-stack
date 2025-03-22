@@ -20,6 +20,7 @@ public class UserMapperTest {
         userMapper = Mappers.getMapper(UserMapper.class);
     }
 
+    // Teste la conversion d'un UserDto en entité User
     @Test
     public void testToEntity() {
         UserDto dto = new UserDto();
@@ -44,6 +45,7 @@ public class UserMapperTest {
         assertEquals(dto.getUpdatedAt(), user.getUpdatedAt());
     }
 
+    // Teste la conversion d'un User en UserDto
     @Test
     public void testToDto() {
         User user = new User();
@@ -68,6 +70,7 @@ public class UserMapperTest {
         assertEquals(user.getUpdatedAt(), dto.getUpdatedAt());
     }
 
+    // Teste la conversion d'une liste de UserDto en liste d'entités User
     @Test
     public void testToEntityList() {
         UserDto dto1 = new UserDto();
@@ -95,6 +98,7 @@ public class UserMapperTest {
         assertEquals(dtoList.get(1).getEmail(), userList.get(1).getEmail());
     }
 
+    // Teste la conversion d'une liste d'entités User en liste de UserDto
     @Test
     public void testToDtoList() {
         User user1 = new User();
