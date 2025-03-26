@@ -1,7 +1,6 @@
-package com.openclassrooms.starterjwt.jwt;
+package com.openclassrooms.starterjwt.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.openclassrooms.starterjwt.security.AuthEntryPointJwt;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
