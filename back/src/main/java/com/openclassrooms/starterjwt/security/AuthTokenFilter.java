@@ -1,4 +1,4 @@
-package com.openclassrooms.starterjwt.security.jwt;
+package com.openclassrooms.starterjwt.security;
 
 import java.io.IOException;
 
