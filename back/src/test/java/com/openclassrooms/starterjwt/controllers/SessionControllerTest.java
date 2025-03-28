@@ -1,199 +1,112 @@
-//package com.openclassrooms.starterjwt.controllers;
-//
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.openclassrooms.starterjwt.dto.SessionDto;
-//import com.openclassrooms.starterjwt.mapper.SessionMapper;
-//import com.openclassrooms.starterjwt.models.Session;
-//import com.openclassrooms.starterjwt.services.SessionService;
-//import org.junit.jupiter.api.Test;
-//import org.mockito.Mockito;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-//import org.springframework.boot.test.mock.mockito.MockBean;
-//import org.springframework.http.MediaType;
-//import org.springframework.test.web.servlet.MockMvc;
-//
-//import java.util.Collections;
-//import java.util.Date;
-//import java.util.List;
-//
-//import static org.mockito.Mockito.*;
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-//
-//@WebMvcTest(SessionController.class)
-//public class SessionControllerTest {
-//
-//    @Autowired
-//    private MockMvc mockMvc;
-//
-//    @MockBean
-//    private SessionService sessionService;
-//
-//    @MockBean
-//    private SessionMapper sessionMapper;
-//
-//    @Autowired
-//    private ObjectMapper objectMapper;
-//
-//    @Test
-//    void testFindById_ReturnsSessionDto() throws Exception {
-//        Session session = new Session();
-//        session.setId(1L);
-//        session.setName("Yoga");
-//
-//        SessionDto sessionDto = new SessionDto();
-//        sessionDto.setId(1L);
-//        sessionDto.setName("Yoga");
-//
-//        when(sessionService.getById(1L)).thenReturn(session);
-//        when(sessionMapper.toDto(session)).thenReturn(sessionDto);
-//
-//        mockMvc.perform(get("/api/session/1"))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.id").value(1L))
-//                .andExpect(jsonPath("$.name").value("Yoga"));
-//    }
-//
-//    @Test
-//    void testFindById_NotFound() throws Exception {
-//        when(sessionService.getById(1L)).thenReturn(null);
-//
-//        mockMvc.perform(get("/api/session/1"))
-//                .andExpect(status().isNotFound());
-//    }
-//
-//    @Test
-//    void testFindById_InvalidIdFormat() throws Exception {
-//        mockMvc.perform(get("/api/session/abc"))
-//                .andExpect(status().isBadRequest());
-//    }
-//
-//    @Test
-//    void testFindAll() throws Exception {
-//        Session session = new Session();
-//        session.setId(1L);
-//        session.setName("Pilates");
-//
-//        SessionDto sessionDto = new SessionDto();
-//        sessionDto.setId(1L);
-//        sessionDto.setName("Pilates");
-//
-//        when(sessionService.findAll()).thenReturn(List.of(session));
-//        when(sessionMapper.toDto(List.of(session))).thenReturn(List.of(sessionDto));
-//
-//        mockMvc.perform(get("/api/session"))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$[0].id").value(1L));
-//    }
-//
-//    @Test
-//    void testCreateSession() throws Exception {
-//        SessionDto dto = new SessionDto();
-//        dto.setName("Meditation");
-//
-//        Session entity = new Session();
-//        entity.setId(1L);
-//        entity.setName("Meditation");
-//
-//        Session saved = new Session();
-//        saved.setId(1L);
-//        saved.setName("Meditation");
-//
-//        SessionDto responseDto = new SessionDto();
-//        responseDto.setId(1L);
-//        responseDto.setName("Meditation");
-//
-//        when(sessionMapper.toEntity(dto)).thenReturn(entity);
-//        when(sessionService.create(entity)).thenReturn(saved);
-//        when(sessionMapper.toDto(saved)).thenReturn(responseDto);
-//
-//        mockMvc.perform(post("/api/session")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(objectMapper.writeValueAsString(dto)))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.id").value(1L));
-//    }
-//
-//    @Test
-//    void testUpdateSession_ValidId() throws Exception {
-//        SessionDto dto = new SessionDto();
-//        dto.setName("New Session");
-//
-//        Session updated = new Session();
-//        updated.setId(1L);
-//        updated.setName("New Session");
-//
-//        SessionDto responseDto = new SessionDto();
-//        responseDto.setId(1L);
-//        responseDto.setName("New Session");
-//
-//        when(sessionMapper.toEntity(dto)).thenReturn(updated);
-//        when(sessionService.update(1L, updated)).thenReturn(updated);
-//        when(sessionMapper.toDto(updated)).thenReturn(responseDto);
-//
-//        mockMvc.perform(put("/api/session/1")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(objectMapper.writeValueAsString(dto)))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.name").value("New Session"));
-//    }
-//
-//    @Test
-//    void testUpdateSession_InvalidId() throws Exception {
-//        SessionDto dto = new SessionDto();
-//        dto.setName("Whatever");
-//
-//        mockMvc.perform(put("/api/session/abc")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(objectMapper.writeValueAsString(dto)))
-//                .andExpect(status().isBadRequest());
-//    }
-//
-//    @Test
-//    void testDeleteSession_Valid() throws Exception {
-//        Session session = new Session();
-//        session.setId(1L);
-//
-//        when(sessionService.getById(1L)).thenReturn(session);
-//
-//        mockMvc.perform(delete("/api/session/1"))
-//                .andExpect(status().isOk());
-//    }
-//
-//    @Test
-//    void testDeleteSession_NotFound() throws Exception {
-//        when(sessionService.getById(1L)).thenReturn(null);
-//
-//        mockMvc.perform(delete("/api/session/1"))
-//                .andExpect(status().isNotFound());
-//    }
-//
-//    @Test
-//    void testParticipate_ValidIds() throws Exception {
-//        mockMvc.perform(post("/api/session/1/participate/2"))
-//                .andExpect(status().isOk());
-//
-//        verify(sessionService).participate(1L, 2L);
-//    }
-//
-//    @Test
-//    void testParticipate_InvalidId() throws Exception {
-//        mockMvc.perform(post("/api/session/abc/participate/xyz"))
-//                .andExpect(status().isBadRequest());
-//    }
-//
-//    @Test
-//    void testNoLongerParticipate_ValidIds() throws Exception {
-//        mockMvc.perform(delete("/api/session/1/participate/2"))
-//                .andExpect(status().isOk());
-//
-//        verify(sessionService).noLongerParticipate(1L, 2L);
-//    }
-//
-//    @Test
-//    void testNoLongerParticipate_InvalidId() throws Exception {
-//        mockMvc.perform(delete("/api/session/abc/participate/xyz"))
-//                .andExpect(status().isBadRequest());
-//    }
-//}
+package com.openclassrooms.starterjwt.controllers;
+
+import com.openclassrooms.starterjwt.dto.SessionDto;
+import com.openclassrooms.starterjwt.mapper.SessionMapper;
+import com.openclassrooms.starterjwt.models.Session;
+import com.openclassrooms.starterjwt.models.Teacher;
+import com.openclassrooms.starterjwt.services.SessionService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.ResponseEntity;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.Mockito.when;
+
+public class SessionControllerTest {
+
+    @Mock
+    private SessionService sessionService;
+
+    @Mock
+    private SessionMapper sessionMapper;
+
+    @InjectMocks
+    private SessionController sessionController;
+
+    private Session session1;
+    private Session session2;
+    private SessionDto sessionDto1;
+    private SessionDto sessionDto2;
+
+    @BeforeEach
+    public void setup() throws Exception {
+        MockitoAnnotations.openMocks(this);
+
+        LocalDateTime now = LocalDateTime.now();
+        Teacher teacher = new Teacher(1L, "Jean", "Dupont", now, now);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = sdf.parse("2025-05-20");
+        Date date2 = sdf.parse("2025-05-21");
+
+        session1 = new Session(1L, "Yoga Matin", date1, "Séance douce du matin", teacher, Collections.emptyList(), now, now);
+        session2 = new Session(2L, "Yoga Soir", date2, "Séance relax du soir", teacher, Collections.emptyList(), now, now);
+
+        sessionDto1 = new SessionDto(1L, "Yoga Matin", date1, 1L, "Séance douce du matin", Collections.emptyList(), now, now);
+        sessionDto2 = new SessionDto(2L, "Yoga Soir", date2, 1L, "Séance relax du soir", Collections.emptyList(), now, now);
+    }
+
+    @Test
+    void testFindAll_ReturnsListOfSessions() {
+        when(sessionService.findAll()).thenReturn(Arrays.asList(session1, session2));
+
+        SessionDto dto1 = new SessionDto(session1.getId(), session1.getName(), session1.getDate(),
+                session1.getTeacher().getId(), session1.getDescription(), null, session1.getCreatedAt(), session1.getUpdatedAt());
+
+        SessionDto dto2 = new SessionDto(session2.getId(), session2.getName(), session2.getDate(),
+                session2.getTeacher().getId(), session2.getDescription(), null, session2.getCreatedAt(), session2.getUpdatedAt());
+
+        when(sessionMapper.toDto(anyList())).thenReturn(Arrays.asList(dto1, dto2));
+
+        ResponseEntity<?> response = sessionController.findAll();
+
+        assertEquals(200, response.getStatusCodeValue());
+
+        List<SessionDto> body = (List<SessionDto>) response.getBody();
+        assertNotNull(body);
+        assertEquals(2, body.size());
+        assertEquals("Yoga Matin", body.get(0).getName());
+        assertEquals("Yoga Soir", body.get(1).getName());
+    }
+
+    @Test
+    void testFindById_ReturnsSession() {
+        when(sessionService.getById(1L)).thenReturn(session1);
+        when(sessionMapper.toDto(session1)).thenReturn(sessionDto1);
+
+        ResponseEntity<?> response = sessionController.findById("1");
+
+        assertEquals(200, response.getStatusCodeValue());
+        SessionDto dto = (SessionDto) response.getBody();
+        assertNotNull(dto);
+        assertEquals("Yoga Matin", dto.getName());
+    }
+
+    @Test
+    void testFindById_NotFound() {
+        when(sessionService.getById(999L)).thenReturn(null);
+
+        ResponseEntity<?> response = sessionController.findById("999");
+
+        assertEquals(404, response.getStatusCodeValue());
+    }
+
+    @Test
+    void testFindById_InvalidId() {
+        ResponseEntity<?> response = sessionController.findById("invalid");
+
+        assertEquals(400, response.getStatusCodeValue());
+    }
+}
