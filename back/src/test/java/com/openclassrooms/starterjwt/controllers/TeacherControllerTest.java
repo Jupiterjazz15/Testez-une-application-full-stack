@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -91,4 +92,54 @@ class TeacherControllerTest {
 
         assertEquals(400, response.getStatusCodeValue());
     }
+
+    // TESTS SUPPLEMENTAIRES
+
+    @Test
+    void findById_shouldReturnTeacherDto_whenTeacherExists() {
+        Teacher teacher = new Teacher();
+        teacher.setId(1L);
+
+        TeacherDto teacherDto = new TeacherDto();
+        teacherDto.setId(1L);
+
+        when(teacherService.findById(1L)).thenReturn(teacher);
+        when(teacherMapper.toDto(teacher)).thenReturn(teacherDto);
+
+        ResponseEntity<?> response = teacherController.findById("1");
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+        assertThat(response.getBody()).isEqualTo(teacherDto);
+    }
+
+    @Test
+    void findById_shouldReturnNotFound_whenTeacherDoesNotExist() {
+        when(teacherService.findById(1L)).thenReturn(null);
+
+        ResponseEntity<?> response = teacherController.findById("1");
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(404);
+    }
+
+    @Test
+    void findById_shouldReturnBadRequest_whenIdIsInvalid() {
+        ResponseEntity<?> response = teacherController.findById("abc");
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+    @Test
+    void findAll_shouldReturnListOfTeacherDtos() {
+        List<Teacher> teachers = List.of(new Teacher(), new Teacher());
+        List<TeacherDto> teacherDtos = List.of(new TeacherDto(), new TeacherDto());
+
+        when(teacherService.findAll()).thenReturn(teachers);
+        when(teacherMapper.toDto(teachers)).thenReturn(teacherDtos);
+
+        ResponseEntity<?> response = teacherController.findAll();
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+        assertThat(response.getBody()).isEqualTo(teacherDtos);
+    }
+
 }

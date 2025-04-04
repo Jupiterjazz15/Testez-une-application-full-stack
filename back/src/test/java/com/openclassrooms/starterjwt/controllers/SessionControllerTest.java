@@ -108,4 +108,89 @@ public class SessionControllerTest {
 
         assertEquals(400, response.getStatusCodeValue());
     }
+
+    // TESTS SUPPLEMENTAIRES
+
+    @Test
+    void testCreateSession_ReturnsCreatedSession() {
+        when(sessionMapper.toEntity(sessionDto1)).thenReturn(session1);
+        when(sessionService.create(session1)).thenReturn(session1);
+        when(sessionMapper.toDto(session1)).thenReturn(sessionDto1);
+
+        ResponseEntity<?> response = sessionController.create(sessionDto1);
+
+        assertEquals(200, response.getStatusCodeValue());
+        SessionDto dto = (SessionDto) response.getBody();
+        assertNotNull(dto);
+        assertEquals("Yoga Matin", dto.getName());
+    }
+
+    @Test
+    void testUpdateSession_ReturnsUpdatedSession() {
+        when(sessionMapper.toEntity(sessionDto1)).thenReturn(session1);
+        when(sessionService.update(1L, session1)).thenReturn(session1);
+        when(sessionMapper.toDto(session1)).thenReturn(sessionDto1);
+
+        ResponseEntity<?> response = sessionController.update("1", sessionDto1);
+
+        assertEquals(200, response.getStatusCodeValue());
+        SessionDto dto = (SessionDto) response.getBody();
+        assertNotNull(dto);
+        assertEquals("Yoga Matin", dto.getName());
+    }
+
+    @Test
+    void testUpdateSession_InvalidId() {
+        ResponseEntity<?> response = sessionController.update("invalid", sessionDto1);
+        assertEquals(400, response.getStatusCodeValue());
+    }
+
+    @Test
+    void testDeleteSession_Success() {
+        when(sessionService.getById(1L)).thenReturn(session1);
+
+        ResponseEntity<?> response = sessionController.delete("1");
+
+        assertEquals(200, response.getStatusCodeValue());
+    }
+
+    @Test
+    void testDeleteSession_NotFound() {
+        when(sessionService.getById(1L)).thenReturn(null);
+
+        ResponseEntity<?> response = sessionController.delete("1");
+
+        assertEquals(404, response.getStatusCodeValue());
+    }
+
+    @Test
+    void testDeleteSession_InvalidId() {
+        ResponseEntity<?> response = sessionController.delete("invalid");
+        assertEquals(400, response.getStatusCodeValue());
+    }
+
+    @Test
+    void testParticipate_Success() {
+        ResponseEntity<?> response = sessionController.participate("1", "2");
+        assertEquals(200, response.getStatusCodeValue());
+    }
+
+    @Test
+    void testParticipate_InvalidId() {
+        ResponseEntity<?> response = sessionController.participate("invalid", "2");
+        assertEquals(400, response.getStatusCodeValue());
+    }
+
+    @Test
+    void testNoLongerParticipate_Success() {
+        ResponseEntity<?> response = sessionController.noLongerParticipate("1", "2");
+        assertEquals(200, response.getStatusCodeValue());
+    }
+
+    @Test
+    void testNoLongerParticipate_InvalidId() {
+        ResponseEntity<?> response = sessionController.noLongerParticipate("invalid", "2");
+        assertEquals(400, response.getStatusCodeValue());
+    }
+
 }
