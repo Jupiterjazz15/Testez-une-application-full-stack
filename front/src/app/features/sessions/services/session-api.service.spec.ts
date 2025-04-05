@@ -31,19 +31,16 @@ describe('SessionsService Unit Tests Suit ', () => {
 
   // TESTS D'INTEGRATION
 
-  it("should get all sessions", (done) => {
-    const mockSessions: Session[] = [
-      { id: 1, name: "name", description: "description", date: new Date(), teacher_id: 1, users: [1, 2, 3] },
-      { id: 2, name: "name 2", description: "description 2", date: new Date(), teacher_id: 2, users: [1, 2, 3] }
-    ];
+  it('should get all sessions', () => {
+    const mockSessions = [{ id: 1, name: 'Test Session' }];
 
-    // Simuler l'ajout des sessions dans le BehaviorSubject
-    sessionApiService['sessionsSubject'].next(mockSessions);
-
-    sessionApiService.all().subscribe(data => {
-      expect(data).toEqual(mockSessions);
-      done();
+    sessionApiService.all().subscribe((sessions) => {
+      expect(sessions).toEqual(mockSessions);
     });
+
+    const req = httpTestingController.expectOne('api/session');
+    expect(req.request.method).toBe('GET');
+    req.flush(mockSessions);
   });
 
   it("should get the details of a session", done => {

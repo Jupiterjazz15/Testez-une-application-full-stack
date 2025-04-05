@@ -209,7 +209,7 @@ describe('MeComponent', () => {
       component.delete();
       tick();
       flush(); // Assure que la navigation est bien déclenchée
-      expect(mockRouter.navigate).toHaveBeenCalledWith(['/']);
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['/register']);
     }));
   });
 
