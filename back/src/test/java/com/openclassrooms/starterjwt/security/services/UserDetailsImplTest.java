@@ -63,4 +63,24 @@ public class UserDetailsImplTest {
 
         assertNotEquals(user1, user2);
     }
+
+    @Test
+    public void testSetters() {
+        UserDetailsImpl user = new UserDetailsImpl();
+
+        user.setId(10L);
+        user.setUsername("new.username@example.com");
+        user.setFirstName("Alice");
+        user.setLastName("Liddell");
+        user.setAdmin(false);
+        user.setPassword("newPassword");
+
+        assertEquals(10L, user.getId());
+        assertEquals("new.username@example.com", user.getUsername());
+        assertEquals("Alice", user.getFirstName());
+        assertEquals("Liddell", user.getLastName());
+        assertFalse(user.isAdmin());
+        assertEquals("newPassword", user.getPassword());
+    }
+
 }
