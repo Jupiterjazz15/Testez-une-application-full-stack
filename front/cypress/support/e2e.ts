@@ -16,4 +16,15 @@
 // When a command from ./commands is ready to use, import with `import './commands'` syntax
 // import './commands';
 
+// Déclare la variable __coverage__ dans le type global
+declare global {
+  interface Window {
+    __coverage__?: any;
+  }
+}
+
+if (window.__coverage__) {
+  console.log('✅ Code coverage is active !');
+}
+
 import '@cypress/code-coverage/support';
