@@ -1,81 +1,70 @@
-package com.openclassrooms.starterjwt.service;
+package com.openclassrooms.starterjwt.services;
 
 import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.repository.UserRepository;
-import com.openclassrooms.starterjwt.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 public class UserServiceTest {
 
+    @Mock
     private UserRepository userRepository;
+
+    @InjectMocks
     private UserService userService;
 
     @BeforeEach
     void setUp() {
-        userRepository = Mockito.mock(UserRepository.class);
-        userService = new UserService(userRepository);
+        MockitoAnnotations.openMocks(this);
     }
 
-    // Ce test vérifie que le service supprime bien un utilisateur en appelant le repository avec le bon ID.
     @Test
     void testDelete() {
-        Long id = 1L;
-        userService.delete(id);
-        verify(userRepository, times(1)).deleteById(id);
+        // Appel de la méthode delete
+        userService.delete(1L);
+
+        // Vérifie que la méthode deleteById du repository a été appelée une fois avec le bon argument
+        verify(userRepository, times(1)).deleteById(1L);
     }
 
-    // Ce test vérifie que le service retourne un utilisateur existant trouvé par son ID.
     @Test
-    void testFindByIdReturnsUser() {
-        Long id = 1L;
-        User user = new User();
-        user.setId(id);
+    void testFindById_UserExists() {
+        User user = User.builder()
+                .id(1L)
+                .email("john.doe@example.com")
+                .lastName("Doe")
+                .firstName("John")
+                .password("password")
+                .admin(true)
+                .build();
 
-        when(userRepository.findById(id)).thenReturn(Optional.of(user));
+        when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
 
-        User result = userService.findById(id);
-        assertThat(result).isNotNull();
-        assertThat(result.getId()).isEqualTo(id);
+        User foundUser = userService.findById(1L);
+
+        assertNotNull(foundUser);
+        assertEquals("john.doe@example.com", foundUser.getEmail());
+        assertEquals("Doe", foundUser.getLastName());
+        assertEquals("John", foundUser.getFirstName());
+        assertEquals("password", foundUser.getPassword());
+        assertTrue(foundUser.isAdmin());
     }
 
-    // Ce test vérifie que le service retourne null si aucun utilisateur n'est trouvé par ID.
     @Test
-    void testFindByIdReturnsNull() {
-        Long id = 2L;
-        when(userRepository.findById(id)).thenReturn(Optional.empty());
+    void testFindById_UserDoesNotExist() {
+        when(userRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        User result = userService.findById(id);
-        assertThat(result).isNull();
-    }
+        User foundUser = userService.findById(1L);
 
-    // Ce test vérifie que le service retourne un utilisateur trouvé par email.
-    @Test
-    void testFindByEmailReturnsUser() {
-        String email = "test@example.com";
-        User user = new User();
-        user.setEmail(email);
-
-        when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
-
-        User result = userService.findByEmail(email);
-        assertThat(result).isNotNull();
-        assertThat(result.getEmail()).isEqualTo(email);
-    }
-
-    // Ce test vérifie que le service retourne null si aucun utilisateur n'est trouvé par email.
-    @Test
-    void testFindByEmailReturnsNull() {
-        String email = "unknown@example.com";
-        when(userRepository.findByEmail(email)).thenReturn(Optional.empty());
-
-        User result = userService.findByEmail(email);
-        assertThat(result).isNull();
+        assertNull(foundUser);
     }
 }

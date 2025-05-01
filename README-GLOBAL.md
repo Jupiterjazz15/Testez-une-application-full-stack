@@ -1,6 +1,6 @@
 # Yoga App – Projet Full Stack
 
-Application de gestion de sessions de yoga développée avec **Angular** (front-end) et **Spring Boot** (back-end).  
+Application de gestion de sessions de yoga développée avec **Angular** (front-end) et **Spring Boot** (back-end).
 Le projet inclut des tests **unitaires** et **E2E**, ainsi qu’un rapport de **couverture de code** généré avec **Jacoco**.
 
 ---
@@ -77,7 +77,14 @@ npx cypress run --env coverage=true
 ```
 
 ### Front-  Rapport de couverture Cypress  :
-Il est généré dans le fichier ci-dessous : 
+
+Commande pour voir le taux de couverture des tests 2e2 :
+
+```bash
+npm run e2e:coverage
+```
+
+Le rapport est généré dans le fichier ci-dessous :
 
 ```bash
 front/coverage/lcov-report/index.html
@@ -108,9 +115,3 @@ FRONT  – Application Angular
 BACK – Application Spring Boot
 
 SCRIPT DE LA GENERATION DE LA BASE MYSQL - ressources/sql/script.sql
-
-
-
-
-
-

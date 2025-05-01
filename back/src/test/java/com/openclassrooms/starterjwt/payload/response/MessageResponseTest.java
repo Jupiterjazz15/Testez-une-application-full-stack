@@ -6,18 +6,22 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MessageResponseTest {
 
     @Test
-    void testConstructorAndGetMessage() {
-        String expectedMessage = "Operation réussie";
-        MessageResponse response = new MessageResponse(expectedMessage);
+    public void testMessageResponseConstructorAndGetter() {
+        String expectedMessage = "This is a test message.";
 
-        assertEquals(expectedMessage, response.getMessage());
+        MessageResponse messageResponse = new MessageResponse(expectedMessage);
+
+        assertEquals(expectedMessage, messageResponse.getMessage(), "The message should be correctly set by the constructor.");
     }
 
     @Test
-    void testSetMessage() {
-        MessageResponse response = new MessageResponse("Ancien message");
-        response.setMessage("Nouveau message");
+    public void testMessageResponseSetter() {
+        MessageResponse messageResponse = new MessageResponse(null);
 
-        assertEquals("Nouveau message", response.getMessage());
+        String newMessage = "This is a new test message.";
+        messageResponse.setMessage(newMessage);
+
+        assertEquals(newMessage, messageResponse.getMessage(), "The message should be correctly updated by the setter.");
     }
 }
+

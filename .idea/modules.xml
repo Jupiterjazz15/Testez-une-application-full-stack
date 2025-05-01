@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/front/front.iml" filepath="$PROJECT_DIR$/front/front.iml" />
+      <module fileurl="file://$PROJECT_DIR$/node_modules/node_modules.iml" filepath="$PROJECT_DIR$/node_modules/node_modules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ressources/ressources.iml" filepath="$PROJECT_DIR$/ressources/ressources.iml" />
       <module fileurl="file://$PROJECT_DIR$/back/yoga-app.iml" filepath="$PROJECT_DIR$/back/yoga-app.iml" />
     </modules>
   </component>

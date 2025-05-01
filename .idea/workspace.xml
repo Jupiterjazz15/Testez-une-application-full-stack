@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="83d0eb9d-ae3a-46f7-b32e-416137453dd5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Testez-une-application-full-stack.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/SpringBootSecurityJwtApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/SpringBootSecurityJwtApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/controllers/AuthControllerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/controllers/AuthControllerIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/controllers/SessionControllerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/controllers/SessionControllerIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/controllers/TeacherControllerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/controllers/TeacherControllerIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/controllers/UserControllerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/controllers/UserControllerIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/dto/TeacherDtoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/dto/TeacherDtoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/dto/UserDtoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/dto/UserDtoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/mapper/SessionMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/mapper/SessionMapperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/mapper/TeacherMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/mapper/TeacherMapperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/mapper/UserMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/mapper/UserMapperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/payload/request/LoginRequestTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/payload/request/LoginRequestTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/payload/request/SignUpRequestTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/payload/request/SignUpRequestTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/payload/response/JwtResponseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/payload/response/JwtResponseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/payload/response/MessageResponseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/payload/response/MessageResponseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/repository/SessionRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/repository/SessionRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/repository/TeacherRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/repository/TeacherRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/repository/UserRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/repository/UserRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/security/AuthEntryPointJwtTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/security/AuthEntryPointJwtTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/security/AuthTokenFilterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/security/AuthTokenFilterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/security/JwtUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/security/JwtUtilsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/security/services/UserDetailsImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/security/services/UserDetailsImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/security/services/UserDetailsServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/security/services/UserDetailsServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/services/SessionServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/services/SessionServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/services/TeacherServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/services/TeacherServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/services/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/services/UserServiceTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2sP3Lslf8vxNEA5p5biFZXOf9Ej" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showScratchesAndConsoles" value="false" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JavaScript Debug.jacoco.exec.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.RegisterComponent.should have a mat-card-title with text \&quot;Register\&quot;.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/node_modules/@angular/cli&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;coverage&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/node_modules" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/ressources" />
+      <recent name="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/payload/request" />
+      <recent name="$PROJECT_DIR$/back/src/test/java/com/openclassrooms/starterjwt/security/services" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.openclassrooms.starterjwt.security" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.jacoco.exec">
+    <configuration name="RegisterComponent.should have a mat-card-title with text &quot;Register&quot;" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/front/node_modules/@angular/cli" />
+      <working-dir value="$PROJECT_DIR$/front" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/front/src/app/features/auth/components/register/register.component.spec.ts" />
+      <test-names>
+        <test-name value="RegisterComponent" />
+        <test-name value="should have a mat-card-title with text &quot;Register&quot;" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="jacoco.exec" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Testez-une-application-full-stack/yoga-app/target/jacoco.exec" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="SpringBootSecurityJwtApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="yoga-app" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.openclassrooms.starterjwt.SpringBootSecurityJwtApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.jacoco.exec" />
+        <item itemvalue="Jest.RegisterComponent.should have a mat-card-title with text &quot;Register&quot;" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="83d0eb9d-ae3a-46f7-b32e-416137453dd5" name="Changes" comment="" />
+      <created>1738343329881</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1738343329881</updated>
+      <workItem from="1738343331381" duration="5374000" />
+      <workItem from="1738620712578" duration="4620000" />
+      <workItem from="1739194032900" duration="689000" />
+      <workItem from="1739197121814" duration="2351000" />
+      <workItem from="1739206707694" duration="75000" />
+      <workItem from="1739206788915" duration="7969000" />
+      <workItem from="1739548005208" duration="83225000" />
+      <workItem from="1741086031973" duration="9444000" />
+      <workItem from="1741519048151" duration="85876000" />
+      <workItem from="1744450993854" duration="9000" />
+      <workItem from="1744451005882" duration="59000" />
+      <workItem from="1744451107590" duration="69000" />
+      <workItem from="1744451241039" duration="190000" />
+      <workItem from="1744451434832" duration="750000" />
+      <workItem from="1744452330107" duration="453000" />
+      <workItem from="1744452797803" duration="24000" />
+      <workItem from="1744452936084" duration="394000" />
+      <workItem from="1744453333865" duration="459000" />
+      <workItem from="1744453796847" duration="10000" />
+      <workItem from="1744453812067" duration="593000" />
+      <workItem from="1744454413923" duration="7000" />
+      <workItem from="1744454434973" duration="104000" />
+      <workItem from="1744454544240" duration="107000" />
+      <workItem from="1744454811298" duration="83000" />
+      <workItem from="1744454913051" duration="106000" />
+      <workItem from="1744455040120" duration="26692000" />
+      <workItem from="1745097553216" duration="50000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

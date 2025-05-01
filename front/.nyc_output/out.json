@@ -1,1 +1,290 @@
-{}
+{
+  "D:/code/savasana/front/src/main.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/main.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/polyfills.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/polyfills.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/app-routing.module.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/app-routing.module.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/app.component.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/app.component.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/app.module.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/app.module.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/environments/environment.prod.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/environments/environment.prod.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/environments/environment.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/environments/environment.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/guards/auth.guard.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/guards/auth.guard.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/guards/unauth.guard.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/guards/unauth.guard.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/interceptors/jwt.interceptor.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/interceptors/jwt.interceptor.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/interfaces/sessionInformation.interface.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/interfaces/sessionInformation.interface.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/interfaces/teacher.interface.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/interfaces/teacher.interface.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/interfaces/user.interface.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/interfaces/user.interface.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/services/session.service.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/services/session.service.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/services/teacher.service.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/services/teacher.service.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/services/user.service.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/services/user.service.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/components/me/me.component.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/components/me/me.component.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/components/not-found/not-found.component.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/components/not-found/not-found.component.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/features/auth/auth-routing.module.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/auth/auth-routing.module.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/features/auth/auth.module.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/auth/auth.module.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/features/sessions/sessions-routing.module.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/sessions/sessions-routing.module.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/features/sessions/sessions.module.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/sessions/sessions.module.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/features/auth/interfaces/loginRequest.interface.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/auth/interfaces/loginRequest.interface.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/features/auth/interfaces/registerRequest.interface.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/auth/interfaces/registerRequest.interface.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/features/auth/services/auth.service.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/auth/services/auth.service.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/features/sessions/interfaces/session.interface.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/sessions/interfaces/session.interface.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/features/sessions/services/session-api.service.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/sessions/services/session-api.service.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/features/auth/components/login/login.component.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/auth/components/login/login.component.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/features/auth/components/register/register.component.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/auth/components/register/register.component.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/features/sessions/components/detail/detail.component.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/sessions/components/detail/detail.component.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/features/sessions/components/form/form.component.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/sessions/components/form/form.component.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "D:/code/savasana/front/src/app/features/sessions/components/list/list.component.ts": {
+    "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/sessions/components/list/list.component.ts",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  }
+}

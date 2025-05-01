@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TeacherMapperTest {
 
@@ -21,13 +21,12 @@ public class TeacherMapperTest {
         teacherMapper = Mappers.getMapper(TeacherMapper.class);
     }
 
-    // Teste la conversion d'un TeacherDto en entité Teacher
     @Test
     public void testToEntity() {
         TeacherDto dto = new TeacherDto();
         dto.setId(1L);
-        dto.setFirstName("Jane");
-        dto.setLastName("Smith");
+        dto.setFirstName("John");
+        dto.setLastName("Doe");
         dto.setCreatedAt(LocalDateTime.parse("2024-08-20T21:33:08"));
         dto.setUpdatedAt(LocalDateTime.parse("2024-08-20T21:33:08"));
 
@@ -40,15 +39,14 @@ public class TeacherMapperTest {
         assertEquals(dto.getUpdatedAt(), teacher.getUpdatedAt());
     }
 
-    // Teste la conversion d'un Teacher en TeacherDto
     @Test
     public void testToDto() {
         Teacher teacher = new Teacher();
-        teacher.setId(2L);
-        teacher.setFirstName("Paul");
-        teacher.setLastName("Anderson");
-        teacher.setCreatedAt(LocalDateTime.parse("2024-09-01T10:00:00"));
-        teacher.setUpdatedAt(LocalDateTime.parse("2024-09-01T10:00:00"));
+        teacher.setId(1L);
+        teacher.setFirstName("John");
+        teacher.setLastName("Doe");
+        teacher.setCreatedAt(LocalDateTime.parse("2024-08-20T21:33:08"));
+        teacher.setUpdatedAt(LocalDateTime.parse("2024-08-20T21:33:08"));
 
         TeacherDto dto = teacherMapper.toDto(teacher);
 
@@ -59,40 +57,46 @@ public class TeacherMapperTest {
         assertEquals(teacher.getUpdatedAt(), dto.getUpdatedAt());
     }
 
-    // Teste la conversion d'une liste de TeacherDto en liste d'entités Teacher
     @Test
     public void testToEntityList() {
         TeacherDto dto1 = new TeacherDto();
         dto1.setId(1L);
-        dto1.setFirstName("Alice");
-        dto1.setLastName("Martin");
+        dto1.setFirstName("John1");
+        dto1.setLastName("Doe1");
+        dto1.setCreatedAt(LocalDateTime.parse("2024-08-20T21:33:08"));
+        dto1.setUpdatedAt(LocalDateTime.parse("2024-08-20T21:33:08"));
 
         TeacherDto dto2 = new TeacherDto();
         dto2.setId(2L);
-        dto2.setFirstName("Bob");
-        dto2.setLastName("Taylor");
+        dto2.setFirstName("John2");
+        dto2.setLastName("Doe2");
+        dto2.setCreatedAt(LocalDateTime.parse("2024-08-20T21:34:08"));
+        dto2.setUpdatedAt(LocalDateTime.parse("2024-08-20T21:34:08"));
 
         List<TeacherDto> dtoList = Arrays.asList(dto1, dto2);
 
         List<Teacher> teacherList = teacherMapper.toEntity(dtoList);
 
         assertEquals(dtoList.size(), teacherList.size());
-        assertEquals(dtoList.get(0).getFirstName(), teacherList.get(0).getFirstName());
-        assertEquals(dtoList.get(1).getLastName(), teacherList.get(1).getLastName());
+        assertEquals(dtoList.get(0).getId(), teacherList.get(0).getId());
+        assertEquals(dtoList.get(1).getFirstName(), teacherList.get(1).getFirstName());
     }
 
-    // Teste la conversion d'une liste de Teacher en liste de TeacherDto
     @Test
     public void testToDtoList() {
         Teacher teacher1 = new Teacher();
         teacher1.setId(1L);
-        teacher1.setFirstName("Emma");
-        teacher1.setLastName("Wilson");
+        teacher1.setFirstName("John1");
+        teacher1.setLastName("Doe1");
+        teacher1.setCreatedAt(LocalDateTime.parse("2024-08-20T21:33:08"));
+        teacher1.setUpdatedAt(LocalDateTime.parse("2024-08-20T21:33:08"));
 
         Teacher teacher2 = new Teacher();
         teacher2.setId(2L);
-        teacher2.setFirstName("Liam");
-        teacher2.setLastName("Brown");
+        teacher2.setFirstName("John2");
+        teacher2.setLastName("Doe2");
+        teacher2.setCreatedAt(LocalDateTime.parse("2024-08-20T21:34:08"));
+        teacher2.setUpdatedAt(LocalDateTime.parse("2024-08-20T21:34:08"));
 
         List<Teacher> teacherList = Arrays.asList(teacher1, teacher2);
 

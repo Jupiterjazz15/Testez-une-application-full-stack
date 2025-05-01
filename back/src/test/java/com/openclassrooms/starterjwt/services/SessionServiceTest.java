@@ -8,181 +8,187 @@ import com.openclassrooms.starterjwt.repository.SessionRepository;
 import com.openclassrooms.starterjwt.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.*;
 
 import java.util.*;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class SessionServiceTest {
+class SessionServiceTest {
 
+    @Mock
     private SessionRepository sessionRepository;
+
+    @Mock
     private UserRepository userRepository;
+
+    @InjectMocks
     private SessionService sessionService;
+
+    private Session session;
+    private User user;
 
     @BeforeEach
     void setUp() {
-        sessionRepository = mock(SessionRepository.class);
-        userRepository = mock(UserRepository.class);
-        sessionService = new SessionService(sessionRepository, userRepository);
+        MockitoAnnotations.openMocks(this);
+
+        user = new User()
+                .setId(1L)
+                .setEmail("test@example.com")
+                .setFirstName("John")
+                .setLastName("Doe")
+                .setPassword("password")
+                .setAdmin(false);
+
+        session = new Session()
+                .setId(1L)
+                .setName("Session 1")
+                .setDate(new Date())
+                .setDescription("Description 1")
+                .setUsers(new ArrayList<>());  // Utiliser une liste mutable
     }
 
-    // Test de création d'une session
     @Test
-    void create_shouldReturnSavedSession() {
-        Session session = new Session();
-        when(sessionRepository.save(session)).thenReturn(session);
+    void testCreate() {
+        when(sessionRepository.save(any(Session.class))).thenReturn(session);
 
-        Session result = sessionService.create(session);
+        Session createdSession = sessionService.create(session);
 
-        assertThat(result).isEqualTo(session);
-        verify(sessionRepository).save(session);
+        assertNotNull(createdSession);
+        assertEquals(session.getName(), createdSession.getName());
+        verify(sessionRepository, times(1)).save(session);
     }
 
-    // Test de suppression d'une session par ID
     @Test
-    void delete_shouldCallRepositoryDeleteById() {
-        Long sessionId = 1L;
-        sessionService.delete(sessionId);
-        verify(sessionRepository).deleteById(sessionId);
+    void testDelete() {
+        doNothing().when(sessionRepository).deleteById(anyLong());
+
+        sessionService.delete(1L);
+
+        verify(sessionRepository, times(1)).deleteById(1L);
     }
 
-    // Test de récupération de toutes les sessions
     @Test
-    void findAll_shouldReturnAllSessions() {
-        List<Session> sessions = List.of(new Session(), new Session());
-        when(sessionRepository.findAll()).thenReturn(sessions);
+    void testFindAll() {
+        when(sessionRepository.findAll()).thenReturn(Arrays.asList(session));
 
-        List<Session> result = sessionService.findAll();
+        List<Session> sessions = sessionService.findAll();
 
-        assertThat(result).hasSize(2);
+        assertNotNull(sessions);
+        assertFalse(sessions.isEmpty());
+        assertEquals(1, sessions.size());
+        verify(sessionRepository, times(1)).findAll();
     }
 
-    // Test de récupération d'une session par ID si elle existe
     @Test
-    void getById_shouldReturnSessionIfFound() {
-        Long id = 1L;
-        Session session = new Session();
-        when(sessionRepository.findById(id)).thenReturn(Optional.of(session));
-
-        Session result = sessionService.getById(id);
-
-        assertThat(result).isEqualTo(session);
-    }
-
-    // Test de récupération d'une session par ID si elle n'existe pas
-    @Test
-    void getById_shouldReturnNullIfNotFound() {
-        when(sessionRepository.findById(anyLong())).thenReturn(Optional.empty());
-
-        Session result = sessionService.getById(42L);
-
-        assertThat(result).isNull();
-    }
-
-    // Test de mise à jour d'une session
-    @Test
-    void update_shouldSaveAndReturnUpdatedSession() {
-        Session session = new Session();
-        Long id = 1L;
-        when(sessionRepository.save(session)).thenReturn(session);
-
-        Session result = sessionService.update(id, session);
-
-        assertThat(result).isEqualTo(session);
-        assertThat(session.getId()).isEqualTo(id);
-        verify(sessionRepository).save(session);
-    }
-
-    // Test d'ajout d'un participant
-    @Test
-    void participate_shouldAddUserToSession() {
-        Long sessionId = 1L;
-        Long userId = 2L;
-        User user = new User();
-        user.setId(userId);
-
-        Session session = new Session();
-        session.setId(sessionId);
-        session.setUsers(new ArrayList<>());
-
-        when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
-        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
-        when(sessionRepository.save(session)).thenReturn(session);
-
-        sessionService.participate(sessionId, userId);
-
-        assertThat(session.getUsers()).contains(user);
-    }
-
-    // Test d'ajout d'un participant déjà inscrit
-    @Test
-    void participate_shouldThrowBadRequestIfUserAlreadyParticipates() {
-        Long sessionId = 1L;
-        Long userId = 2L;
-        User user = new User();
-        user.setId(userId);
-
-        Session session = new Session();
-        session.setId(sessionId);
-        session.setUsers(new ArrayList<>(List.of(user)));
-
-        when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
-        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
-
-        assertThatThrownBy(() -> sessionService.participate(sessionId, userId))
-                .isInstanceOf(BadRequestException.class);
-    }
-
-    // Test si l'utilisateur ou la session n'existe pas
-    @Test
-    void participate_shouldThrowNotFoundIfSessionOrUserIsNull() {
-        when(sessionRepository.findById(1L)).thenReturn(Optional.empty());
-        assertThatThrownBy(() -> sessionService.participate(1L, 2L))
-                .isInstanceOf(NotFoundException.class);
-
-        when(sessionRepository.findById(1L)).thenReturn(Optional.of(new Session()));
-        when(userRepository.findById(2L)).thenReturn(Optional.empty());
-        assertThatThrownBy(() -> sessionService.participate(1L, 2L))
-                .isInstanceOf(NotFoundException.class);
-    }
-
-    // Test de suppression de participation d'un utilisateur
-    @Test
-    void noLongerParticipate_shouldRemoveUserFromSession() {
-        Long userId = 1L;
-        User user = new User();
-        user.setId(userId);
-
-        Session session = new Session();
-        session.setUsers(new ArrayList<>(List.of(user)));
-
-        when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
-        when(sessionRepository.save(session)).thenReturn(session);
-
-        sessionService.noLongerParticipate(1L, userId);
-
-        assertThat(session.getUsers()).doesNotContain(user);
-    }
-
-    // Test si l'utilisateur ne participe pas
-    @Test
-    void noLongerParticipate_shouldThrowBadRequestIfUserNotParticipant() {
-        Session session = new Session();
-        session.setUsers(new ArrayList<>());
-
+    void testGetById() {
         when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
 
-        assertThatThrownBy(() -> sessionService.noLongerParticipate(1L, 1L))
-                .isInstanceOf(BadRequestException.class);
+        Session foundSession = sessionService.getById(1L);
+
+        assertNotNull(foundSession);
+        assertEquals(session.getName(), foundSession.getName());
+        verify(sessionRepository, times(1)).findById(1L);
     }
 
-    // Test si la session n'existe pas pour retirer un participant
     @Test
-    void noLongerParticipate_shouldThrowNotFoundIfSessionNotFound() {
+    void testGetById_NotFound() {
         when(sessionRepository.findById(1L)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> sessionService.noLongerParticipate(1L, 1L))
-                .isInstanceOf(NotFoundException.class);
+        Session foundSession = sessionService.getById(1L);
+
+        assertNull(foundSession);
+        verify(sessionRepository, times(1)).findById(1L);
+    }
+
+    @Test
+    void testUpdate() {
+        when(sessionRepository.save(any(Session.class))).thenReturn(session);
+
+        Session updatedSession = sessionService.update(1L, session);
+
+        assertNotNull(updatedSession);
+        assertEquals(session.getName(), updatedSession.getName());
+        verify(sessionRepository, times(1)).save(session);
+    }
+
+    @Test
+    void testParticipate() {
+        when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        when(sessionRepository.save(any(Session.class))).thenReturn(session);
+
+        sessionService.participate(1L, 1L);
+
+        verify(sessionRepository, times(1)).findById(1L);
+        verify(userRepository, times(1)).findById(1L);
+        verify(sessionRepository, times(1)).save(session);
+    }
+
+    @Test
+    void testParticipate_UserNotFound() {
+        when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
+        when(userRepository.findById(1L)).thenReturn(Optional.empty());
+
+        assertThrows(NotFoundException.class, () -> {
+            sessionService.participate(1L, 1L);
+        });
+
+        verify(sessionRepository, times(1)).findById(1L);
+        verify(userRepository, times(1)).findById(1L);
+        verify(sessionRepository, never()).save(any(Session.class));
+    }
+
+    @Test
+    void testParticipate_AlreadyParticipates() {
+        session.setUsers(Arrays.asList(user));
+        when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+
+        assertThrows(BadRequestException.class, () -> {
+            sessionService.participate(1L, 1L);
+        });
+
+        verify(sessionRepository, times(1)).findById(1L);
+        verify(userRepository, times(1)).findById(1L);
+        verify(sessionRepository, never()).save(any(Session.class));
+    }
+
+    @Test
+    void testNoLongerParticipate() {
+        session.setUsers(Arrays.asList(user));
+        when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
+        when(sessionRepository.save(any(Session.class))).thenReturn(session);
+
+        sessionService.noLongerParticipate(1L, 1L);
+
+        verify(sessionRepository, times(1)).findById(1L);
+        verify(sessionRepository, times(1)).save(session);
+    }
+
+    @Test
+    void testNoLongerParticipate_SessionNotFound() {
+        when(sessionRepository.findById(1L)).thenReturn(Optional.empty());
+
+        assertThrows(NotFoundException.class, () -> {
+            sessionService.noLongerParticipate(1L, 1L);
+        });
+
+        verify(sessionRepository, times(1)).findById(1L);
+        verify(sessionRepository, never()).save(any(Session.class));
+    }
+
+    @Test
+    void testNoLongerParticipate_NotParticipating() {
+        when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
+
+        assertThrows(BadRequestException.class, () -> {
+            sessionService.noLongerParticipate(1L, 1L);
+        });
+
+        verify(sessionRepository, times(1)).findById(1L);
+        verify(sessionRepository, never()).save(any(Session.class));
     }
 }

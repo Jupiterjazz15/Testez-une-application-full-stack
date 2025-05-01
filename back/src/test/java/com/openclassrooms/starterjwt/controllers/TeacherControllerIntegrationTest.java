@@ -1,11 +1,10 @@
 package com.openclassrooms.starterjwt.controllers;
 
-import com.openclassrooms.starterjwt.models.User;
-import com.openclassrooms.starterjwt.repository.UserRepository;
-import com.openclassrooms.starterjwt.services.UserService;
+import com.openclassrooms.starterjwt.models.Teacher;
+import com.openclassrooms.starterjwt.services.TeacherService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,93 +14,73 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerIntegrationTest {
+public class TeacherControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private UserService userService;
+    private TeacherService teacherService;
 
-    @MockBean
-    private UserRepository userRepository;
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    private Teacher teacher1;
+    private Teacher teacher2;
 
     @BeforeEach
     void setUp() {
-        User user = new User();
-        user.setId(1L);
-        user.setEmail("john.doe@example.com");
-        user.setLastName("Doe");
-        user.setFirstName("John");
-        user.setPassword("password");
-        user.setAdmin(true);
+        teacher1 = new Teacher().setId(1L).setFirstName("John").setLastName("Doe");
+        teacher2 = new Teacher().setId(2L).setFirstName("Jane").setLastName("Smith");
 
-        when(userService.findById(1L)).thenReturn(user);
+        when(teacherService.findById(1L)).thenReturn(teacher1);
+        when(teacherService.findById(2L)).thenReturn(teacher2);
+        when(teacherService.findAll()).thenReturn(Arrays.asList(teacher1, teacher2));
     }
 
     @Test
-    @WithMockUser(username = "john.doe@example.com")
-    void testFindById_UserExists() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/user/1")
+    @WithMockUser(username = "admin", roles = {"USER"})
+    void testFindById_TeacherExists() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/teacher/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"id\":1,\"email\":\"john.doe@example.com\",\"lastName\":\"Doe\",\"firstName\":\"John\"}"));
+                .andExpect(content().json(objectMapper.writeValueAsString(teacher1)));
     }
 
     @Test
-    @WithMockUser(username = "john.doe@example.com")
-    void testFindById_UserDoesNotExist() throws Exception {
-        when(userService.findById(99L)).thenReturn(null);
+    @WithMockUser(username = "admin", roles = {"USER"})
+    void testFindById_TeacherDoesNotExist() throws Exception {
+        when(teacherService.findById(99L)).thenReturn(null);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/user/99")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/teacher/99")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
 
     @Test
-    @WithMockUser(username = "john.doe@example.com")
+    @WithMockUser(username = "admin", roles = {"USER"})
     void testFindById_InvalidId() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/user/invalid")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/teacher/invalid")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    @WithMockUser(username = "john.doe@example.com")
-    void testDelete_UserExists() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/user/1")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
+    @WithMockUser(username = "admin", roles = {"USER"})
+    void testFindAll() throws Exception {
+        List<Teacher> teachers = Arrays.asList(teacher1, teacher2);
 
-    @Test
-    @WithMockUser(username = "john.doe@example.com")
-    void testDelete_UserDoesNotExist() throws Exception {
-        when(userService.findById(99L)).thenReturn(null);
-
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/user/99")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/teacher")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
-    }
-
-    @Test
-    @WithMockUser(username = "different.user@example.com")
-    void testDelete_Unauthorized() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/user/1")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    @WithMockUser(username = "john.doe@example.com")
-    void testDelete_InvalidId() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/user/invalid")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(teachers)));
     }
 }

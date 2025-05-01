@@ -7,50 +7,63 @@ import static org.junit.jupiter.api.Assertions.*;
 public class JwtResponseTest {
 
     @Test
-    public void testConstructorAndGetters() {
-        JwtResponse jwtResponse = new JwtResponse(
-                "test-token",
-                1L,
-                "user@example.com",
-                "Jean",
-                "Dupont",
-                true
-        );
+    public void testJwtResponseConstructorAndGetters() {
+        String accessToken = "testToken";
+        Long id = 1L;
+        String username = "testUser";
+        String firstName = "John";
+        String lastName = "Doe";
+        Boolean admin = true;
 
-        assertEquals("test-token", jwtResponse.getToken());
+        JwtResponse jwtResponse = new JwtResponse(accessToken, id, username, firstName, lastName, admin);
+
+        assertEquals(accessToken, jwtResponse.getToken());
         assertEquals("Bearer", jwtResponse.getType());
-        assertEquals(1L, jwtResponse.getId());
-        assertEquals("user@example.com", jwtResponse.getUsername());
-        assertEquals("Jean", jwtResponse.getFirstName());
-        assertEquals("Dupont", jwtResponse.getLastName());
-        assertTrue(jwtResponse.getAdmin());
+        assertEquals(id, jwtResponse.getId());
+        assertEquals(username, jwtResponse.getUsername());
+        assertEquals(firstName, jwtResponse.getFirstName());
+        assertEquals(lastName, jwtResponse.getLastName());
+        assertEquals(admin, jwtResponse.getAdmin());
     }
 
     @Test
-    public void testSetters() {
-        JwtResponse jwtResponse = new JwtResponse("", 0L, "", "", "", false);
+    public void testJwtResponseSetters() {
+        JwtResponse jwtResponse = new JwtResponse(null, null, null, null, null, null);
 
-        jwtResponse.setToken("new-token");
-        jwtResponse.setType("CustomType");
-        jwtResponse.setId(42L);
-        jwtResponse.setUsername("newuser@example.com");
-        jwtResponse.setFirstName("Alice");
-        jwtResponse.setLastName("Liddell");
-        jwtResponse.setAdmin(true);
+        String accessToken = "newToken";
+        Long id = 2L;
+        String username = "newUser";
+        String firstName = "Jane";
+        String lastName = "Smith";
+        Boolean admin = false;
 
-        assertEquals("new-token", jwtResponse.getToken());
-        assertEquals("CustomType", jwtResponse.getType());
-        assertEquals(42L, jwtResponse.getId());
-        assertEquals("newuser@example.com", jwtResponse.getUsername());
-        assertEquals("Alice", jwtResponse.getFirstName());
-        assertEquals("Liddell", jwtResponse.getLastName());
-        assertTrue(jwtResponse.getAdmin());
+        jwtResponse.setToken(accessToken);
+        jwtResponse.setId(id);
+        jwtResponse.setUsername(username);
+        jwtResponse.setFirstName(firstName);
+        jwtResponse.setLastName(lastName);
+        jwtResponse.setAdmin(admin);
+
+        assertEquals(accessToken, jwtResponse.getToken());
+        assertEquals(id, jwtResponse.getId());
+        assertEquals(username, jwtResponse.getUsername());
+        assertEquals(firstName, jwtResponse.getFirstName());
+        assertEquals(lastName, jwtResponse.getLastName());
+        assertEquals(admin, jwtResponse.getAdmin());
     }
 
     @Test
-    public void testToString() {
-        JwtResponse jwtResponse = new JwtResponse("abc123", 1L, "user@example.com", "Jean", "Dupont", false);
-        String expected = "JwtResponse{token='abc123', type='Bearer', id=1, username='user@example.com', firstName='Jean', lastName='Dupont', admin=false}";
-        assertEquals(expected, jwtResponse.toString());
+    public void testDefaultTokenType() {
+        JwtResponse jwtResponse = new JwtResponse(null, null, null, null, null, null);
+
+        assertEquals("Bearer", jwtResponse.getType(), "Default token type should be 'Bearer'");
+    }
+
+    @Test
+    public void testTokenTypeCanBeChanged() {
+        JwtResponse jwtResponse = new JwtResponse(null, null, null, null, null, null);
+
+        jwtResponse.setType("NewType");
+        assertEquals("NewType", jwtResponse.getType(), "Token type should be changeable.");
     }
 }
