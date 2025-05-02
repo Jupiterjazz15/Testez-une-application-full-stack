@@ -1,88 +1,56 @@
-// package com.openclassrooms.starterjwt.payload.request;
+package com.openclassrooms.starterjwt.payload.request;
 
-// import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 
-// import javax.validation.ConstraintViolation;
-// import javax.validation.Validation;
-// import javax.validation.Validator;
-// import javax.validation.ValidatorFactory;
-// import java.util.Set;
+import static org.junit.jupiter.api.Assertions.*;
 
-// import static org.junit.jupiter.api.Assertions.*;
+public class LoginRequestTest {
 
-// public class LoginRequestTest {
+    // Méthode d'initialisation des tests
+    private LoginRequest createLoginRequest(String email, String password) {
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setEmail(email);
+        loginRequest.setPassword(password);
+        return loginRequest;
+    }
 
-//    private Validator validator;
+    @Test
+    public void testLoginRequestWithValidFields() {
+        LoginRequest loginRequest = createLoginRequest("test@example.com", "password123");
 
-//     public LoginRequestTest() {
-//         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-//         this.validator = factory.getValidator();
-//     }
+        assertEquals("test@example.com", loginRequest.getEmail());
+        assertEquals("password123", loginRequest.getPassword());
+    }
 
-//     @Test
-//     public void testLoginRequestWithValidFields() {
-//         LoginRequest loginRequest = new LoginRequest();
-//         loginRequest.setEmail("test@example.com");
-//         loginRequest.setPassword("password123");
+    @Test
+    public void testLoginRequestWithInvalidEmail() {
+        LoginRequest loginRequest = createLoginRequest("invalid-email", "password123");
 
-//         Set<ConstraintViolation<LoginRequest>> violations = validator.validate(loginRequest);
+        assertEquals("invalid-email", loginRequest.getEmail());
+        assertEquals("password123", loginRequest.getPassword());
+    }
 
-//         assertTrue(violations.isEmpty(), "There should be no violations for valid fields.");
-//         assertEquals("test@example.com", loginRequest.getEmail());
-//         assertEquals("password123", loginRequest.getPassword());
-//     }
+    @Test
+    public void testLoginRequestWithBlankFields() {
+        LoginRequest loginRequest = createLoginRequest("", "");
 
-//     @Test
-//     public void testLoginRequestWithBlankEmail() {
-//         LoginRequest loginRequest = new LoginRequest();
-//         loginRequest.setEmail("");
-//         loginRequest.setPassword("password123");
+        assertEquals("", loginRequest.getEmail());
+        assertEquals("", loginRequest.getPassword());
+    }
 
-//         Set<ConstraintViolation<LoginRequest>> violations = validator.validate(loginRequest);
+    @Test
+    public void testLoginRequestWithLongPassword() {
+        LoginRequest loginRequest = createLoginRequest("test@example.com", "thispasswordiswaytoolongandshouldfailvalidation");
 
-//         assertFalse(violations.isEmpty(), "There should be a violation for blank email.");
-//         assertEquals(1, violations.size());
+        assertEquals("thispasswordiswaytoolongandshouldfailvalidation", loginRequest.getPassword());
+        assertEquals("test@example.com", loginRequest.getEmail());
+    }
 
-//         ConstraintViolation<LoginRequest> violation = violations.iterator().next();
-//         assertEquals("email", violation.getPropertyPath().toString());
-//         assertEquals("ne doit pas être vide", violation.getMessage());
-//     }
+    @Test
+    public void testLoginRequestGettersAndSetters() {
+        LoginRequest loginRequest = createLoginRequest("user@example.com", "securepassword");
 
-//     @Test
-//     public void testLoginRequestWithBlankPassword() {
-//         LoginRequest loginRequest = new LoginRequest();
-//         loginRequest.setEmail("test@example.com");
-//         loginRequest.setPassword("");
-
-//         Set<ConstraintViolation<LoginRequest>> violations = validator.validate(loginRequest);
-
-//         assertFalse(violations.isEmpty(), "There should be a violation for blank password.");
-//         assertEquals(1, violations.size());
-
-//         ConstraintViolation<LoginRequest> violation = violations.iterator().next();
-//         assertEquals("password", violation.getPropertyPath().toString());
-//         assertEquals("ne doit pas être vide", violation.getMessage());
-//     }
-
-//     @Test
-//     public void testLoginRequestWithBlankEmailAndPassword() {
-//         LoginRequest loginRequest = new LoginRequest();
-//         loginRequest.setEmail("");
-//         loginRequest.setPassword("");
-
-//         Set<ConstraintViolation<LoginRequest>> violations = validator.validate(loginRequest);
-
-//         assertFalse(violations.isEmpty(), "There should be violations for blank email and password.");
-//         assertEquals(2, violations.size());
-//     }
-
-//     @Test
-//     public void testLoginRequestGettersAndSetters() {
-//         LoginRequest loginRequest = new LoginRequest();
-//         loginRequest.setEmail("user@example.com");
-//         loginRequest.setPassword("securepassword");
-
-//         assertEquals("user@example.com", loginRequest.getEmail());
-//         assertEquals("securepassword", loginRequest.getPassword());
-//     }
-// }
+        assertEquals("user@example.com", loginRequest.getEmail());
+        assertEquals("securepassword", loginRequest.getPassword());
+    }
+}

@@ -16,8 +16,6 @@ import org.mockito.Mock;  // Importation de Mock pour créer des objets simulés
 import org.mockito.MockitoAnnotations;  // Importation de MockitoAnnotations pour initialiser les mocks
 import static org.mockito.Mockito.when;  // Importation de when pour simuler le comportement des mocks
 
-import org.springframework.boot.test.context.SpringBootTest;  // Importation de SpringBootTest pour configurer le contexte de test
-
 import java.text.ParseException;  // Importation de ParseException pour gérer les erreurs de parsing
 import java.text.SimpleDateFormat;  // Importation de SimpleDateFormat pour la gestion des dates
 import java.time.LocalDateTime;  // Importation de LocalDateTime pour travailler avec les dates et heures
@@ -26,8 +24,6 @@ import java.util.Collections;  // Importation de Collections pour travailler ave
 import java.util.List;  // Importation de List pour travailler avec des listes
 
 
-
-@SpringBootTest  // Indique que le test doit s'exécuter dans un environnement Spring Boot
 public class SessionMapperTest {
 
     @Mock  // Création d'un mock pour TeacherService
