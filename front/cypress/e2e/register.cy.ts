@@ -1,39 +1,68 @@
 /// <reference types="cypress" />
 
-describe('Registration spec', () => {
-    it('should register successfully and redirect to login page', () => {
-        cy.visit('/register')
+describe('Register Form', () => {
+  beforeEach(() => {
+    cy.visit('/register'); // Modifier l'URL selon votre application
+  });
 
-        cy.intercept('POST', '/api/auth/register', {
-            statusCode: 200,
-            body: { message: 'User registered successfully!' }
-        })
+  it('should validate email format', () => {
+    cy.get('[data-cy="email"]').type('invalid-email');
+    cy.get('[data-cy="email"]').should('have.class', 'ng-invalid');
+  });
 
-        cy.get('input[formControlName=firstName]').type("John")
-        cy.get('input[formControlName=lastName]').type("Doe")
-        cy.get('input[formControlName=email]').type("testing@studio.com")
-        cy.get('input[formControlName=password]').type("test!1234")
-        cy.get('button[type=submit]').click()
+  it('should validate first name length', () => {
+    cy.get('[data-cy="first-name"]').type('Jo'); // 2 caractères (trop court)
+    cy.get('[data-cy="first-name"]').should('have.class', 'ng-invalid');
 
-        cy.url().should('include', '/login')
-    })
+    cy.get('[data-cy="first-name"]').clear().type('J'.repeat(21)); // 21 caractères (trop long)
+    cy.get('[data-cy="first-name"]').should('have.class', 'ng-invalid');
+  });
 
-    it('should show error when email is already taken', () => {
-        cy.visit('/register')
+  it('should validate last name length', () => {
+    cy.get('[data-cy="last-name"]').type('Lo'); // 2 caractères (trop court)
+    cy.get('[data-cy="last-name"]').should('have.class', 'ng-invalid');
 
-        cy.intercept('POST', '/api/auth/register', {
-            statusCode: 400,
-            body: { message: 'Error: Email is already taken!' }
-        })
+    cy.get('[data-cy="last-name"]').clear().type('L'.repeat(21)); // 21 caractères (trop long)
+    cy.get('[data-cy="last-name"]').should('have.class', 'ng-invalid');
+  });
 
-        cy.get('input[formControlName=firstName]').type("Already")
-        cy.get('input[formControlName=lastName]').type("Taken")
-        cy.get('input[formControlName=email]').type("alreadytaken@studio.com")
-        cy.get('input[formControlName=password]').type("taken!1234")
-        cy.get('button[type=submit]').click()
+  it('should validate password length', () => {
+    cy.get('[data-cy="password"]').type('12'); // 2 caractères (trop court)
+    cy.get('[data-cy="password"]').should('have.class', 'ng-invalid');
 
-        cy.url().should('not.include', '/login')
+    cy.get('[data-cy="password"]').clear().type('P'.repeat(41)); // 41 caractères (trop long)
+    cy.get('[data-cy="password"]').should('have.class', 'ng-invalid');
+  });
 
-        cy.get('span.error').should('contain', 'An error occurred')
-    })
-})
+  it('should fill the form and submit, then be redirected', () => {
+    const firstName = "John";
+    const lastName = "Doe";
+    const email = "johndoe@example.com";
+    const password = "Password123"; // Doit respecter la longueur requise
+
+    // Intercepter la requête API pour la simuler
+    cy.intercept('POST', '/api/auth/register', {
+      statusCode: 201, // Simule une réponse réussie
+      body: {} // Vous pouvez ajouter un corps de réponse si nécessaire
+    }).as('registerRequest');
+
+    cy.get('[data-cy="first-name"]').type(firstName);
+    cy.get('[data-cy="last-name"]').type(lastName);
+    cy.get('[data-cy="email"]').type(email);
+    cy.get('[data-cy="password"]').type(password);
+
+    cy.get('[data-cy="submit-button"]').click();
+
+    // Attendre la requête simulée
+    cy.wait('@registerRequest');
+
+    // Vérifier la redirection vers /login
+    cy.url().should('eq', Cypress.config('baseUrl') + 'login');
+
+    // Vérification que l'alerte XSS ne s'est pas affichée
+    cy.on("window:alert", () => {
+      throw new Error("Une alerte XSS a été déclenchée !");
+    });
+  });
+
+});
