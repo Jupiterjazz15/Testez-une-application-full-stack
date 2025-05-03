@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SessionInformation } from 'src/app/interfaces/sessionInformation.interface';
@@ -6,12 +6,13 @@ import { SessionService } from 'src/app/services/session.service';
 import { LoginRequest } from '../../interfaces/loginRequest.interface';
 import { AuthService } from '../../services/auth.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public hide = true;
   public onError = false;
 
@@ -36,6 +37,12 @@ export class LoginComponent {
               private fb: FormBuilder,
               private router: Router,
               private sessionService: SessionService) {
+  }
+
+  ngOnInit(): void {
+    if (this.sessionService.sessionInformation?.token) {
+      this.router.navigate(['/sessions']);
+    }
   }
 
   public submit(): void {

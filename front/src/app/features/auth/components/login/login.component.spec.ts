@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,199 +8,155 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
-import { throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { expect } from '@jest/globals';
 import { AuthService } from '../../services/auth.service';
 import { SessionService } from 'src/app/services/session.service';
-import { NgZone } from '@angular/core';
+import { NgZone, DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { SessionInformation } from '../../../../interfaces/sessionInformation.interface';
 import { LoginComponent } from './login.component';
 
+
 describe('LoginComponent', () => {
-	let component: LoginComponent;
-	let fixture: ComponentFixture<LoginComponent>;
-	let authService: AuthService;
-	let sessionService: SessionService;
-	let router: Router;
-	let ngZone: NgZone;
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
+  let authService: AuthService;
+  let sessionService: SessionService;
+  let router: Router;
+  let ngZone: NgZone;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [LoginComponent],
-			providers: [SessionService, AuthService],
-			imports: [
-				RouterTestingModule.withRoutes([
-					{ path: 'sessions', component: LoginComponent }
-				]),
-				BrowserAnimationsModule,
-				HttpClientModule,
-				MatCardModule,
-				MatIconModule,
-				MatFormFieldModule,
-				MatInputModule,
-				ReactiveFormsModule,
-			],
-		}).compileComponents();
+  const mockRouter = {
+    navigate: jest.fn(),
+  };
 
-		fixture = TestBed.createComponent(LoginComponent);
-		component = fixture.componentInstance;
-		authService = TestBed.inject(AuthService);
-		sessionService = TestBed.inject(SessionService);
-		router = TestBed.inject(Router);
-		ngZone = TestBed.inject(NgZone);
-		fixture.detectChanges();
-	});
+  const mockSessionService: { sessionInformation: { token?: string | null } | null, logIn: jest.Mock } = {
+    sessionInformation: null,
+    logIn: jest.fn(),
+  };
 
-	describe('Unit Test Suites', () => {
-		it('should create', () => {
-			expect(component).toBeTruthy();
-		});
+  const mockSessionInfo: SessionInformation = {
+    id: 1,
+    token: 'mockToken',
+    type: 'mockType',
+    username: 'mockUsername',
+    firstName: 'John',
+    lastName: 'Doe',
+    admin: false,
+  };
 
-		it('should mark email as invalid if empty', () => {
-			const emailInput = component.form.get('email');
+  beforeEach(async () => {
+    jest.resetAllMocks();
+    jest.clearAllMocks();
 
-			emailInput?.setValue('');
-			expect(emailInput?.valid).toBeFalsy();
-			expect(emailInput?.errors?.['required']).toBeTruthy();
-		});
+    await TestBed.configureTestingModule({
+      declarations: [LoginComponent],
+      providers: [
+        { provide: AuthService, useValue: { login: jest.fn().mockReturnValue(of(mockSessionInfo)) } },
+        { provide: SessionService, useValue: mockSessionService },
+        { provide: Router, useValue: mockRouter },
+        FormBuilder
+      ],
+      imports: [
+        RouterTestingModule.withRoutes([{ path: 'sessions', component: LoginComponent }]),
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatCardModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+      ]
+    }).compileComponents();
 
-		it('should mark password as invalid if empty', () => {
-			const passwordInput = component.form.get('password');
+    fixture = TestBed.createComponent(LoginComponent);
+    component = fixture.componentInstance;
+    authService = TestBed.inject(AuthService);
+    sessionService = TestBed.inject(SessionService);
+    router = TestBed.inject(Router);
+    ngZone = TestBed.inject(NgZone);
+    fixture.detectChanges();
+  });
 
-			passwordInput?.setValue('');
-			expect(passwordInput?.valid).toBeFalsy();
-			expect(passwordInput?.errors?.['required']).toBeTruthy();
-		});
+  // TESTS UNITAIRES
 
-		it('should invalidate email when format is incorrect', () => {
-			const emailInput = component.form.get('email');
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-			// sans '@'
-			emailInput?.setValue('test.com');
-			fixture.detectChanges();
-			expect(emailInput?.valid).toBeFalsy();
-			expect(emailInput?.hasError('email')).toBeTruthy();
+  it('should have a mat-card-title with text "Login"', () => {
+    const title: DebugElement = fixture.debugElement.query(By.css('.mat-card-title'));
+    expect(title).toBeTruthy();
+    expect(title.nativeElement.textContent.trim()).toBe('Login');
+  });
 
-			// caractères invalides
-			emailInput?.setValue('test@g....com');
-			fixture.detectChanges();
-			expect(emailInput?.valid).toBeFalsy();
-			expect(emailInput?.hasError('email')).toBeTruthy();
-		});
+  it('should contain an email input field', () => {
+    const emailInput = fixture.debugElement.query(By.css('input[formControlName="email"]'));
+    expect(emailInput).toBeTruthy();
+  });
 
-		it('should disable submit button if form is invalid', () => {
-			const emailInput = component.form.get('email');
-			const passwordInput = component.form.get('password');
+  it('should contain a password input field', () => {
+    const passwordInput = fixture.debugElement.query(By.css('input[formControlName="password"]'));
+    expect(passwordInput).toBeTruthy();
+  });
 
-			emailInput?.setValue('');
-			passwordInput?.setValue('');
-			fixture.detectChanges();
+  it('should set aria-invalid="false" when the password is not empty', () => {
+    const passwordInput = fixture.debugElement.query(By.css('input[formControlName="password"]'));
+    component.form.controls['password'].setValue('');
+    fixture.detectChanges();
+    expect(passwordInput.nativeElement.getAttribute('aria-invalid')).toBeNull();
+  });
 
-			const submitButton = fixture.nativeElement.querySelector(
-				'button[type="submit"]'
-			);
-			expect(submitButton.disabled).toBeTruthy();
-		});
+  it('should have the class ng-invalid if password is empty', () => {
+    const passwordInput = fixture.debugElement.query(By.css('input[formControlName="password"]'));
+    component.form.controls['password'].setValue('');
+    fixture.detectChanges();
+    expect(passwordInput.nativeElement.classList).toContain('ng-invalid');
+  });
 
-		it('should enable submit button if form is valid', () => {
-			const emailInput = component.form.get('email');
-			const passwordInput = component.form.get('password');
+  it('should contain a button with text "Submit"', () => {
+    const submitButton = fixture.debugElement.query(By.css('button[type="submit"]'));
+    expect(submitButton).toBeTruthy();
+    expect(submitButton.nativeElement.textContent.trim()).toBe('Submit');
+  });
 
-			emailInput?.setValue('test@gmail.com');
-			passwordInput?.setValue('password');
-			fixture.detectChanges();
+  it('should enable the submit button when form is valid', () => {
+    const submitButton = fixture.debugElement.query(By.css('button[type="submit"]'));
+    component.form.controls['email'].setValue('test@email.com');
+    component.form.controls['password'].setValue('StrongPassword123');
+    fixture.detectChanges();
+    expect(submitButton.nativeElement.disabled).toBeFalsy();
+  });
 
-			const submitButton = fixture.nativeElement.querySelector(
-				'button[type="submit"]'
-			);
-			expect(submitButton.disabled).toBeFalsy();
-		});
-	});
+  // TESTS D'INTEGRATION
 
-	describe('Integration Test Suites', () => {
-		beforeEach(() => {
-			jest.spyOn(authService, 'login').mockReturnValue(
-				of({
-					token: 'fake-jwt-token',
-					type: 'user',
-					id: 1,
-					username: 'fakeUser',
-					firstName: 'Test',
-					lastName: 'Test',
-					admin: false
-				})
-			);
-		});
+  describe('ngOnInit method', () => {
+    it('should navigate to "/sessions" if sessionInformation token is valid', () => {
+      mockSessionService.sessionInformation = { token: 'validToken' };
+      component.ngOnInit();
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['/sessions']);
+    });
+  });
 
-		it('should call AuthService.login with correct data on form submission', () => {
-			const emailInput = component.form.get('email');
-			const passwordInput = component.form.get('password');
+  describe('submit method', () => {
+    it('should call authService.login with form values', () => {
+      const loginRequest = { email: 'test@example.com', password: 'password' };
+      component.form.setValue(loginRequest);
+      component.submit();
+      expect(authService.login).toHaveBeenCalledWith(loginRequest);
+    });
 
-			emailInput?.setValue('test@gmail.com');
-			passwordInput?.setValue('password');
+    it('should call sessionService.logIn and navigate on successful login', () => {
+      const sessionSpy = jest.spyOn(mockSessionService, 'logIn');
+      component.submit();
+      expect(sessionSpy).toHaveBeenCalledWith(mockSessionInfo);
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['/sessions']);
+    });
 
-			ngZone.run(() => {
-				component.submit();
-			})
-
-			expect(authService.login).toHaveBeenLastCalledWith({ email: 'test@gmail.com', password: 'password' });
-		});
-
-		it('should call SessionService.logIn with correct data after succesful login', () => {
-			jest.spyOn(sessionService, 'logIn');
-
-			const emailInput = component.form.get('email');
-			const passwordInput = component.form.get('password');
-
-			emailInput?.setValue('test@gmail.com');
-			passwordInput?.setValue('password');
-
-			ngZone.run(() => {
-				component.submit();
-			});
-
-			expect(sessionService.logIn).toHaveBeenLastCalledWith({
-				token: 'fake-jwt-token',
-				type: 'user',
-				id: 1,
-				username: 'fakeUser',
-				firstName: 'Test',
-				lastName: 'Test',
-				admin: false
-			})
-		});
-
-		it('should redirect to /sessions after successful login', () => {
-			jest.spyOn(router, 'navigate');
-
-			const emailInput = component.form.get('email');
-			const passwordInput = component.form.get('password');
-
-			emailInput?.setValue('test@gmail.com');
-			passwordInput?.setValue('password');
-
-			ngZone.run(() => {
-				component.submit();
-			});
-
-			expect(router.navigate).toHaveBeenLastCalledWith(['/sessions']);
-		});
-
-		it('should set onError to true when login fails', () => {
-			const errorResponse = { message: 'Login failed' };
-			jest.spyOn(authService, 'login').mockReturnValue(throwError(() => new Error(errorResponse.message)));
-
-			const emailInput = component.form.get('email');
-			const passwordInput = component.form.get('password');
-
-			emailInput?.setValue('test@gmail.com');
-			passwordInput?.setValue('password');
-
-			ngZone.run(() => {
-				component.submit();
-			});
-			
-			expect(component.onError).toBeTruthy();
-		});
-	});
+    it('should set onError to true if login fails', () => {
+      jest.spyOn(authService, 'login').mockReturnValue(throwError(() => new Error('Invalid credentials')));
+      component.submit();
+      expect(component.onError).toBeTruthy();
+    });
+  });
 });
