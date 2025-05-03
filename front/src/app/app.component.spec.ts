@@ -20,7 +20,7 @@ describe('AppComponent', () => {
 			declarations: [AppComponent],
 			imports: [
 				RouterTestingModule.withRoutes([
-					{ path: '', component: AppComponent } 
+					{ path: '', component: AppComponent }
 				]),
 				HttpClientModule,
 				MatToolbarModule
@@ -41,13 +41,13 @@ describe('AppComponent', () => {
 	describe('Unit Test Suites', () => {
 		it('should create the app', () => {
 			expect(app).toBeTruthy();
-		});	
+		});
 	});
 
 	describe('Integration Test Suites', () => {
 		it('should display the correct navigation links when connected', () => {
 			jest.spyOn(sessionService, '$isLogged').mockReturnValue(of(true));
-			
+
 			fixture.detectChanges();
 
 			const links = fixture.nativeElement.querySelectorAll('.link');
@@ -78,7 +78,7 @@ describe('AppComponent', () => {
 			logoutLink.click();
 
 			expect(sessionService.logOut).toHaveBeenCalled;
-			expect(navigateSpy).toHaveBeenCalledWith(['']);
+			expect(navigateSpy).toHaveBeenCalledWith(['login']);
 		});
 	});
 });
