@@ -53,4 +53,13 @@ public class LoginRequestTest {
         assertEquals("user@example.com", loginRequest.getEmail());
         assertEquals("securepassword", loginRequest.getPassword());
     }
+
+    @Test
+    public void testConstructorWithAllFields() {
+        LoginRequest loginRequest = new LoginRequest("test@example.com", "password123");
+
+        assertEquals("test@example.com", loginRequest.getEmail());
+        assertEquals("password123", loginRequest.getPassword());
+    }
+
 }

@@ -17,6 +17,16 @@ public class SignupRequestTest {
     }
 
     @Test
+    public void testConstructorWithAllFields() {
+        SignupRequest signupRequest = new SignupRequest("test@example.com", "John", "Doe", "password123");
+
+        assertEquals("test@example.com", signupRequest.getEmail());
+        assertEquals("John", signupRequest.getFirstName());
+        assertEquals("Doe", signupRequest.getLastName());
+        assertEquals("password123", signupRequest.getPassword());
+    }
+
+    @Test
     public void testSignupRequestWithValidFields() {
         SignupRequest signupRequest = createSignupRequest("test@example.com", "John", "Doe", "password123");
 
@@ -75,4 +85,39 @@ public class SignupRequestTest {
         assertEquals("Smith", signupRequest.getLastName());
         assertEquals("securepassword", signupRequest.getPassword());
     }
+
+    @Test
+    public void testEqualsAndHashCode() {
+        SignupRequest req1 = new SignupRequest("email@example.com", "John", "Doe", "password123");
+        SignupRequest req2 = new SignupRequest("email@example.com", "John", "Doe", "password123");
+        SignupRequest req3 = new SignupRequest("different@example.com", "Jane", "Smith", "diffpass");
+
+        // Les deux objets identiques doivent être égaux
+        assertEquals(req1, req2);
+        assertEquals(req1.hashCode(), req2.hashCode());
+
+        // Les objets différents ne doivent pas être égaux
+        assertNotEquals(req1, req3);
+        assertNotEquals(req1.hashCode(), req3.hashCode());
+    }
+
+    @Test
+    public void testToString() {
+        SignupRequest signupRequest = new SignupRequest("email@example.com", "John", "Doe", "password123");
+
+        String toString = signupRequest.toString();
+
+        assertNotNull(toString);
+        assertTrue(toString.contains("email@example.com"));
+        assertTrue(toString.contains("John"));
+        assertTrue(toString.contains("Doe"));
+    }
+
+    @Test
+    public void testCanEqual() {
+        SignupRequest signupRequest = new SignupRequest();
+        assertTrue(signupRequest.canEqual(new SignupRequest()));
+        assertFalse(signupRequest.canEqual("NotASignupRequest")); // Cas négatif
+      }
+
 }

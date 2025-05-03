@@ -38,8 +38,15 @@ public class TeacherControllerIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        teacher1 = new Teacher().setId(1L).setFirstName("John").setLastName("Doe");
-        teacher2 = new Teacher().setId(2L).setFirstName("Jane").setLastName("Smith");
+        teacher1 = new Teacher();
+        teacher1.setId(1L);
+        teacher1.setFirstName("John");
+        teacher1.setLastName("Doe");
+
+        teacher2 = new Teacher();
+        teacher2.setId(2L);
+        teacher2.setFirstName("Jane");
+        teacher2.setLastName("Smith");
 
         when(teacherService.findById(1L)).thenReturn(teacher1);
         when(teacherService.findById(2L)).thenReturn(teacher2);

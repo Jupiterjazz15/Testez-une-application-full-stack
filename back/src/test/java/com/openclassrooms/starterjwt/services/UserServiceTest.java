@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,14 +39,16 @@ public class UserServiceTest {
 
     @Test
     void testFindById_UserExists() {
-        User user = User.builder()
-                .id(1L)
-                .email("john.doe@example.com")
-                .lastName("Doe")
-                .firstName("John")
-                .password("password")
-                .admin(true)
-                .build();
+        User user = new User(
+                1L,
+                "john.doe@example.com",
+                "Doe",
+                "John",
+                "password",
+                true,
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        );
 
         when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
 

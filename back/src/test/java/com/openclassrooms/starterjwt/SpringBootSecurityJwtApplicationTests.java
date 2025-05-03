@@ -10,4 +10,5 @@ public class SpringBootSecurityJwtApplicationTests {
 	public void contextLoads() {
 	}
 
+
 }

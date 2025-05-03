@@ -34,20 +34,20 @@ class SessionServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        user = new User()
-                .setId(1L)
-                .setEmail("test@example.com")
-                .setFirstName("John")
-                .setLastName("Doe")
-                .setPassword("password")
-                .setAdmin(false);
+        user = new User();
+        user.setId(1L);
+        user.setEmail("test@example.com");
+        user.setFirstName("John");
+        user.setLastName("Doe");
+        user.setPassword("password");
+        user.setAdmin(false);
 
-        session = new Session()
-                .setId(1L)
-                .setName("Session 1")
-                .setDate(new Date())
-                .setDescription("Description 1")
-                .setUsers(new ArrayList<>());  // Utiliser une liste mutable
+        session = new Session();
+        session.setId(1L);
+        session.setName("Session 1");
+        session.setDate(new Date());
+        session.setDescription("Description 1");
+        session.setUsers(new ArrayList<>());
     }
 
     @Test
@@ -132,9 +132,7 @@ class SessionServiceTest {
         when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
         when(userRepository.findById(1L)).thenReturn(Optional.empty());
 
-        assertThrows(NotFoundException.class, () -> {
-            sessionService.participate(1L, 1L);
-        });
+        assertThrows(NotFoundException.class, () -> sessionService.participate(1L, 1L));
 
         verify(sessionRepository, times(1)).findById(1L);
         verify(userRepository, times(1)).findById(1L);
@@ -147,9 +145,7 @@ class SessionServiceTest {
         when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
-        assertThrows(BadRequestException.class, () -> {
-            sessionService.participate(1L, 1L);
-        });
+        assertThrows(BadRequestException.class, () -> sessionService.participate(1L, 1L));
 
         verify(sessionRepository, times(1)).findById(1L);
         verify(userRepository, times(1)).findById(1L);
@@ -158,7 +154,7 @@ class SessionServiceTest {
 
     @Test
     void testNoLongerParticipate() {
-        session.setUsers(Arrays.asList(user));
+        session.setUsers(new ArrayList<>(Arrays.asList(user)));
         when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
         when(sessionRepository.save(any(Session.class))).thenReturn(session);
 
@@ -172,9 +168,7 @@ class SessionServiceTest {
     void testNoLongerParticipate_SessionNotFound() {
         when(sessionRepository.findById(1L)).thenReturn(Optional.empty());
 
-        assertThrows(NotFoundException.class, () -> {
-            sessionService.noLongerParticipate(1L, 1L);
-        });
+        assertThrows(NotFoundException.class, () -> sessionService.noLongerParticipate(1L, 1L));
 
         verify(sessionRepository, times(1)).findById(1L);
         verify(sessionRepository, never()).save(any(Session.class));
@@ -182,11 +176,10 @@ class SessionServiceTest {
 
     @Test
     void testNoLongerParticipate_NotParticipating() {
+        session.setUsers(new ArrayList<>()); // vide
         when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
 
-        assertThrows(BadRequestException.class, () -> {
-            sessionService.noLongerParticipate(1L, 1L);
-        });
+        assertThrows(BadRequestException.class, () -> sessionService.noLongerParticipate(1L, 1L));
 
         verify(sessionRepository, times(1)).findById(1L);
         verify(sessionRepository, never()).save(any(Session.class));

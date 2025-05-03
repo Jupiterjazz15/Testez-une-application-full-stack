@@ -4,18 +4,17 @@ import com.openclassrooms.starterjwt.models.Teacher;
 import com.openclassrooms.starterjwt.repository.TeacherRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-public class TeacherServiceTest {
+class TeacherServiceTest {
 
     @Mock
     private TeacherRepository teacherRepository;
@@ -23,50 +22,53 @@ public class TeacherServiceTest {
     @InjectMocks
     private TeacherService teacherService;
 
+    private Teacher teacher;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+
+        teacher = new Teacher();
+        teacher.setId(1L);
+        teacher.setLastName("Doe");
+        teacher.setFirstName("John");
+        teacher.setCreatedAt(LocalDateTime.now());
+        teacher.setUpdatedAt(LocalDateTime.now());
     }
 
     @Test
     void testFindAll() {
-        Teacher teacher1 = new Teacher().setId(1L).setFirstName("John").setLastName("Doe");
-        Teacher teacher2 = new Teacher().setId(2L).setFirstName("Jane").setLastName("Smith");
+        when(teacherRepository.findAll()).thenReturn(Arrays.asList(teacher));
 
-        when(teacherRepository.findAll()).thenReturn(Arrays.asList(teacher1, teacher2));
+        List<Teacher> result = teacherService.findAll();
 
-        List<Teacher> teachers = teacherService.findAll();
-
-        assertNotNull(teachers);
-        assertEquals(2, teachers.size());
-        assertEquals("John", teachers.get(0).getFirstName());
-        assertEquals("Jane", teachers.get(1).getFirstName());
+        assertThat(result).isNotNull();
+        assertThat(result).hasSize(1);
+        assertThat(result.get(0).getFirstName()).isEqualTo("John");
 
         verify(teacherRepository, times(1)).findAll();
     }
 
     @Test
     void testFindById_TeacherExists() {
-        Teacher teacher = new Teacher().setId(1L).setFirstName("John").setLastName("Doe");
-
         when(teacherRepository.findById(1L)).thenReturn(Optional.of(teacher));
 
-        Teacher foundTeacher = teacherService.findById(1L);
+        Teacher result = teacherService.findById(1L);
 
-        assertNotNull(foundTeacher);
-        assertEquals("John", foundTeacher.getFirstName());
+        assertThat(result).isNotNull();
+        assertThat(result.getId()).isEqualTo(1L);
+        assertThat(result.getLastName()).isEqualTo("Doe");
 
         verify(teacherRepository, times(1)).findById(1L);
     }
 
     @Test
-    void testFindById_TeacherDoesNotExist() {
+    void testFindById_TeacherNotFound() {
         when(teacherRepository.findById(1L)).thenReturn(Optional.empty());
 
-        Teacher foundTeacher = teacherService.findById(1L);
+        Teacher result = teacherService.findById(1L);
 
-        assertNull(foundTeacher);
-
+        assertThat(result).isNull();
         verify(teacherRepository, times(1)).findById(1L);
     }
 }
