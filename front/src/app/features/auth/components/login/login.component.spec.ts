@@ -12,7 +12,7 @@ import { of, throwError } from 'rxjs';
 import { expect } from '@jest/globals';
 import { AuthService } from '../../services/auth.service';
 import { SessionService } from 'src/app/services/session.service';
-import { NgZone, DebugElement } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { SessionInformation } from '../../../../interfaces/sessionInformation.interface';
 import { LoginComponent } from './login.component';
@@ -24,13 +24,16 @@ describe('LoginComponent', () => {
   let authService: AuthService;
   let sessionService: SessionService;
   let router: Router;
-  let ngZone: NgZone;
+
 
   const mockRouter = {
     navigate: jest.fn(),
   };
 
-  const mockSessionService: { sessionInformation: { token?: string | null } | null, logIn: jest.Mock } = {
+  const mockSessionService: {
+    sessionInformation: { token?: string | null } | null, // sessionInformation est soit un objet contenant une propriété token optionnelle qui est une chaîne ou null ou carrément null (dans le cas où aucun utilisateur n’est connecté).
+    logIn: jest.Mock
+    } = {
     sessionInformation: null,
     logIn: jest.fn(),
   };
@@ -71,16 +74,17 @@ describe('LoginComponent', () => {
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
+
     authService = TestBed.inject(AuthService);
     sessionService = TestBed.inject(SessionService);
     router = TestBed.inject(Router);
-    ngZone = TestBed.inject(NgZone);
+
     fixture.detectChanges();
   });
 
-  // TESTS UNITAIRES
+// TESTS UNITAIRES
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
@@ -141,13 +145,13 @@ describe('LoginComponent', () => {
   describe('submit method', () => {
     it('should call authService.login with form values', () => {
       const loginRequest = { email: 'test@example.com', password: 'password' };
-      component.form.setValue(loginRequest);
+      component.form.setValue(loginRequest); // simule de remplir le form
       component.submit();
       expect(authService.login).toHaveBeenCalledWith(loginRequest);
     });
 
     it('should call sessionService.logIn and navigate on successful login', () => {
-      const sessionSpy = jest.spyOn(mockSessionService, 'logIn');
+      const sessionSpy = jest.spyOn(mockSessionService, 'logIn'); // spy sur la mthd logIn de mockSessionService
       component.submit();
       expect(sessionSpy).toHaveBeenCalledWith(mockSessionInfo);
       expect(mockRouter.navigate).toHaveBeenCalledWith(['/sessions']);
@@ -155,6 +159,7 @@ describe('LoginComponent', () => {
 
     it('should set onError to true if login fails', () => {
       jest.spyOn(authService, 'login').mockReturnValue(throwError(() => new Error('Invalid credentials')));
+      // on force l'erreur
       component.submit();
       expect(component.onError).toBeTruthy();
     });
