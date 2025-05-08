@@ -18,13 +18,11 @@ describe('NotFoundComponent', () => {
     fixture.detectChanges();
   });
 
-  // TEST UNITAIRE
+  // TESTS UNITAIRES
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  // TESTS D'INTEGRATION
 
   it('should display "Page not found !"', () => {
     const compiled = fixture.debugElement.nativeElement;

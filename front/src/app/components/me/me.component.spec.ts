@@ -69,7 +69,6 @@ describe('MeComponent', () => {
         MatIconModule,
         MatInputModule,
       ],
-      // INJECTION DES PROVIDERS
       providers: [
         { provide: SessionService, useValue: mockSessionService },
         { provide: UserService, useValue: mockUserService },
@@ -78,12 +77,8 @@ describe('MeComponent', () => {
       ],
     }).compileComponents();
 
-    jest.spyOn(mockUserService, 'getById').mockReturnValue(of(mockUser));
-
     fixture = TestBed.createComponent(MeComponent);
-
     component = fixture.componentInstance;
-
     router = TestBed.inject(Router);
 
     fixture.detectChanges();
@@ -130,7 +125,7 @@ describe('MeComponent', () => {
   });
 
   it('should display "You are admin" if the user is an admin', () => {
-    const adminMessage = fixture.debugElement.query(By.css('p.my2'));
+    const adminMessage = fixture.debugElement.query(By.css('p.my2')); // élément p avec le classe my2
     expect(adminMessage).toBeTruthy();
     expect(adminMessage.nativeElement.textContent).toBe('You are admin');
   });
@@ -138,6 +133,7 @@ describe('MeComponent', () => {
   it('should display the user creation date correctly', () => {
     const createdAtElement = fixture.debugElement.queryAll(By.css('p'))
       .find(el => el.nativeElement.textContent.includes("Create at:"))?.nativeElement;
+      // Trouve l'élément qui contient "Create at:"
     expect(createdAtElement).toBeTruthy();
     expect(createdAtElement.textContent).toContain(
       new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(mockUser.createdAt)
@@ -153,6 +149,22 @@ describe('MeComponent', () => {
   });
 
   // TESTS D'INTEGRATION //
+
+  describe('ngOnInit method', () => {
+    it('should call userService.getById() with the correct ID', fakeAsync(() => {
+      component.ngOnInit();
+      tick();
+      flush();
+      expect(mockUserService.getById).toHaveBeenCalledWith('1');
+    }));
+
+    it('should update the user property after fetching user data', fakeAsync(() => {
+      component.ngOnInit();
+      tick();
+      flush();
+      expect(component.user).toEqual(mockUser);
+    }));
+  });
 
   it('should go back when back arrow is clicked', () => {
     const historySpy = jest.spyOn(window.history, 'back');
@@ -196,22 +208,6 @@ describe('MeComponent', () => {
       tick();
       flush();
       expect(mockRouter.navigate).toHaveBeenCalledWith(['login']);
-    }));
-  });
-
-  describe('ngOnInit method', () => {
-    it('should call userService.getById() with the correct ID', fakeAsync(() => {
-      component.ngOnInit();
-      tick();
-      flush();
-      expect(mockUserService.getById).toHaveBeenCalledWith('1');
-    }));
-
-    it('should update the user property after fetching user data', fakeAsync(() => {
-      component.ngOnInit();
-      tick();
-      flush();
-      expect(component.user).toEqual(mockUser);
     }));
   });
 
