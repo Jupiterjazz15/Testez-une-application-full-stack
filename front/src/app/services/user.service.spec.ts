@@ -38,10 +38,14 @@ describe('UserService', () => {
 		httpMock.verify();
 	});
 
-	describe('Unit Test Suites', () => {
+
+  // TEST UNITAIRE
 		it('should be created', () => {
 			expect(service).toBeTruthy();
 		});
+
+
+  // TESTS D'INTEGRATION
 
 		it('should fetch a user by ID', () => {
 			service.getById('1').subscribe((user) => {
@@ -90,5 +94,5 @@ describe('UserService', () => {
 			expect(req.request.method).toBe('DELETE');
 			req.flush({ message: 'User not found' }, { status: 404, statusText: 'Not Found' });
 		});
-	});
+
 });

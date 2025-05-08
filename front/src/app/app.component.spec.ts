@@ -38,13 +38,14 @@ describe('AppComponent', () => {
 		fixture.detectChanges();
 	});
 
-	describe('Unit Test Suites', () => {
+  // TEST UNITAIRE
 		it('should create the app', () => {
 			expect(app).toBeTruthy();
 		});
-	});
 
-	describe('Integration Test Suites', () => {
+
+// TESTS D'INTEGRATION
+
 		it('should display the correct navigation links when connected', () => {
 			jest.spyOn(sessionService, '$isLogged').mockReturnValue(of(true));
 
@@ -80,5 +81,4 @@ describe('AppComponent', () => {
 			expect(sessionService.logOut).toHaveBeenCalled;
 			expect(navigateSpy).toHaveBeenCalledWith(['login']);
 		});
-	});
 });

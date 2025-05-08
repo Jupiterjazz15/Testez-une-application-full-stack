@@ -27,10 +27,15 @@ describe('TeacherService', () => {
 		httpMock.verify();
 	});
 
+  // TEST UNITAIRE
+
 	describe('Unit Test Suites', () => {
 		it('should be created', () => {
 			expect(service).toBeTruthy();
 		});
+
+    
+  // TESTS D'INTEGRATION
 
 		it('should fetch all teachers', () => {
 			const mockTeachers: Teacher[] = [

@@ -12,6 +12,8 @@ describe('SessionService', () => {
 		service = TestBed.inject(SessionService);
 	});
 
+// TESTS UNITAIRES
+
 	describe('Unit Test Suites', () => {
 		it('should be created', () => {
 			expect(service).toBeTruthy();
