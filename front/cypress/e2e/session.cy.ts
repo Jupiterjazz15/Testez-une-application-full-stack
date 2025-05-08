@@ -50,7 +50,7 @@ describe('Session spec', () => {
                 description: "Relaxing yoga session !",
                 users: [12, 18, 21],
                 createdAt: "2024-11-10T16:30:06",
-                updatedAt: "2024-11-10T16:30:06", 
+                updatedAt: "2024-11-10T16:30:06",
             }
         }).as('sessionDetail')
 
@@ -124,20 +124,19 @@ describe('Session spec', () => {
                 }
             ]
         }).as('loadTeachers')
-    
+
         cy.contains('button', 'Create').click()
-    
+
         cy.get('input[formControlName=name]').type('New Yoga Session')
         cy.get('input[formControlName=date]').type('2025-02-20')
         cy.get('mat-select[formControlName=teacher_id]').click()
         cy.contains('mat-option', 'Hélène THIERCELIN').click()
         cy.get('textarea[formControlName=description]').type('A brand new relaxing yoga session')
-    
-        // Soumettre le formulaire
+
         cy.contains('button', 'Save').click()
-    
+
         cy.get('.mat-snack-bar-container')
-        .should('exist') 
+        .should('exist')
         .and('contain.text', 'Session created !')
     })
 
@@ -158,5 +157,5 @@ describe('Session spec', () => {
         .should('exist')
         .and('contain.text', 'Session deleted !')
     })
-    
+
 })

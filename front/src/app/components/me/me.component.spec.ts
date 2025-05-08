@@ -64,7 +64,7 @@ describe('MeComponent', () => {
         NoopAnimationsModule,
         HttpClientModule,
         MatSnackBarModule,
-        MatCardModule
+        MatCardModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
@@ -211,7 +211,7 @@ describe('MeComponent', () => {
       component.ngOnInit();
       tick();
       flush();
-      expect(component.user).toEqual(mockUser); 
+      expect(component.user).toEqual(mockUser);
     }));
   });
 

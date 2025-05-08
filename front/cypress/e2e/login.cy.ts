@@ -2,7 +2,7 @@
 
 describe('Login Form', () => {
   beforeEach(() => {
-    cy.visit('/login'); // Modifier l'URL selon votre application
+    cy.visit('/login'); 
   });
 
   it('should validate email format', () => {
