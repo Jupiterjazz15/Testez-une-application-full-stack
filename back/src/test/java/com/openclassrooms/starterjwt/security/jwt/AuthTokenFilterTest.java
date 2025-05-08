@@ -48,8 +48,8 @@ public class AuthTokenFilterTest {
 
     @Test
     public void testDoFilterInternal_WithValidJwt_SetsAuthentication() throws IOException, ServletException {
-        // Arrange
-        String jwt = "valid.jwt.token";
+
+      String jwt = "valid.jwt.token";
         String username = "testuser";
 
         when(request.getHeader("Authorization")).thenReturn("Bearer " + jwt);
@@ -57,62 +57,47 @@ public class AuthTokenFilterTest {
         when(jwtUtils.getUserNameFromJwtToken(jwt)).thenReturn(username);
         when(userDetailsService.loadUserByUsername(username)).thenReturn(userDetails);
 
-        // Act
         authTokenFilter.doFilterInternal(request, response, filterChain);
 
-        // Assert
         verify(jwtUtils).validateJwtToken(jwt);
         verify(jwtUtils).getUserNameFromJwtToken(jwt);
         verify(userDetailsService).loadUserByUsername(username);
         verify(filterChain).doFilter(request, response);
-        // Note: Verify that SecurityContextHolder's context has been set with the authentication token
     }
 
     @Test
     public void testDoFilterInternal_WithInvalidJwt_DoesNotSetAuthentication() throws IOException, ServletException {
-        // Arrange
         when(request.getHeader("Authorization")).thenReturn("Bearer invalid.jwt.token");
         when(jwtUtils.validateJwtToken("invalid.jwt.token")).thenReturn(false);
 
-        // Act
         authTokenFilter.doFilterInternal(request, response, filterChain);
 
-        // Assert
         verify(jwtUtils).validateJwtToken("invalid.jwt.token");
         verify(filterChain).doFilter(request, response);
-        // Note: No authentication set in SecurityContextHolder
     }
 
     @Test
     public void testParseJwt_WithValidHeader_ReturnsToken() throws Exception {
-        // Arrange
         String jwt = "valid.jwt.token";
         when(request.getHeader("Authorization")).thenReturn("Bearer " + jwt);
 
-        // Use reflection to access the private method
         Method method = AuthTokenFilter.class.getDeclaredMethod("parseJwt", HttpServletRequest.class);
         method.setAccessible(true);
 
-        // Act
         String result = (String) method.invoke(authTokenFilter, request);
 
-        // Assert
         assertEquals(jwt, result);
     }
 
     @Test
     public void testParseJwt_WithInvalidHeader_ReturnsNull() throws Exception {
-        // Arrange
         when(request.getHeader("Authorization")).thenReturn("InvalidHeader");
 
-        // Use reflection to access the private method
         Method method = AuthTokenFilter.class.getDeclaredMethod("parseJwt", HttpServletRequest.class);
         method.setAccessible(true);
 
-        // Act
         String result = (String) method.invoke(authTokenFilter, request);
 
-        // Assert
         assertEquals(null, result);
     }
 }

@@ -31,7 +31,7 @@ public class UserDetailsServiceImplTest {
 
     @Test
     void testLoadUserByUsername_Success() {
-        // Arrange
+       
         String email = "test@example.com";
         User user = new User();
         user.setId(1L);
@@ -42,10 +42,10 @@ public class UserDetailsServiceImplTest {
 
         when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
 
-        // Act
+       
         UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
-        // Assert
+       
         assertNotNull(userDetails);
         assertEquals(email, userDetails.getUsername());
         assertEquals("John", ((UserDetailsImpl) userDetails).getFirstName());
@@ -54,16 +54,15 @@ public class UserDetailsServiceImplTest {
 
     @Test
     void testLoadUserByUsername_UserNotFound() {
-        // Arrange
+       
         String email = "nonexistent@example.com";
 
         when(userRepository.findByEmail(email)).thenReturn(Optional.empty());
 
-        // Act & Assert
+       
         UsernameNotFoundException thrown = assertThrows(UsernameNotFoundException.class, () -> {
             userDetailsService.loadUserByUsername(email);
         });
         assertEquals("User Not Found with email: " + email, thrown.getMessage());
     }
 }
-

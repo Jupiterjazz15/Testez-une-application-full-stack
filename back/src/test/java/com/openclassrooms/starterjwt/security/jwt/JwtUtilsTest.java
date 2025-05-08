@@ -25,9 +25,9 @@ public class JwtUtilsTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
         jwtUtils = new JwtUtils();
-        // Using reflection to set private fields
+
         setField(jwtUtils, "jwtSecret", "testSecretKey");
-        setField(jwtUtils, "jwtExpirationMs", 86400000); // 1 day in milliseconds
+        setField(jwtUtils, "jwtExpirationMs", 86400000);
     }
 
     private void setField(Object obj, String fieldName, Object value) {
@@ -42,92 +42,92 @@ public class JwtUtilsTest {
 
     @Test
     public void testGenerateJwtToken() {
-        // Arrange
+
         UserDetailsImpl userDetails = new UserDetailsImpl(1L, "username", "John", "Doe", false,"password");
         when(authentication.getPrincipal()).thenReturn(userDetails);
 
-        // Act
+
         String token = jwtUtils.generateJwtToken(authentication);
 
-        // Assert
+
         assertNotNull(token);
         assertTrue(token.startsWith("eyJ"));
     }
 
     @Test
     public void testGetUserNameFromJwtToken() {
-        // Arrange
+
         String token = Jwts.builder()
                 .setSubject("username")
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + 86400000)) // 1 day in milliseconds
+                .setExpiration(new Date((new Date()).getTime() + 86400000))
                 .signWith(SignatureAlgorithm.HS512, "testSecretKey")
                 .compact();
 
-        // Act
+
         String username = jwtUtils.getUserNameFromJwtToken(token);
 
-        // Assert
+
         assertEquals("username", username);
     }
 
     @Test
     public void testValidateJwtToken_ValidToken() {
-        // Arrange
+
         String token = Jwts.builder()
                 .setSubject("username")
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + 86400000)) // 1 day in milliseconds
+                .setExpiration(new Date((new Date()).getTime() + 86400000))
                 .signWith(SignatureAlgorithm.HS512, "testSecretKey")
                 .compact();
 
-        // Act
+
         boolean isValid = jwtUtils.validateJwtToken(token);
 
-        // Assert
+
         assertTrue(isValid);
     }
 
     @Test
     public void testValidateJwtToken_InvalidSignature() {
-        // Arrange
+
         String token = Jwts.builder()
                 .setSubject("username")
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + 86400000)) // 1 day in milliseconds
+                .setExpiration(new Date((new Date()).getTime() + 86400000))
                 .signWith(SignatureAlgorithm.HS512, "wrongSecret")
                 .compact();
 
-        // Act
+
         boolean isValid = jwtUtils.validateJwtToken(token);
 
-        // Assert
+
         assertFalse(isValid);
     }
 
     @Test
     public void testValidateJwtToken_ExpiredToken() {
-        // Arrange
+
         String token = Jwts.builder()
                 .setSubject("username")
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() - 1000)) // Expired token
+                .setExpiration(new Date((new Date()).getTime() - 1000))
                 .signWith(SignatureAlgorithm.HS512, "testSecretKey")
                 .compact();
 
-        // Act
+
         boolean isValid = jwtUtils.validateJwtToken(token);
 
-        // Assert
+
         assertFalse(isValid);
     }
 
     @Test
     public void testValidateJwtToken_MalformedToken() {
-        // Act
+
         boolean isValid = jwtUtils.validateJwtToken("malformedToken");
 
-        // Assert
+
         assertFalse(isValid);
     }
 }

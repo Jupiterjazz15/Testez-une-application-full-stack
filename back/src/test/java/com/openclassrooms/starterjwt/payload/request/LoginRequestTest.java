@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LoginRequestTest {
 
-    // Méthode d'initialisation des tests
     private LoginRequest createLoginRequest(String email, String password) {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail(email);

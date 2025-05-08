@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SignupRequestTest {
 
-    // Méthode d'initialisation des tests
     private SignupRequest createSignupRequest(String email, String firstName, String lastName, String password) {
         SignupRequest signupRequest = new SignupRequest();
         signupRequest.setEmail(email);

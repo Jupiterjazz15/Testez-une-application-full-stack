@@ -51,7 +51,6 @@ public class AuthControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User registered successfully!"));
 
-        // Additional check to ensure the user was saved in the repository
         assert(userRepository.existsByEmail("newuser@example.com"));
     }
 
@@ -63,7 +62,6 @@ public class AuthControllerIntegrationTest {
         signupRequest.setLastName("Doe");
         signupRequest.setPassword("password123");
 
-        // Pre-save a user with the same email
         userRepository.save(new User(signupRequest.getEmail(), signupRequest.getLastName(), signupRequest.getFirstName(),
                 "encoded_password", false));
 
@@ -76,30 +74,25 @@ public class AuthControllerIntegrationTest {
 
     @Test
     public void testAuthenticateUserSuccess() throws Exception {
-        // Utilisation du PasswordEncoder pour encoder le mot de passe avant de sauvegarder l'utilisateur
         String rawPassword = "password123";
         String encodedPassword = passwordEncoder.encode(rawPassword);
 
-        // Pré-enregistrement d'un utilisateur pour l'authentification
         User user = new User("loginuser@example.com", "Doe", "John", encodedPassword, false);
         userRepository.save(user);
 
-        // Création de la requête de connexion
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail("loginuser@example.com");
-        loginRequest.setPassword(rawPassword);  // Utilisation du mot de passe brut
+        loginRequest.setPassword(rawPassword);
 
-        // Exécution de la requête et vérification des résultats
         mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(loginRequest)))
-                .andExpect(status().isOk())  // Vérification du statut HTTP 200
-                .andExpect(jsonPath("$.token").exists())  // Vérification de l'existence du token JWT dans la réponse
-                .andExpect(jsonPath("$.id").value(user.getId()))  // Vérification de l'ID de l'utilisateur
-                .andExpect(jsonPath("$.username").value(user.getEmail()))  // Vérification de l'email de l'utilisateur
-                .andExpect(jsonPath("$.firstName").value(user.getFirstName()))  // Vérification du prénom
-                .andExpect(jsonPath("$.lastName").value(user.getLastName()))  // Vérification du nom de famille
-                .andExpect(jsonPath("$.admin").value(false));  // Vérification du statut admin
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.token").exists())
+                .andExpect(jsonPath("$.id").value(user.getId()))
+                .andExpect(jsonPath("$.username").value(user.getEmail()))
+                .andExpect(jsonPath("$.firstName").value(user.getFirstName()))  .andExpect(jsonPath("$.lastName").value(user.getLastName()))
+                .andExpect(jsonPath("$.admin").value(false));
     }
 
     @Test

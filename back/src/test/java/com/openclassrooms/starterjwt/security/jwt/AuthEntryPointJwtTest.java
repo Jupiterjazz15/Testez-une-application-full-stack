@@ -44,10 +44,8 @@ public class AuthEntryPointJwtTest {
 
     @Test
     public void testCommence() throws IOException, ServletException {
-        // Arrange
         when(authException.getMessage()).thenReturn("Unauthorized access");
 
-        // Utilisation de ByteArrayOutputStream pour capturer le flux de sortie
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ServletOutputStream servletOutputStream = new ServletOutputStream() {
             @Override
@@ -57,7 +55,7 @@ public class AuthEntryPointJwtTest {
 
             @Override
             public void setWriteListener(WriteListener writeListener) {
-                // Rien à implémenter pour ce test
+      
             }
 
             @Override
@@ -69,14 +67,11 @@ public class AuthEntryPointJwtTest {
         when(response.getOutputStream()).thenReturn(servletOutputStream);
         when(request.getServletPath()).thenReturn("/test-path");
 
-        // Act
         authEntryPointJwt.commence(request, response, authException);
 
-        // Assert
         verify(response).setContentType(MediaType.APPLICATION_JSON_VALUE);
         verify(response).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
-        // Vérification du corps de la réponse
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> responseMap = objectMapper.readValue(byteArrayOutputStream.toString(), HashMap.class);
 
@@ -86,4 +81,3 @@ public class AuthEntryPointJwtTest {
         assertEquals("/test-path", responseMap.get("path"));
     }
 }
-
