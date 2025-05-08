@@ -33,6 +33,6 @@ describe('NotFoundComponent', () => {
 
   it('should have the correct CSS class applied', () => {
     const divElement = fixture.debugElement.query(By.css('div.flex'));
-    expect(divElement).toBeTruthy(); // Vérifie que la classe CSS flex est appliquée
+    expect(divElement).toBeTruthy();
   });
 });
