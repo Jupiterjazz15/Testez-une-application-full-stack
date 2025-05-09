@@ -2,7 +2,7 @@
 
 describe('Login Form', () => {
   beforeEach(() => {
-    cy.visit('/login'); 
+    cy.visit('/login');
   });
 
   it('should validate email format', () => {
@@ -16,10 +16,11 @@ describe('Login Form', () => {
   });
 
   it('should fill the form and submit, then be redirected', () => {
+    // Simulation de la réponse du seveur quand la requête sera faite
     cy.intercept('POST', '/api/auth/login', { statusCode: 200 }).as('loginRequest');
 
     const email = "johndoe@example.com";
-    const password = "Password123"; // Doit respecter la longueur requise
+    const password = "Password123";
 
     cy.get('[data-cy="email"]').type(email);
     cy.get('[data-cy="password"]').type(password);

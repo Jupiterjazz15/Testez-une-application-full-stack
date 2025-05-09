@@ -11,9 +11,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Session } from '../../interfaces/session.interface';
-import { Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { expect } from '@jest/globals';
+import { By } from '@angular/platform-browser';
 
 import { SessionService } from 'src/app/services/session.service';
 import { SessionApiService } from '../../services/session-api.service';
@@ -124,6 +124,12 @@ describe('FormComponent', () => {
     expect(component).toBeTruthy();
   });
 
+   it('should display the back arrow button', () => {
+      const backButton = fixture.debugElement.query(By.css('button mat-icon'));
+      expect(backButton).toBeTruthy();
+      expect(backButton.nativeElement.textContent.trim()).toBe('arrow_back');
+    });
+
   it('should enable the submit button when the form is valid', async () => {
     await fixture.whenStable();
     expect(component.sessionForm).toBeDefined();
@@ -140,6 +146,33 @@ describe('FormComponent', () => {
 
     const submitButton = fixture.nativeElement.querySelector('button[type="submit"]');
     expect(submitButton.disabled).toBeFalsy();
+  });
+
+  it('should disable submit button if form is invalid', () => {
+    component.sessionForm!.setValue({
+      name: '',
+      date: '',
+      teacher_id: '',
+      description: ''
+    });
+
+    fixture.detectChanges();
+    const submitButton = fixture.nativeElement.querySelector('button[type="submit"]');
+    expect(submitButton.disabled).toBeTruthy();
+  });
+
+  it('should have form controls initialized', () => {
+    expect(component.sessionForm?.contains('name')).toBeTruthy();
+    expect(component.sessionForm?.contains('date')).toBeTruthy();
+    expect(component.sessionForm?.contains('teacher_id')).toBeTruthy();
+    expect(component.sessionForm?.contains('description')).toBeTruthy();
+  });
+
+  it('should mark name as invalid if empty', () => {
+    const control = component.sessionForm!.get('name');
+    control?.setValue('');
+    expect(control?.valid).toBeFalsy();
+    expect(control?.hasError('required')).toBeTruthy();
   });
 
 // TESTS D'INTEGRATION
@@ -272,7 +305,7 @@ describe('FormComponent', () => {
     });
 
     it('should display a snackbar message and navigate to /sessions', () => {
-      (component as any).exitPage('Test message'); 
+      (component as any).exitPage('Test message');
 
       expect(snackBarSpy).toHaveBeenCalledWith('Test message', 'Close', { duration: 3000 });
       expect(routerSpy).toHaveBeenCalledWith(['sessions']);
