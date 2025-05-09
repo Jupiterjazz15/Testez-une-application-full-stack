@@ -388,7 +388,7 @@
       "0": 7,
       "1": 7,
       "2": 7,
-      "3": 624,
+      "3": 626,
       "4": 7,
       "5": 7,
       "6": 7,
@@ -404,7 +404,7 @@
     "f": {
       "0": 7,
       "1": 7,
-      "2": 624,
+      "2": 626,
       "3": 7,
       "4": 0,
       "5": 7,
@@ -1432,7 +1432,7 @@
         },
         "end": {
           "line": 107,
-          "column": 36
+          "column": 40
         }
       },
       "68": {
@@ -2366,7 +2366,7 @@
     },
     "inputSourceMap": {
       "version": 3,
-      "mappings": ";;;;;;;;;;;;;IAcQA;IAAkCA;IAAaA;;;;;;;;IAC/CA,+BAAqF,CAArF,EAAqF,GAArF;IACKA;IAAkBA;IACrBA;IAAuCA;MAAAA;MAAA;MAAA,OAASA,+BAAT;IAAiB,CAAjB;IACrCA;IAAUA;IAAMA;IAChBA;IAAkBA;IAAMA;;;;;;IAR9BA,+BAAiE,CAAjE,EAAiE,GAAjE;IACKA;;IAA0DA;IAC7DA;IAAGA;IAAuBA;IAC1BA;IACAA;IAOAA,+BAA0D,CAA1D,EAA0D,GAA1D,EAA0D,EAA1D,EAA0D,GAA1D;IAEQA;IAAWA;IAAKA;;IAAsCA;IAC5DA,2BAAG,EAAH,EAAG,GAAH;IAAMA;IAAaA;IAAKA;;IAAqCA;;;;;IAb5DA;IAAAA;IACAA;IAAAA;IACCA;IAAAA;IACEA;IAAAA;IASkBA;IAAAA;IACEA;IAAAA;;;;ACblC,WAAaC,WAAb;EAAM,MAAOA,WAAP,CAAkB;IAItBC,YAAoBC,MAApB,EACoBC,cADpB,EAEoBC,WAFpB,EAGoBC,WAHpB,EAG4C;MAHxB;MACA;MACA;MACA;IACnB;;IAEMC,QAAQ;MACb,KAAKD,WAAL,CACGE,OADH,CACW,KAAKJ,cAAL,CAAoBK,kBAApB,CAAwCC,EAAxC,CAA2CC,QAA3C,EADX,EAEGC,SAFH,CAEcC,IAAD,IAAgB,KAAKA,IAAL,GAAYA,IAFzC;IAGD;;IAEMC,IAAI;MACTC,MAAM,CAACC,OAAP,CAAeF,IAAf;IACD;;IAEMG,MAAM;MACX,KAAKX,WAAL,CACGW,MADH,CACU,KAAKb,cAAL,CAAoBK,kBAApB,CAAwCC,EAAxC,CAA2CC,QAA3C,EADV,EAEGC,SAFH,CAEcM,CAAD,IAAM;QACf,KAAKb,WAAL,CAAiBc,IAAjB,CAAsB,iCAAtB,EAAyD,OAAzD,EAAkE;UAAEC,QAAQ,EAAE;QAAZ,CAAlE;QACA,KAAKhB,cAAL,CAAoBiB,MAApB;QACA,KAAKlB,MAAL,CAAYmB,QAAZ,CAAqB,CAAC,GAAD,CAArB;MACD,CANH;IAOD;;EA5BqB;;;qBAAXrB,aAAWD;EAAA;;;UAAXC;IAAWsB;IAAAC;IAAAC;IAAAC;IAAAC;MAAA;QDZxB3B,+BAAgB,CAAhB,EAAgB,UAAhB,EAAgB,CAAhB,EAAgB,gBAAhB,EAAgB,CAAhB,EAAgB,KAAhB,EAAgB,CAAhB,EAAgB,CAAhB,EAAgB,QAAhB,EAAgB,CAAhB;QAIgCA;UAAA,OAAS4B,UAAT;QAAe,CAAf;QACtB5B;QAAUA;QAAUA;QAEtBA;QAAIA;QAAgBA;QAGxBA;QACEA;QAiBFA;;;;QAjBQA;QAAAA;;;;;ECCZ,OAAaC,WAAb;AAAA",
+      "mappings": ";;;;;;;;;;;;;IAcQA;IAAkCA;IAAaA;;;;;;;;IAC/CA,+BAAqF,CAArF,EAAqF,GAArF;IACKA;IAAkBA;IACrBA;IAAuCA;MAAAA;MAAA;MAAA,OAASA,+BAAT;IAAiB,CAAjB;IACrCA;IAAUA;IAAMA;IAChBA;IAAkBA;IAAMA;;;;;;IAR9BA,+BAAiE,CAAjE,EAAiE,GAAjE;IACKA;;IAA0DA;IAC7DA;IAAGA;IAAuBA;IAC1BA;IACAA;IAOAA,+BAA0D,CAA1D,EAA0D,GAA1D,EAA0D,EAA1D,EAA0D,GAA1D;IAEQA;IAAWA;IAAKA;;IAAsCA;IAC5DA,2BAAG,EAAH,EAAG,GAAH;IAAMA;IAAaA;IAAKA;;IAAqCA;;;;;IAb5DA;IAAAA;IACAA;IAAAA;IACCA;IAAAA;IACEA;IAAAA;IASkBA;IAAAA;IACEA;IAAAA;;;;ACblC,WAAaC,WAAb;EAAM,MAAOA,WAAP,CAAkB;IAItBC,YAAoBC,MAApB,EACoBC,cADpB,EAEoBC,WAFpB,EAGoBC,WAHpB,EAG4C;MAHxB;MACA;MACA;MACA;IACnB;;IAEMC,QAAQ;MACb,KAAKD,WAAL,CACGE,OADH,CACW,KAAKJ,cAAL,CAAoBK,kBAApB,CAAwCC,EAAxC,CAA2CC,QAA3C,EADX,EAEGC,SAFH,CAEcC,IAAD,IAAgB,KAAKA,IAAL,GAAYA,IAFzC;IAGD;;IAEMC,IAAI;MACTC,MAAM,CAACC,OAAP,CAAeF,IAAf;IACD;;IAEMG,MAAM;MACX,KAAKX,WAAL,CACGW,MADH,CACU,KAAKb,cAAL,CAAoBK,kBAApB,CAAwCC,EAAxC,CAA2CC,QAA3C,EADV,EAEGC,SAFH,CAEcM,CAAD,IAAM;QACf,KAAKb,WAAL,CAAiBc,IAAjB,CAAsB,iCAAtB,EAAyD,OAAzD,EAAkE;UAAEC,QAAQ,EAAE;QAAZ,CAAlE;QACA,KAAKhB,cAAL,CAAoBiB,MAApB;QACA,KAAKlB,MAAL,CAAYmB,QAAZ,CAAqB,CAAC,OAAD,CAArB;MACD,CANH;IAOD;;EA5BqB;;;qBAAXrB,aAAWD;EAAA;;;UAAXC;IAAWsB;IAAAC;IAAAC;IAAAC;IAAAC;MAAA;QDZxB3B,+BAAgB,CAAhB,EAAgB,UAAhB,EAAgB,CAAhB,EAAgB,gBAAhB,EAAgB,CAAhB,EAAgB,KAAhB,EAAgB,CAAhB,EAAgB,CAAhB,EAAgB,QAAhB,EAAgB,CAAhB;QAIgCA;UAAA,OAAS4B,UAAT;QAAe,CAAf;QACtB5B;QAAUA;QAAUA;QAEtBA;QAAIA;QAAgBA;QAGxBA;QACEA;QAiBFA;;;;QAjBQA;QAAAA;;;;;ECCZ,OAAaC,WAAb;AAAA",
       "names": [
         "i0",
         "MeComponent",
@@ -2405,11 +2405,11 @@
       ],
       "sourcesContent": [
         "<div class=\"m3\">\n  <mat-card>\n    <mat-card-title>\n      <div fxLayout=\"row\" fxLayoutAlign=\"start center\">\n        <button mat-icon-button (click)=\"back()\">\n          <mat-icon>arrow_back</mat-icon>\n        </button>\n        <h1>User information</h1>\n      </div>\n    </mat-card-title>\n    <mat-card-content>\n      <div *ngIf=\"user\" fxLayout=\"column\" fxLayoutAlign=\"start center\">\n        <p>Name: {{ user.firstName }} {{ user.lastName | uppercase }}</p>\n        <p>Email: {{ user.email }}</p>\n        <p *ngIf=\"user.admin\" class=\"my2\">You are admin</p>\n        <div *ngIf=\"!user.admin\" fxLayout=\"column\" class=\"my2\" fxLayoutAlign=\"center center\">\n          <p>Delete my account:</p>\n          <button mat-raised-button color=\"warn\" (click)=\"delete()\">\n            <mat-icon>delete</mat-icon>\n            <span class=\"ml1\">Detail</span>\n          </button>\n        </div>\n        <div fxLayoutAlign=\"space-between center\" class=\"p2 w100\">\n\n          <p><i>Create at: </i> {{ user.createdAt | date: 'longDate'}}</p>\n          <p><i>Last update: </i> {{ user.updatedAt| date: 'longDate'}}</p>\n        </div>\n      </div>\n    </mat-card-content>\n  </mat-card>\n</div>\n",
-        "import { Component, OnInit } from '@angular/core';\nimport { MatSnackBar } from '@angular/material/snack-bar';\nimport { Router } from '@angular/router';\nimport { User } from '../../interfaces/user.interface';\nimport { SessionService } from '../../services/session.service';\nimport { UserService } from '../../services/user.service';\n\n@Component({\n  selector: 'app-me',\n  templateUrl: './me.component.html',\n  styleUrls: ['./me.component.scss']\n})\nexport class MeComponent implements OnInit {\n\n  public user: User | undefined;\n\n  constructor(private router: Router,\n              private sessionService: SessionService,\n              private matSnackBar: MatSnackBar,\n              private userService: UserService) {\n  }\n\n  public ngOnInit(): void {\n    this.userService\n      .getById(this.sessionService.sessionInformation!.id.toString())\n      .subscribe((user: User) => this.user = user);\n  }\n\n  public back(): void {\n    window.history.back();\n  }\n\n  public delete(): void {\n    this.userService\n      .delete(this.sessionService.sessionInformation!.id.toString())\n      .subscribe((_) => {\n        this.matSnackBar.open(\"Your account has been deleted !\", 'Close', { duration: 3000 });\n        this.sessionService.logOut();\n        this.router.navigate(['/']);\n      })\n  }\n\n}\n"
+        "import { Component, OnInit } from '@angular/core';\nimport { MatSnackBar } from '@angular/material/snack-bar';\nimport { Router } from '@angular/router';\nimport { User } from '../../interfaces/user.interface';\nimport { SessionService } from '../../services/session.service';\nimport { UserService } from '../../services/user.service';\n\n@Component({\n  selector: 'app-me',\n  templateUrl: './me.component.html',\n  styleUrls: ['./me.component.scss']\n})\nexport class MeComponent implements OnInit {\n\n  public user: User | undefined;\n\n  constructor(private router: Router,\n              private sessionService: SessionService,\n              private matSnackBar: MatSnackBar,\n              private userService: UserService) {\n  }\n\n  public ngOnInit(): void {\n    this.userService\n      .getById(this.sessionService.sessionInformation!.id.toString())\n      .subscribe((user: User) => this.user = user);\n  }\n\n  public back(): void {\n    window.history.back();\n  }\n\n  public delete(): void {\n    this.userService\n      .delete(this.sessionService.sessionInformation!.id.toString())\n      .subscribe((_) => {\n        this.matSnackBar.open(\"Your account has been deleted !\", 'Close', { duration: 3000 });\n        this.sessionService.logOut();\n        this.router.navigate(['login']);\n      })\n  }\n\n}\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "8e856ce4c8a835f6aa576d040281f0efcd2ae76d"
+    "hash": "cb1974bb4ff1cff972d37da5b1e68d6b6b9bbcd4"
   },
   "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/components/not-found/not-found.component.ts": {
     "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/components/not-found/not-found.component.ts",
@@ -4937,7 +4937,7 @@
       }
     },
     "s": {
-      "0": 323,
+      "0": 325,
       "1": 7,
       "2": 7,
       "3": 7,
@@ -4963,13 +4963,13 @@
       "23": 7,
       "24": 7,
       "25": 7,
-      "26": 624,
+      "26": 626,
       "27": 0,
       "28": 0,
       "29": 7,
       "30": 7,
       "31": 7,
-      "32": 631,
+      "32": 633,
       "33": 7,
       "34": 7,
       "35": 7,
@@ -4980,27 +4980,27 @@
       "40": 7,
       "41": 7,
       "42": 7,
-      "43": 631,
-      "44": 624,
-      "45": 624,
-      "46": 624,
+      "43": 633,
+      "44": 626,
+      "45": 626,
+      "46": 626,
       "47": 7
     },
     "f": {
-      "0": 323,
+      "0": 325,
       "1": 0,
       "2": 315,
       "3": 7,
       "4": 7,
-      "5": 624,
+      "5": 626,
       "6": 0,
       "7": 7,
-      "8": 631
+      "8": 633
     },
     "b": {
       "0": [
         7,
-        316
+        318
       ],
       "1": [
         7,
@@ -5012,10 +5012,10 @@
       ],
       "3": [
         7,
-        624
+        626
       ],
       "4": [
-        624,
+        626,
         7
       ]
     },
@@ -5835,7 +5835,7 @@
           "column": 41
         },
         "end": {
-          "line": 108,
+          "line": 114,
           "column": 4
         }
       },
@@ -5912,450 +5912,470 @@
       "12": {
         "start": {
           "line": 39,
-          "column": 27
+          "column": 6
         },
         "end": {
-          "line": 39,
-          "column": 42
+          "line": 41,
+          "column": 7
         }
       },
       "13": {
         "start": {
           "line": 40,
-          "column": 6
+          "column": 8
         },
         "end": {
-          "line": 46,
-          "column": 9
+          "line": 40,
+          "column": 44
         }
       },
       "14": {
         "start": {
-          "line": 42,
-          "column": 10
+          "line": 45,
+          "column": 27
         },
         "end": {
-          "line": 42,
-          "column": 46
+          "line": 45,
+          "column": 42
         }
       },
       "15": {
         "start": {
-          "line": 43,
-          "column": 10
+          "line": 46,
+          "column": 6
         },
         "end": {
-          "line": 43,
-          "column": 46
+          "line": 52,
+          "column": 9
         }
       },
       "16": {
         "start": {
-          "line": 45,
-          "column": 24
+          "line": 48,
+          "column": 10
         },
         "end": {
-          "line": 45,
-          "column": 43
+          "line": 48,
+          "column": 46
         }
       },
       "17": {
         "start": {
-          "line": 51,
-          "column": 2
+          "line": 49,
+          "column": 10
         },
         "end": {
-          "line": 53,
-          "column": 4
+          "line": 49,
+          "column": 46
         }
       },
       "18": {
         "start": {
-          "line": 52,
-          "column": 4
+          "line": 51,
+          "column": 24
         },
         "end": {
-          "line": 52,
-          "column": 187
+          "line": 51,
+          "column": 43
         }
       },
       "19": {
         "start": {
-          "line": 55,
+          "line": 57,
           "column": 2
         },
         "end": {
-          "line": 106,
-          "column": 5
+          "line": 59,
+          "column": 4
         }
       },
       "20": {
         "start": {
-          "line": 62,
-          "column": 6
+          "line": 58,
+          "column": 4
         },
         "end": {
-          "line": 87,
-          "column": 7
+          "line": 58,
+          "column": 187
         }
       },
       "21": {
         "start": {
-          "line": 63,
-          "column": 8
+          "line": 61,
+          "column": 2
         },
         "end": {
-          "line": 63,
-          "column": 100
+          "line": 112,
+          "column": 5
         }
       },
       "22": {
         "start": {
-          "line": 64,
-          "column": 8
+          "line": 68,
+          "column": 6
         },
         "end": {
-          "line": 64,
-          "column": 30
+          "line": 93,
+          "column": 7
         }
       },
       "23": {
         "start": {
-          "line": 65,
-          "column": 8
-        },
-        "end": {
-          "line": 65,
-          "column": 28
-        }
-      },
-      "24": {
-        "start": {
-          "line": 66,
-          "column": 8
-        },
-        "end": {
-          "line": 66,
-          "column": 40
-        }
-      },
-      "25": {
-        "start": {
-          "line": 67,
+          "line": 69,
           "column": 8
         },
         "end": {
           "line": 69,
-          "column": 11
+          "column": 100
+        }
+      },
+      "24": {
+        "start": {
+          "line": 70,
+          "column": 8
+        },
+        "end": {
+          "line": 70,
+          "column": 30
+        }
+      },
+      "25": {
+        "start": {
+          "line": 71,
+          "column": 8
+        },
+        "end": {
+          "line": 71,
+          "column": 28
         }
       },
       "26": {
         "start": {
-          "line": 68,
-          "column": 10
+          "line": 72,
+          "column": 8
         },
         "end": {
-          "line": 68,
-          "column": 30
+          "line": 72,
+          "column": 40
         }
       },
       "27": {
         "start": {
-          "line": 70,
+          "line": 73,
           "column": 8
         },
         "end": {
-          "line": 70,
-          "column": 76
+          "line": 75,
+          "column": 11
         }
       },
       "28": {
         "start": {
-          "line": 71,
-          "column": 8
+          "line": 74,
+          "column": 10
         },
         "end": {
-          "line": 71,
-          "column": 36
+          "line": 74,
+          "column": 30
         }
       },
       "29": {
-        "start": {
-          "line": 72,
-          "column": 8
-        },
-        "end": {
-          "line": 72,
-          "column": 26
-        }
-      },
-      "30": {
-        "start": {
-          "line": 73,
-          "column": 8
-        },
-        "end": {
-          "line": 73,
-          "column": 50
-        }
-      },
-      "31": {
-        "start": {
-          "line": 74,
-          "column": 8
-        },
-        "end": {
-          "line": 74,
-          "column": 37
-        }
-      },
-      "32": {
-        "start": {
-          "line": 75,
-          "column": 8
-        },
-        "end": {
-          "line": 75,
-          "column": 43
-        }
-      },
-      "33": {
         "start": {
           "line": 76,
           "column": 8
         },
         "end": {
+          "line": 76,
+          "column": 76
+        }
+      },
+      "30": {
+        "start": {
+          "line": 77,
+          "column": 8
+        },
+        "end": {
+          "line": 77,
+          "column": 36
+        }
+      },
+      "31": {
+        "start": {
           "line": 78,
-          "column": 11
+          "column": 8
+        },
+        "end": {
+          "line": 78,
+          "column": 26
+        }
+      },
+      "32": {
+        "start": {
+          "line": 79,
+          "column": 8
+        },
+        "end": {
+          "line": 79,
+          "column": 50
+        }
+      },
+      "33": {
+        "start": {
+          "line": 80,
+          "column": 8
+        },
+        "end": {
+          "line": 80,
+          "column": 37
         }
       },
       "34": {
         "start": {
-          "line": 77,
-          "column": 10
+          "line": 81,
+          "column": 8
         },
         "end": {
-          "line": 77,
-          "column": 38
+          "line": 81,
+          "column": 43
         }
       },
       "35": {
         "start": {
-          "line": 79,
+          "line": 82,
           "column": 8
         },
         "end": {
-          "line": 79,
-          "column": 42
+          "line": 84,
+          "column": 11
         }
       },
       "36": {
         "start": {
-          "line": 80,
-          "column": 8
+          "line": 83,
+          "column": 10
         },
         "end": {
-          "line": 80,
-          "column": 22
+          "line": 83,
+          "column": 38
         }
       },
       "37": {
         "start": {
-          "line": 81,
+          "line": 85,
           "column": 8
         },
         "end": {
-          "line": 81,
-          "column": 32
+          "line": 85,
+          "column": 42
         }
       },
       "38": {
         "start": {
-          "line": 82,
+          "line": 86,
           "column": 8
         },
         "end": {
-          "line": 82,
-          "column": 43
+          "line": 86,
+          "column": 22
         }
       },
       "39": {
         "start": {
-          "line": 83,
+          "line": 87,
           "column": 8
         },
         "end": {
-          "line": 83,
-          "column": 34
+          "line": 87,
+          "column": 32
         }
       },
       "40": {
         "start": {
-          "line": 84,
+          "line": 88,
           "column": 8
         },
         "end": {
-          "line": 84,
-          "column": 26
+          "line": 88,
+          "column": 43
         }
       },
       "41": {
         "start": {
-          "line": 85,
+          "line": 89,
           "column": 8
         },
         "end": {
-          "line": 85,
-          "column": 70
+          "line": 89,
+          "column": 34
         }
       },
       "42": {
         "start": {
-          "line": 86,
+          "line": 90,
           "column": 8
         },
         "end": {
-          "line": 86,
-          "column": 30
+          "line": 90,
+          "column": 26
         }
       },
       "43": {
         "start": {
-          "line": 89,
-          "column": 6
+          "line": 91,
+          "column": 8
         },
         "end": {
-          "line": 102,
-          "column": 7
+          "line": 91,
+          "column": 70
         }
       },
       "44": {
         "start": {
-          "line": 90,
+          "line": 92,
           "column": 8
         },
         "end": {
-          "line": 90,
-          "column": 24
+          "line": 92,
+          "column": 30
         }
       },
       "45": {
         "start": {
-          "line": 91,
-          "column": 8
+          "line": 95,
+          "column": 6
         },
         "end": {
-          "line": 91,
-          "column": 45
+          "line": 108,
+          "column": 7
         }
       },
       "46": {
         "start": {
-          "line": 92,
+          "line": 96,
           "column": 8
         },
         "end": {
-          "line": 92,
+          "line": 96,
           "column": 24
         }
       },
       "47": {
         "start": {
-          "line": 93,
+          "line": 97,
           "column": 8
         },
         "end": {
-          "line": 93,
-          "column": 62
+          "line": 97,
+          "column": 45
         }
       },
       "48": {
         "start": {
-          "line": 94,
+          "line": 98,
           "column": 8
         },
         "end": {
-          "line": 94,
+          "line": 98,
           "column": 24
         }
       },
       "49": {
         "start": {
-          "line": 95,
+          "line": 99,
           "column": 8
         },
         "end": {
-          "line": 95,
-          "column": 80
+          "line": 99,
+          "column": 62
         }
       },
       "50": {
         "start": {
-          "line": 96,
+          "line": 100,
           "column": 8
         },
         "end": {
-          "line": 96,
+          "line": 100,
           "column": 24
         }
       },
       "51": {
         "start": {
-          "line": 97,
+          "line": 101,
           "column": 8
         },
         "end": {
-          "line": 97,
-          "column": 73
+          "line": 101,
+          "column": 80
         }
       },
       "52": {
         "start": {
-          "line": 98,
+          "line": 102,
           "column": 8
         },
         "end": {
-          "line": 98,
+          "line": 102,
           "column": 24
         }
       },
       "53": {
         "start": {
-          "line": 99,
+          "line": 103,
           "column": 8
         },
         "end": {
-          "line": 99,
-          "column": 52
+          "line": 103,
+          "column": 73
         }
       },
       "54": {
         "start": {
-          "line": 100,
+          "line": 104,
           "column": 8
         },
         "end": {
-          "line": 100,
+          "line": 104,
           "column": 24
         }
       },
       "55": {
         "start": {
-          "line": 101,
+          "line": 105,
           "column": 8
         },
         "end": {
-          "line": 101,
-          "column": 43
+          "line": 105,
+          "column": 52
         }
       },
       "56": {
         "start": {
+          "line": 106,
+          "column": 8
+        },
+        "end": {
+          "line": 106,
+          "column": 24
+        }
+      },
+      "57": {
+        "start": {
           "line": 107,
-          "column": 2
+          "column": 8
         },
         "end": {
           "line": 107,
+          "column": 43
+        }
+      },
+      "58": {
+        "start": {
+          "line": 113,
+          "column": 2
+        },
+        "end": {
+          "line": 113,
           "column": 24
         }
       }
@@ -6403,7 +6423,7 @@
             "column": 48
           },
           "end": {
-            "line": 108,
+            "line": 114,
             "column": 1
           }
         },
@@ -6448,10 +6468,10 @@
         "loc": {
           "start": {
             "line": 38,
-            "column": 13
+            "column": 15
           },
           "end": {
-            "line": 47,
+            "line": 42,
             "column": 5
           }
         },
@@ -6461,145 +6481,169 @@
         "name": "(anonymous_4)",
         "decl": {
           "start": {
-            "line": 41,
-            "column": 14
+            "line": 44,
+            "column": 4
           },
           "end": {
-            "line": 41,
-            "column": 15
+            "line": 44,
+            "column": 5
           }
         },
         "loc": {
           "start": {
-            "line": 41,
-            "column": 26
+            "line": 44,
+            "column": 13
           },
           "end": {
-            "line": 44,
-            "column": 9
+            "line": 53,
+            "column": 5
           }
         },
-        "line": 41
+        "line": 44
       },
       "5": {
         "name": "(anonymous_5)",
         "decl": {
           "start": {
-            "line": 45,
+            "line": 47,
+            "column": 14
+          },
+          "end": {
+            "line": 47,
+            "column": 15
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 47,
+            "column": 26
+          },
+          "end": {
+            "line": 50,
+            "column": 9
+          }
+        },
+        "line": 47
+      },
+      "6": {
+        "name": "(anonymous_6)",
+        "decl": {
+          "start": {
+            "line": 51,
             "column": 15
           },
           "end": {
-            "line": 45,
+            "line": 51,
             "column": 16
           }
         },
         "loc": {
           "start": {
-            "line": 45,
+            "line": 51,
             "column": 24
           },
           "end": {
-            "line": 45,
+            "line": 51,
             "column": 43
-          }
-        },
-        "line": 45
-      },
-      "6": {
-        "name": "LoginComponent_Factory",
-        "decl": {
-          "start": {
-            "line": 51,
-            "column": 33
-          },
-          "end": {
-            "line": 51,
-            "column": 55
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 51,
-            "column": 59
-          },
-          "end": {
-            "line": 53,
-            "column": 3
           }
         },
         "line": 51
       },
       "7": {
+        "name": "LoginComponent_Factory",
+        "decl": {
+          "start": {
+            "line": 57,
+            "column": 33
+          },
+          "end": {
+            "line": 57,
+            "column": 55
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 57,
+            "column": 59
+          },
+          "end": {
+            "line": 59,
+            "column": 3
+          }
+        },
+        "line": 57
+      },
+      "8": {
         "name": "LoginComponent_Template",
         "decl": {
           "start": {
-            "line": 61,
+            "line": 67,
             "column": 23
           },
           "end": {
-            "line": 61,
+            "line": 67,
             "column": 46
           }
         },
         "loc": {
           "start": {
-            "line": 61,
+            "line": 67,
             "column": 56
           },
           "end": {
-            "line": 103,
+            "line": 109,
             "column": 5
-          }
-        },
-        "line": 61
-      },
-      "8": {
-        "name": "LoginComponent_Template_form_ngSubmit_5_listener",
-        "decl": {
-          "start": {
-            "line": 67,
-            "column": 43
-          },
-          "end": {
-            "line": 67,
-            "column": 91
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 67,
-            "column": 94
-          },
-          "end": {
-            "line": 69,
-            "column": 9
           }
         },
         "line": 67
       },
       "9": {
+        "name": "LoginComponent_Template_form_ngSubmit_5_listener",
+        "decl": {
+          "start": {
+            "line": 73,
+            "column": 43
+          },
+          "end": {
+            "line": 73,
+            "column": 91
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 73,
+            "column": 94
+          },
+          "end": {
+            "line": 75,
+            "column": 9
+          }
+        },
+        "line": 73
+      },
+      "10": {
         "name": "LoginComponent_Template_button_click_11_listener",
         "decl": {
           "start": {
-            "line": 76,
+            "line": 82,
             "column": 40
           },
           "end": {
-            "line": 76,
+            "line": 82,
             "column": 88
           }
         },
         "loc": {
           "start": {
-            "line": 76,
+            "line": 82,
             "column": 91
           },
           "end": {
-            "line": 78,
+            "line": 84,
             "column": 9
           }
         },
-        "line": 76
+        "line": 82
       }
     },
     "branchMap": {
@@ -6642,11 +6686,47 @@
       "1": {
         "loc": {
           "start": {
-            "line": 52,
+            "line": 39,
+            "column": 6
+          },
+          "end": {
+            "line": 41,
+            "column": 7
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 39,
+              "column": 6
+            },
+            "end": {
+              "line": 41,
+              "column": 7
+            }
+          },
+          {
+            "start": {
+              "line": 39,
+              "column": 6
+            },
+            "end": {
+              "line": 41,
+              "column": 7
+            }
+          }
+        ],
+        "line": 39
+      },
+      "2": {
+        "loc": {
+          "start": {
+            "line": 58,
             "column": 16
           },
           "end": {
-            "line": 52,
+            "line": 58,
             "column": 35
           }
         },
@@ -6654,71 +6734,35 @@
         "locations": [
           {
             "start": {
-              "line": 52,
+              "line": 58,
               "column": 16
             },
             "end": {
-              "line": 52,
+              "line": 58,
               "column": 17
             }
           },
           {
             "start": {
-              "line": 52,
+              "line": 58,
               "column": 21
             },
             "end": {
-              "line": 52,
+              "line": 58,
               "column": 35
             }
           }
         ],
-        "line": 52
-      },
-      "2": {
-        "loc": {
-          "start": {
-            "line": 62,
-            "column": 6
-          },
-          "end": {
-            "line": 87,
-            "column": 7
-          }
-        },
-        "type": "if",
-        "locations": [
-          {
-            "start": {
-              "line": 62,
-              "column": 6
-            },
-            "end": {
-              "line": 87,
-              "column": 7
-            }
-          },
-          {
-            "start": {
-              "line": 62,
-              "column": 6
-            },
-            "end": {
-              "line": 87,
-              "column": 7
-            }
-          }
-        ],
-        "line": 62
+        "line": 58
       },
       "3": {
         "loc": {
           "start": {
-            "line": 89,
+            "line": 68,
             "column": 6
           },
           "end": {
-            "line": 102,
+            "line": 93,
             "column": 7
           }
         },
@@ -6726,35 +6770,71 @@
         "locations": [
           {
             "start": {
-              "line": 89,
+              "line": 68,
               "column": 6
             },
             "end": {
-              "line": 102,
+              "line": 93,
               "column": 7
             }
           },
           {
             "start": {
-              "line": 89,
+              "line": 68,
               "column": 6
             },
             "end": {
-              "line": 102,
+              "line": 93,
               "column": 7
             }
           }
         ],
-        "line": 89
+        "line": 68
       },
       "4": {
         "loc": {
           "start": {
-            "line": 93,
+            "line": 95,
+            "column": 6
+          },
+          "end": {
+            "line": 108,
+            "column": 7
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 95,
+              "column": 6
+            },
+            "end": {
+              "line": 108,
+              "column": 7
+            }
+          },
+          {
+            "start": {
+              "line": 95,
+              "column": 6
+            },
+            "end": {
+              "line": 108,
+              "column": 7
+            }
+          }
+        ],
+        "line": 95
+      },
+      "5": {
+        "loc": {
+          "start": {
+            "line": 99,
             "column": 30
           },
           "end": {
-            "line": 93,
+            "line": 99,
             "column": 60
           }
         },
@@ -6762,35 +6842,35 @@
         "locations": [
           {
             "start": {
-              "line": 93,
+              "line": 99,
               "column": 41
             },
             "end": {
-              "line": 93,
+              "line": 99,
               "column": 51
             }
           },
           {
             "start": {
-              "line": 93,
+              "line": 99,
               "column": 54
             },
             "end": {
-              "line": 93,
+              "line": 99,
               "column": 60
             }
           }
         ],
-        "line": 93
+        "line": 99
       },
-      "5": {
+      "6": {
         "loc": {
           "start": {
-            "line": 97,
+            "line": 103,
             "column": 29
           },
           "end": {
-            "line": 97,
+            "line": 103,
             "column": 71
           }
         },
@@ -6798,26 +6878,26 @@
         "locations": [
           {
             "start": {
-              "line": 97,
+              "line": 103,
               "column": 40
             },
             "end": {
-              "line": 97,
+              "line": 103,
               "column": 56
             }
           },
           {
             "start": {
-              "line": 97,
+              "line": 103,
               "column": 59
             },
             "end": {
-              "line": 97,
+              "line": 103,
               "column": 71
             }
           }
         ],
-        "line": 97
+        "line": 103
       }
     },
     "s": {
@@ -6834,16 +6914,16 @@
       "10": 7,
       "11": 7,
       "12": 7,
-      "13": 7,
+      "13": 0,
       "14": 7,
       "15": 7,
-      "16": 0,
+      "16": 7,
       "17": 7,
-      "18": 7,
+      "18": 0,
       "19": 7,
-      "20": 301,
+      "20": 7,
       "21": 7,
-      "22": 7,
+      "22": 301,
       "23": 7,
       "24": 7,
       "25": 7,
@@ -6855,18 +6935,18 @@
       "31": 7,
       "32": 7,
       "33": 7,
-      "34": 14,
+      "34": 7,
       "35": 7,
-      "36": 7,
+      "36": 14,
       "37": 7,
       "38": 7,
       "39": 7,
       "40": 7,
       "41": 7,
       "42": 7,
-      "43": 301,
-      "44": 294,
-      "45": 294,
+      "43": 7,
+      "44": 7,
+      "45": 301,
       "46": 294,
       "47": 294,
       "48": 294,
@@ -6877,7 +6957,9 @@
       "53": 294,
       "54": 294,
       "55": 294,
-      "56": 7
+      "56": 294,
+      "57": 294,
+      "58": 7
     },
     "f": {
       "0": 0,
@@ -6885,11 +6967,12 @@
       "2": 7,
       "3": 7,
       "4": 7,
-      "5": 0,
-      "6": 7,
-      "7": 301,
-      "8": 7,
-      "9": 14
+      "5": 7,
+      "6": 0,
+      "7": 7,
+      "8": 301,
+      "9": 7,
+      "10": 14
     },
     "b": {
       "0": [
@@ -6897,29 +6980,33 @@
         0
       ],
       "1": [
-        7,
+        0,
         7
       ],
       "2": [
         7,
-        294
+        7
       ],
       "3": [
+        7,
+        294
+      ],
+      "4": [
         294,
         7
       ],
-      "4": [
+      "5": [
         280,
         14
       ],
-      "5": [
+      "6": [
         280,
         14
       ]
     },
     "inputSourceMap": {
       "version": 3,
-      "mappings": "AACA,SAAsBA,UAAtB,QAAwC,gBAAxC;;;;;;;;;;;;;;;;IC4BMC;IAAyDA;IAAiBA;;;;ADhBhF,WAAaC,cAAb;EAAM,MAAOA,cAAP,CAAqB;IAqBzBC,YAAoBC,WAApB,EACoBC,EADpB,EAEoBC,MAFpB,EAGoBC,cAHpB,EAGkD;MAH9B;MACA;MACA;MACA;MAvBb,YAAO,IAAP;MACA,eAAU,KAAV;MAEA,YAAO,KAAKF,EAAL,CAAQG,KAAR,CAAc;QAC1BC,KAAK,EAAE,CACL,EADK,EAEL,CACET,UAAU,CAACU,QADb,EAEEV,UAAU,CAACS,KAFb,CAFK,CADmB;QAQ1BE,QAAQ,EAAE,CACR,EADQ,EAER,CACEX,UAAU,CAACU,QADb,EAEEV,UAAU,CAACY,GAAX,CAAe,CAAf,CAFF,CAFQ;MARgB,CAAd,CAAP;IAqBN;;IAEMC,MAAM;MACX,MAAMC,YAAY,GAAG,KAAKC,IAAL,CAAUC,KAA/B;MACA,KAAKZ,WAAL,CAAiBa,KAAjB,CAAuBH,YAAvB,EAAqCI,SAArC,CAA+C;QAC7CC,IAAI,EAAGC,QAAD,IAAiC;UACrC,KAAKb,cAAL,CAAoBc,KAApB,CAA0BD,QAA1B;UACA,KAAKd,MAAL,CAAYgB,QAAZ,CAAqB,CAAC,WAAD,CAArB;QACD,CAJ4C;QAK7CC,KAAK,EAAEA,KAAK,IAAI,KAAKC,OAAL,GAAe;MALc,CAA/C;IAOD;;EApCwB;;;qBAAdtB,gBAAcD;EAAA;;;UAAdC;IAAcuB;IAAAC;IAAAC;IAAAC;IAAAC;MAAA;QCZ3B5B,+BAAgE,CAAhE,EAAgE,UAAhE,EAAgE,CAAhE,EAAgE,iBAAhE,EAAgE,CAAhE,EAAgE,CAAhE,EAAgE,gBAAhE;QAGsBA;QAAKA;QAEvBA;QAA4CA;UAAA,OAAY6B,YAAZ;QAAoB,CAApB;QAC1C7B,4CAAoC,CAApC,EAAoC,gBAApC,EAAoC,CAApC;QAGIA;QACFA;QAGAA;QACEA;QAEAA;QAAkCA;UAAA;QAAA;QAEhCA;QAAUA;QAA0CA;QAM1DA;QACEA;QACFA;QAEAA;QACFA;;;;QAxByBA;QAAAA;QASHA;QAAAA;QAEyCA;QAAAA,8CAAmC,cAAnC,EAAmC6B,QAAnC;QAE7C7B;QAAAA;QAMwCA;QAAAA;QAIpDA;QAAAA;;;;;;EDhBV,OAAaC,cAAb;AAAA",
+      "mappings": "AACA,SAAsBA,UAAtB,QAAwC,gBAAxC;;;;;;;;;;;;;;;;IC4BMC;IAAyDA;IAAiBA;;;;ADfhF,WAAaC,cAAb;EAAM,MAAOA,cAAP,CAAqB;IAqBzBC,YAAoBC,WAApB,EACoBC,EADpB,EAEoBC,MAFpB,EAGoBC,cAHpB,EAGkD;MAH9B;MACA;MACA;MACA;MAvBb,YAAO,IAAP;MACA,eAAU,KAAV;MAEA,YAAO,KAAKF,EAAL,CAAQG,KAAR,CAAc;QAC1BC,KAAK,EAAE,CACL,EADK,EAEL,CACET,UAAU,CAACU,QADb,EAEEV,UAAU,CAACS,KAFb,CAFK,CADmB;QAQ1BE,QAAQ,EAAE,CACR,EADQ,EAER,CACEX,UAAU,CAACU,QADb,EAEEV,UAAU,CAACY,GAAX,CAAe,CAAf,CAFF,CAFQ;MARgB,CAAd,CAAP;IAqBN;;IAEDC,QAAQ;MACN,IAAI,KAAKN,cAAL,CAAoBO,kBAApB,EAAwCC,KAA5C,EAAmD;QACjD,KAAKT,MAAL,CAAYU,QAAZ,CAAqB,CAAC,WAAD,CAArB;MACD;IACF;;IAEMC,MAAM;MACX,MAAMC,YAAY,GAAG,KAAKC,IAAL,CAAUC,KAA/B;MACA,KAAKhB,WAAL,CAAiBiB,KAAjB,CAAuBH,YAAvB,EAAqCI,SAArC,CAA+C;QAC7CC,IAAI,EAAGC,QAAD,IAAiC;UACrC,KAAKjB,cAAL,CAAoBkB,KAApB,CAA0BD,QAA1B;UACA,KAAKlB,MAAL,CAAYU,QAAZ,CAAqB,CAAC,WAAD,CAArB;QACD,CAJ4C;QAK7CU,KAAK,EAAEA,KAAK,IAAI,KAAKC,OAAL,GAAe;MALc,CAA/C;IAOD;;EA1CwB;;;qBAAdzB,gBAAcD;EAAA;;;UAAdC;IAAc0B;IAAAC;IAAAC;IAAAC;IAAAC;MAAA;QCb3B/B,+BAAgE,CAAhE,EAAgE,UAAhE,EAAgE,CAAhE,EAAgE,iBAAhE,EAAgE,CAAhE,EAAgE,CAAhE,EAAgE,gBAAhE;QAGsBA;QAAKA;QAEvBA;QAA4CA;UAAA,OAAYgC,YAAZ;QAAoB,CAApB;QAC1ChC,4CAAoC,CAApC,EAAoC,gBAApC,EAAoC,CAApC;QAGIA;QACFA;QAGAA;QACEA;QAEAA;QAAkCA;UAAA;QAAA;QAEhCA;QAAUA;QAA0CA;QAM1DA;QACEA;QACFA;QAEAA;QACFA;;;;QAxByBA;QAAAA;QASHA;QAAAA;QAEyCA;QAAAA,8CAAmC,cAAnC,EAAmCgC,QAAnC;QAE7ChC;QAAAA;QAMwCA;QAAAA;QAIpDA;QAAAA;;;;;;EDfV,OAAaC,cAAb;AAAA",
       "names": [
         "Validators",
         "i0",
@@ -6934,6 +7021,10 @@
         "required",
         "password",
         "min",
+        "ngOnInit",
+        "sessionInformation",
+        "token",
+        "navigate",
         "submit",
         "loginRequest",
         "form",
@@ -6943,7 +7034,6 @@
         "next",
         "response",
         "logIn",
-        "navigate",
         "error",
         "onError",
         "selectors",
@@ -6959,12 +7049,12 @@
         "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/auth/components/login/login.component.html"
       ],
       "sourcesContent": [
-        "import { Component } from '@angular/core';\nimport { FormBuilder, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { SessionInformation } from 'src/app/interfaces/sessionInformation.interface';\nimport { SessionService } from 'src/app/services/session.service';\nimport { LoginRequest } from '../../interfaces/loginRequest.interface';\nimport { AuthService } from '../../services/auth.service';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss']\n})\nexport class LoginComponent {\n  public hide = true;\n  public onError = false;\n\n  public form = this.fb.group({\n    email: [\n      '',\n      [\n        Validators.required,\n        Validators.email\n      ]\n    ],\n    password: [\n      '',\n      [\n        Validators.required,\n        Validators.min(3)\n      ]\n    ]\n  });\n\n  constructor(private authService: AuthService,\n              private fb: FormBuilder,\n              private router: Router,\n              private sessionService: SessionService) {\n  }\n\n  public submit(): void {\n    const loginRequest = this.form.value as LoginRequest;\n    this.authService.login(loginRequest).subscribe({\n      next: (response: SessionInformation) => {\n        this.sessionService.logIn(response);\n        this.router.navigate(['/sessions']);\n      },\n      error: error => this.onError = true,\n    });\n  }\n}\n",
+        "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { SessionInformation } from 'src/app/interfaces/sessionInformation.interface';\nimport { SessionService } from 'src/app/services/session.service';\nimport { LoginRequest } from '../../interfaces/loginRequest.interface';\nimport { AuthService } from '../../services/auth.service';\n\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss']\n})\nexport class LoginComponent implements OnInit {\n  public hide = true;\n  public onError = false;\n\n  public form = this.fb.group({\n    email: [\n      '',\n      [\n        Validators.required,\n        Validators.email\n      ]\n    ],\n    password: [\n      '',\n      [\n        Validators.required,\n        Validators.min(3)\n      ]\n    ]\n  });\n\n  constructor(private authService: AuthService,\n              private fb: FormBuilder,\n              private router: Router,\n              private sessionService: SessionService) {\n  }\n\n  ngOnInit(): void {\n    if (this.sessionService.sessionInformation?.token) {\n      this.router.navigate(['/sessions']);\n    }\n  }\n\n  public submit(): void {\n    const loginRequest = this.form.value as LoginRequest;\n    this.authService.login(loginRequest).subscribe({\n      next: (response: SessionInformation) => {\n        this.sessionService.logIn(response);\n        this.router.navigate(['/sessions']);\n      },\n      error: error => this.onError = true,\n    });\n  }\n}\n",
         "\n<div class=\"login\" fxLayout=\"row\" fxLayoutAlign=\"center center\">\n  <mat-card>\n    <mat-card-header fxLayoutAlign=\"center center\">\n      <mat-card-title>Login</mat-card-title>\n    </mat-card-header>\n    <form class=\"login-form\" [formGroup]=\"form\" (ngSubmit)=\"submit()\">\n      <mat-card-content fxLayout=\"column\">\n        <!-- Champ Email avec data-cy -->\n        <mat-form-field fxFlex>\n          <input matInput placeholder=\"Email\" formControlName=\"email\" data-cy=\"email\">\n        </mat-form-field>\n\n        <!-- Champ Password avec data-cy -->\n        <mat-form-field fxFlex>\n          <input matInput [type]=\"hide ? 'password' : 'text'\" placeholder=\"Password\"\n                 formControlName=\"password\" data-cy=\"password\">\n          <button mat-icon-button matSuffix (click)=\"hide = !hide\" [attr.aria-label]=\"'Hide password'\"\n                  [attr.aria-pressed]=\"hide\">\n            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>\n          </button>\n        </mat-form-field>\n      </mat-card-content>\n\n      <!-- Bouton Submit avec data-cy -->\n      <button mat-raised-button color=\"primary\" type=\"submit\" [disabled]=\"form.invalid\" data-cy=\"submit-button\">\n        Submit\n      </button>\n\n      <p *ngIf=\"onError\" class=\"error\" data-cy=\"error-message\">An error occurred</p>\n    </form>\n  </mat-card>\n</div>\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "732dc19ba8ed52d6acd190eea4f854a3551f304b"
+    "hash": "0dc60f16b3b2d08f1c1417d4c1adf1ed3f3b95af"
   },
   "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/auth/components/register/register.component.ts": {
     "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/auth/components/register/register.component.ts",
@@ -9598,7 +9688,7 @@
         },
         "end": {
           "line": 75,
-          "column": 93
+          "column": 94
         }
       },
       "43": {
@@ -9698,7 +9788,7 @@
         },
         "end": {
           "line": 91,
-          "column": 29
+          "column": 27
         }
       },
       "53": {
@@ -9788,7 +9878,7 @@
         },
         "end": {
           "line": 102,
-          "column": 112
+          "column": 114
         }
       },
       "62": {
@@ -9797,7 +9887,7 @@
           "column": 2
         },
         "end": {
-          "line": 162,
+          "line": 166,
           "column": 3
         }
       },
@@ -9898,7 +9988,7 @@
         },
         "end": {
           "line": 119,
-          "column": 31
+          "column": 34
         }
       },
       "73": {
@@ -10018,7 +10108,7 @@
         },
         "end": {
           "line": 131,
-          "column": 90
+          "column": 91
         }
       },
       "85": {
@@ -10028,7 +10118,7 @@
         },
         "end": {
           "line": 132,
-          "column": 29
+          "column": 27
         }
       },
       "86": {
@@ -10078,7 +10168,7 @@
         },
         "end": {
           "line": 137,
-          "column": 52
+          "column": 53
         }
       },
       "91": {
@@ -10088,7 +10178,7 @@
         },
         "end": {
           "line": 138,
-          "column": 38
+          "column": 36
         }
       },
       "92": {
@@ -10178,7 +10268,7 @@
         },
         "end": {
           "line": 147,
-          "column": 18
+          "column": 38
         }
       },
       "101": {
@@ -10188,7 +10278,7 @@
         },
         "end": {
           "line": 148,
-          "column": 27
+          "column": 18
         }
       },
       "102": {
@@ -10208,7 +10298,7 @@
         },
         "end": {
           "line": 150,
-          "column": 60
+          "column": 27
         }
       },
       "104": {
@@ -10218,7 +10308,7 @@
         },
         "end": {
           "line": 151,
-          "column": 33
+          "column": 22
         }
       },
       "105": {
@@ -10228,7 +10318,7 @@
         },
         "end": {
           "line": 152,
-          "column": 22
+          "column": 61
         }
       },
       "106": {
@@ -10238,7 +10328,7 @@
         },
         "end": {
           "line": 153,
-          "column": 18
+          "column": 33
         }
       },
       "107": {
@@ -10248,7 +10338,7 @@
         },
         "end": {
           "line": 154,
-          "column": 26
+          "column": 22
         }
       },
       "108": {
@@ -10258,7 +10348,7 @@
         },
         "end": {
           "line": 155,
-          "column": 22
+          "column": 38
         }
       },
       "109": {
@@ -10268,7 +10358,7 @@
         },
         "end": {
           "line": 156,
-          "column": 46
+          "column": 18
         }
       },
       "110": {
@@ -10278,7 +10368,7 @@
         },
         "end": {
           "line": 157,
-          "column": 35
+          "column": 26
         }
       },
       "111": {
@@ -10288,7 +10378,7 @@
         },
         "end": {
           "line": 158,
-          "column": 22
+          "column": 24
         }
       },
       "112": {
@@ -10298,7 +10388,7 @@
         },
         "end": {
           "line": 159,
-          "column": 18
+          "column": 46
         }
       },
       "113": {
@@ -10308,7 +10398,7 @@
         },
         "end": {
           "line": 160,
-          "column": 26
+          "column": 35
         }
       },
       "114": {
@@ -10318,67 +10408,67 @@
         },
         "end": {
           "line": 161,
-          "column": 28
+          "column": 22
         }
       },
       "115": {
         "start": {
-          "line": 164,
-          "column": 2
+          "line": 162,
+          "column": 4
         },
         "end": {
-          "line": 184,
-          "column": 3
+          "line": 162,
+          "column": 38
         }
       },
       "116": {
         "start": {
-          "line": 165,
-          "column": 19
+          "line": 163,
+          "column": 4
         },
         "end": {
-          "line": 165,
-          "column": 37
+          "line": 163,
+          "column": 18
         }
       },
       "117": {
         "start": {
-          "line": 166,
+          "line": 164,
           "column": 4
         },
         "end": {
-          "line": 166,
-          "column": 20
+          "line": 164,
+          "column": 26
         }
       },
       "118": {
         "start": {
-          "line": 167,
+          "line": 165,
           "column": 4
         },
         "end": {
-          "line": 167,
-          "column": 68
+          "line": 165,
+          "column": 30
         }
       },
       "119": {
         "start": {
           "line": 168,
-          "column": 4
+          "column": 2
         },
         "end": {
-          "line": 168,
-          "column": 20
+          "line": 188,
+          "column": 3
         }
       },
       "120": {
         "start": {
           "line": 169,
-          "column": 4
+          "column": 19
         },
         "end": {
           "line": 169,
-          "column": 42
+          "column": 37
         }
       },
       "121": {
@@ -10398,7 +10488,7 @@
         },
         "end": {
           "line": 171,
-          "column": 43
+          "column": 68
         }
       },
       "123": {
@@ -10438,7 +10528,7 @@
         },
         "end": {
           "line": 175,
-          "column": 73
+          "column": 43
         }
       },
       "127": {
@@ -10458,7 +10548,7 @@
         },
         "end": {
           "line": 177,
-          "column": 82
+          "column": 42
         }
       },
       "129": {
@@ -10478,7 +10568,7 @@
         },
         "end": {
           "line": 179,
-          "column": 64
+          "column": 75
         }
       },
       "131": {
@@ -10498,7 +10588,7 @@
         },
         "end": {
           "line": 181,
-          "column": 97
+          "column": 93
         }
       },
       "133": {
@@ -10518,57 +10608,57 @@
         },
         "end": {
           "line": 183,
-          "column": 97
+          "column": 53
         }
       },
       "135": {
         "start": {
-          "line": 187,
-          "column": 42
+          "line": 184,
+          "column": 4
         },
         "end": {
-          "line": 265,
-          "column": 4
+          "line": 184,
+          "column": 20
         }
       },
       "136": {
         "start": {
-          "line": 190,
-          "column": 6
+          "line": 185,
+          "column": 4
         },
         "end": {
-          "line": 190,
-          "column": 25
+          "line": 185,
+          "column": 87
         }
       },
       "137": {
         "start": {
-          "line": 191,
-          "column": 6
+          "line": 186,
+          "column": 4
         },
         "end": {
-          "line": 191,
-          "column": 19
+          "line": 186,
+          "column": 20
         }
       },
       "138": {
         "start": {
-          "line": 192,
-          "column": 6
+          "line": 187,
+          "column": 4
         },
         "end": {
-          "line": 192,
-          "column": 43
+          "line": 187,
+          "column": 87
         }
       },
       "139": {
         "start": {
-          "line": 193,
-          "column": 6
+          "line": 191,
+          "column": 42
         },
         "end": {
-          "line": 193,
-          "column": 49
+          "line": 269,
+          "column": 4
         }
       },
       "140": {
@@ -10578,7 +10668,7 @@
         },
         "end": {
           "line": 194,
-          "column": 43
+          "column": 25
         }
       },
       "141": {
@@ -10588,7 +10678,7 @@
         },
         "end": {
           "line": 195,
-          "column": 37
+          "column": 19
         }
       },
       "142": {
@@ -10598,7 +10688,7 @@
         },
         "end": {
           "line": 196,
-          "column": 27
+          "column": 43
         }
       },
       "143": {
@@ -10608,7 +10698,7 @@
         },
         "end": {
           "line": 197,
-          "column": 33
+          "column": 49
         }
       },
       "144": {
@@ -10618,7 +10708,7 @@
         },
         "end": {
           "line": 198,
-          "column": 27
+          "column": 43
         }
       },
       "145": {
@@ -10628,7 +10718,7 @@
         },
         "end": {
           "line": 199,
-          "column": 62
+          "column": 37
         }
       },
       "146": {
@@ -10638,7 +10728,7 @@
         },
         "end": {
           "line": 200,
-          "column": 66
+          "column": 27
         }
       },
       "147": {
@@ -10648,266 +10738,306 @@
         },
         "end": {
           "line": 201,
-          "column": 73
+          "column": 33
         }
       },
       "148": {
         "start": {
+          "line": 202,
+          "column": 6
+        },
+        "end": {
+          "line": 202,
+          "column": 27
+        }
+      },
+      "149": {
+        "start": {
+          "line": 203,
+          "column": 6
+        },
+        "end": {
+          "line": 203,
+          "column": 62
+        }
+      },
+      "150": {
+        "start": {
+          "line": 204,
+          "column": 6
+        },
+        "end": {
+          "line": 204,
+          "column": 66
+        }
+      },
+      "151": {
+        "start": {
           "line": 205,
           "column": 6
         },
         "end": {
           "line": 205,
-          "column": 26
+          "column": 73
         }
       },
-      "149": {
+      "152": {
         "start": {
           "line": 209,
           "column": 6
         },
         "end": {
           "line": 209,
-          "column": 28
+          "column": 26
         }
       },
-      "150": {
+      "153": {
         "start": {
           "line": 213,
           "column": 6
         },
         "end": {
-          "line": 218,
-          "column": 9
-        }
-      },
-      "151": {
-        "start": {
-          "line": 214,
-          "column": 8
-        },
-        "end": {
-          "line": 216,
-          "column": 11
-        }
-      },
-      "152": {
-        "start": {
-          "line": 217,
-          "column": 8
-        },
-        "end": {
-          "line": 217,
-          "column": 43
-        }
-      },
-      "153": {
-        "start": {
-          "line": 222,
-          "column": 6
-        },
-        "end": {
-          "line": 222,
-          "column": 106
+          "line": 213,
+          "column": 28
         }
       },
       "154": {
         "start": {
-          "line": 222,
-          "column": 85
+          "line": 217,
+          "column": 6
         },
         "end": {
           "line": 222,
-          "column": 104
+          "column": 9
         }
       },
       "155": {
+        "start": {
+          "line": 218,
+          "column": 8
+        },
+        "end": {
+          "line": 220,
+          "column": 11
+        }
+      },
+      "156": {
+        "start": {
+          "line": 221,
+          "column": 8
+        },
+        "end": {
+          "line": 221,
+          "column": 43
+        }
+      },
+      "157": {
         "start": {
           "line": 226,
           "column": 6
         },
         "end": {
           "line": 226,
-          "column": 108
-        }
-      },
-      "156": {
-        "start": {
-          "line": 226,
-          "column": 87
-        },
-        "end": {
-          "line": 226,
           "column": 106
         }
       },
-      "157": {
+      "158": {
+        "start": {
+          "line": 226,
+          "column": 85
+        },
+        "end": {
+          "line": 226,
+          "column": 104
+        }
+      },
+      "159": {
         "start": {
           "line": 230,
           "column": 6
         },
         "end": {
-          "line": 234,
-          "column": 9
-        }
-      },
-      "158": {
-        "start": {
-          "line": 231,
-          "column": 8
-        },
-        "end": {
-          "line": 231,
-          "column": 31
-        }
-      },
-      "159": {
-        "start": {
-          "line": 232,
-          "column": 8
-        },
-        "end": {
-          "line": 232,
-          "column": 102
+          "line": 230,
+          "column": 108
         }
       },
       "160": {
         "start": {
-          "line": 232,
-          "column": 53
+          "line": 230,
+          "column": 87
         },
         "end": {
-          "line": 232,
-          "column": 100
+          "line": 230,
+          "column": 106
         }
       },
       "161": {
         "start": {
-          "line": 233,
-          "column": 8
+          "line": 234,
+          "column": 6
         },
         "end": {
-          "line": 233,
-          "column": 111
+          "line": 238,
+          "column": 9
         }
       },
       "162": {
         "start": {
-          "line": 233,
-          "column": 87
+          "line": 235,
+          "column": 8
         },
         "end": {
-          "line": 233,
-          "column": 109
+          "line": 235,
+          "column": 31
         }
       },
       "163": {
         "start": {
-          "line": 239,
-          "column": 2
+          "line": 236,
+          "column": 8
         },
         "end": {
-          "line": 241,
-          "column": 4
+          "line": 236,
+          "column": 102
         }
       },
       "164": {
         "start": {
-          "line": 240,
-          "column": 4
+          "line": 236,
+          "column": 53
         },
         "end": {
-          "line": 240,
-          "column": 314
+          "line": 236,
+          "column": 100
         }
       },
       "165": {
+        "start": {
+          "line": 237,
+          "column": 8
+        },
+        "end": {
+          "line": 237,
+          "column": 111
+        }
+      },
+      "166": {
+        "start": {
+          "line": 237,
+          "column": 87
+        },
+        "end": {
+          "line": 237,
+          "column": 109
+        }
+      },
+      "167": {
         "start": {
           "line": 243,
           "column": 2
         },
         "end": {
-          "line": 263,
-          "column": 5
-        }
-      },
-      "166": {
-        "start": {
-          "line": 250,
-          "column": 6
-        },
-        "end": {
-          "line": 254,
-          "column": 7
-        }
-      },
-      "167": {
-        "start": {
-          "line": 251,
-          "column": 8
-        },
-        "end": {
-          "line": 251,
-          "column": 39
+          "line": 245,
+          "column": 4
         }
       },
       "168": {
         "start": {
-          "line": 252,
-          "column": 8
+          "line": 244,
+          "column": 4
         },
         "end": {
-          "line": 252,
-          "column": 85
+          "line": 244,
+          "column": 314
         }
       },
       "169": {
         "start": {
-          "line": 253,
-          "column": 8
+          "line": 247,
+          "column": 2
         },
         "end": {
-          "line": 253,
-          "column": 26
+          "line": 267,
+          "column": 5
         }
       },
       "170": {
         "start": {
-          "line": 256,
+          "line": 254,
           "column": 6
         },
         "end": {
-          "line": 259,
+          "line": 258,
           "column": 7
         }
       },
       "171": {
         "start": {
-          "line": 257,
+          "line": 255,
           "column": 8
         },
         "end": {
-          "line": 257,
-          "column": 24
+          "line": 255,
+          "column": 39
         }
       },
       "172": {
         "start": {
-          "line": 258,
+          "line": 256,
           "column": 8
         },
         "end": {
-          "line": 258,
-          "column": 43
+          "line": 256,
+          "column": 85
         }
       },
       "173": {
         "start": {
-          "line": 264,
+          "line": 257,
+          "column": 8
+        },
+        "end": {
+          "line": 257,
+          "column": 26
+        }
+      },
+      "174": {
+        "start": {
+          "line": 260,
+          "column": 6
+        },
+        "end": {
+          "line": 263,
+          "column": 7
+        }
+      },
+      "175": {
+        "start": {
+          "line": 261,
+          "column": 8
+        },
+        "end": {
+          "line": 261,
+          "column": 24
+        }
+      },
+      "176": {
+        "start": {
+          "line": 262,
+          "column": 8
+        },
+        "end": {
+          "line": 262,
+          "column": 43
+        }
+      },
+      "177": {
+        "start": {
+          "line": 268,
           "column": 2
         },
         "end": {
-          "line": 264,
+          "line": 268,
           "column": 25
         }
       }
@@ -11123,7 +11253,7 @@
             "column": 54
           },
           "end": {
-            "line": 185,
+            "line": 189,
             "column": 1
           }
         },
@@ -11157,76 +11287,52 @@
         "name": "(anonymous_10)",
         "decl": {
           "start": {
-            "line": 187,
+            "line": 191,
             "column": 43
           },
           "end": {
-            "line": 187,
+            "line": 191,
             "column": 44
           }
         },
         "loc": {
           "start": {
-            "line": 187,
+            "line": 191,
             "column": 49
           },
           "end": {
-            "line": 265,
+            "line": 269,
             "column": 1
           }
         },
-        "line": 187
+        "line": 191
       },
       "11": {
         "name": "(anonymous_11)",
         "decl": {
           "start": {
-            "line": 189,
+            "line": 193,
             "column": 4
           },
           "end": {
-            "line": 189,
+            "line": 193,
             "column": 5
           }
         },
         "loc": {
           "start": {
-            "line": 189,
+            "line": 193,
             "column": 99
-          },
-          "end": {
-            "line": 202,
-            "column": 5
-          }
-        },
-        "line": 189
-      },
-      "12": {
-        "name": "(anonymous_12)",
-        "decl": {
-          "start": {
-            "line": 204,
-            "column": 4
-          },
-          "end": {
-            "line": 204,
-            "column": 5
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 204,
-            "column": 15
           },
           "end": {
             "line": 206,
             "column": 5
           }
         },
-        "line": 204
+        "line": 193
       },
-      "13": {
-        "name": "(anonymous_13)",
+      "12": {
+        "name": "(anonymous_12)",
         "decl": {
           "start": {
             "line": 208,
@@ -11240,7 +11346,7 @@
         "loc": {
           "start": {
             "line": 208,
-            "column": 11
+            "column": 15
           },
           "end": {
             "line": 210,
@@ -11249,8 +11355,8 @@
         },
         "line": 208
       },
-      "14": {
-        "name": "(anonymous_14)",
+      "13": {
+        "name": "(anonymous_13)",
         "decl": {
           "start": {
             "line": 212,
@@ -11264,89 +11370,65 @@
         "loc": {
           "start": {
             "line": 212,
-            "column": 13
+            "column": 11
           },
           "end": {
-            "line": 219,
+            "line": 214,
             "column": 5
           }
         },
         "line": 212
       },
-      "15": {
-        "name": "(anonymous_15)",
+      "14": {
+        "name": "(anonymous_14)",
         "decl": {
           "start": {
-            "line": 213,
-            "column": 62
-          },
-          "end": {
-            "line": 213,
-            "column": 63
-          }
-        },
-        "loc": {
-          "start": {
-            "line": 213,
-            "column": 67
-          },
-          "end": {
-            "line": 218,
-            "column": 7
-          }
-        },
-        "line": 213
-      },
-      "16": {
-        "name": "(anonymous_16)",
-        "decl": {
-          "start": {
-            "line": 221,
+            "line": 216,
             "column": 4
           },
           "end": {
-            "line": 221,
+            "line": 216,
             "column": 5
           }
         },
         "loc": {
           "start": {
-            "line": 221,
-            "column": 18
+            "line": 216,
+            "column": 13
           },
           "end": {
             "line": 223,
             "column": 5
           }
         },
-        "line": 221
+        "line": 216
       },
-      "17": {
-        "name": "(anonymous_17)",
+      "15": {
+        "name": "(anonymous_15)",
         "decl": {
           "start": {
-            "line": 222,
-            "column": 80
+            "line": 217,
+            "column": 62
           },
           "end": {
-            "line": 222,
-            "column": 81
+            "line": 217,
+            "column": 63
           }
         },
         "loc": {
           "start": {
-            "line": 222,
-            "column": 85
+            "line": 217,
+            "column": 67
           },
           "end": {
             "line": 222,
-            "column": 104
+            "column": 7
           }
         },
-        "line": 222
+        "line": 217
       },
-      "18": {
-        "name": "(anonymous_18)",
+      "16": {
+        "name": "(anonymous_16)",
         "decl": {
           "start": {
             "line": 225,
@@ -11360,7 +11442,7 @@
         "loc": {
           "start": {
             "line": 225,
-            "column": 20
+            "column": 18
           },
           "end": {
             "line": 227,
@@ -11369,32 +11451,32 @@
         },
         "line": 225
       },
-      "19": {
-        "name": "(anonymous_19)",
+      "17": {
+        "name": "(anonymous_17)",
         "decl": {
           "start": {
             "line": 226,
-            "column": 82
+            "column": 80
           },
           "end": {
             "line": 226,
-            "column": 83
+            "column": 81
           }
         },
         "loc": {
           "start": {
             "line": 226,
-            "column": 87
+            "column": 85
           },
           "end": {
             "line": 226,
-            "column": 106
+            "column": 104
           }
         },
         "line": 226
       },
-      "20": {
-        "name": "(anonymous_20)",
+      "18": {
+        "name": "(anonymous_18)",
         "decl": {
           "start": {
             "line": 229,
@@ -11408,134 +11490,182 @@
         "loc": {
           "start": {
             "line": 229,
-            "column": 19
+            "column": 20
           },
           "end": {
-            "line": 235,
+            "line": 231,
             "column": 5
           }
         },
         "line": 229
       },
+      "19": {
+        "name": "(anonymous_19)",
+        "decl": {
+          "start": {
+            "line": 230,
+            "column": 82
+          },
+          "end": {
+            "line": 230,
+            "column": 83
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 230,
+            "column": 87
+          },
+          "end": {
+            "line": 230,
+            "column": 106
+          }
+        },
+        "line": 230
+      },
+      "20": {
+        "name": "(anonymous_20)",
+        "decl": {
+          "start": {
+            "line": 233,
+            "column": 4
+          },
+          "end": {
+            "line": 233,
+            "column": 5
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 233,
+            "column": 19
+          },
+          "end": {
+            "line": 239,
+            "column": 5
+          }
+        },
+        "line": 233
+      },
       "21": {
         "name": "(anonymous_21)",
         "decl": {
           "start": {
-            "line": 230,
+            "line": 234,
             "column": 62
           },
           "end": {
-            "line": 230,
+            "line": 234,
             "column": 63
           }
         },
         "loc": {
           "start": {
-            "line": 230,
+            "line": 234,
             "column": 73
           },
           "end": {
-            "line": 234,
+            "line": 238,
             "column": 7
           }
         },
-        "line": 230
+        "line": 234
       },
       "22": {
         "name": "(anonymous_22)",
         "decl": {
           "start": {
-            "line": 232,
+            "line": 236,
             "column": 48
           },
           "end": {
-            "line": 232,
+            "line": 236,
             "column": 49
           }
         },
         "loc": {
           "start": {
-            "line": 232,
+            "line": 236,
             "column": 53
           },
           "end": {
-            "line": 232,
+            "line": 236,
             "column": 100
           }
         },
-        "line": 232
+        "line": 236
       },
       "23": {
         "name": "(anonymous_23)",
         "decl": {
           "start": {
-            "line": 233,
+            "line": 237,
             "column": 76
           },
           "end": {
-            "line": 233,
+            "line": 237,
             "column": 77
           }
         },
         "loc": {
           "start": {
-            "line": 233,
+            "line": 237,
             "column": 87
           },
           "end": {
-            "line": 233,
+            "line": 237,
             "column": 109
           }
         },
-        "line": 233
+        "line": 237
       },
       "24": {
         "name": "DetailComponent_Factory",
         "decl": {
           "start": {
-            "line": 239,
+            "line": 243,
             "column": 34
           },
           "end": {
-            "line": 239,
+            "line": 243,
             "column": 57
           }
         },
         "loc": {
           "start": {
-            "line": 239,
+            "line": 243,
             "column": 61
           },
           "end": {
-            "line": 241,
+            "line": 245,
             "column": 3
           }
         },
-        "line": 239
+        "line": 243
       },
       "25": {
         "name": "DetailComponent_Template",
         "decl": {
           "start": {
-            "line": 249,
+            "line": 253,
             "column": 23
           },
           "end": {
-            "line": 249,
+            "line": 253,
             "column": 47
           }
         },
         "loc": {
           "start": {
-            "line": 249,
+            "line": 253,
             "column": 57
           },
           "end": {
-            "line": 260,
+            "line": 264,
             "column": 5
           }
         },
-        "line": 249
+        "line": 253
       }
     },
     "branchMap": {
@@ -11798,7 +11928,7 @@
             "column": 2
           },
           "end": {
-            "line": 162,
+            "line": 166,
             "column": 3
           }
         },
@@ -11810,7 +11940,7 @@
               "column": 2
             },
             "end": {
-              "line": 162,
+              "line": 166,
               "column": 3
             }
           },
@@ -11820,7 +11950,7 @@
               "column": 2
             },
             "end": {
-              "line": 162,
+              "line": 166,
               "column": 3
             }
           }
@@ -11830,11 +11960,11 @@
       "8": {
         "loc": {
           "start": {
-            "line": 164,
+            "line": 168,
             "column": 2
           },
           "end": {
-            "line": 184,
+            "line": 188,
             "column": 3
           }
         },
@@ -11842,35 +11972,35 @@
         "locations": [
           {
             "start": {
-              "line": 164,
+              "line": 168,
               "column": 2
             },
             "end": {
-              "line": 184,
+              "line": 188,
               "column": 3
             }
           },
           {
             "start": {
-              "line": 164,
+              "line": 168,
               "column": 2
             },
             "end": {
-              "line": 184,
+              "line": 188,
               "column": 3
             }
           }
         ],
-        "line": 164
+        "line": 168
       },
       "9": {
         "loc": {
           "start": {
-            "line": 240,
+            "line": 244,
             "column": 16
           },
           "end": {
-            "line": 240,
+            "line": 244,
             "column": 36
           }
         },
@@ -11878,35 +12008,35 @@
         "locations": [
           {
             "start": {
-              "line": 240,
+              "line": 244,
               "column": 16
             },
             "end": {
-              "line": 240,
+              "line": 244,
               "column": 17
             }
           },
           {
             "start": {
-              "line": 240,
+              "line": 244,
               "column": 21
             },
             "end": {
-              "line": 240,
+              "line": 244,
               "column": 36
             }
           }
         ],
-        "line": 240
+        "line": 244
       },
       "10": {
         "loc": {
           "start": {
-            "line": 250,
+            "line": 254,
             "column": 6
           },
           "end": {
-            "line": 254,
+            "line": 258,
             "column": 7
           }
         },
@@ -11914,35 +12044,35 @@
         "locations": [
           {
             "start": {
-              "line": 250,
+              "line": 254,
               "column": 6
             },
             "end": {
-              "line": 254,
+              "line": 258,
               "column": 7
             }
           },
           {
             "start": {
-              "line": 250,
+              "line": 254,
               "column": 6
             },
             "end": {
-              "line": 254,
+              "line": 258,
               "column": 7
             }
           }
         ],
-        "line": 250
+        "line": 254
       },
       "11": {
         "loc": {
           "start": {
-            "line": 256,
+            "line": 260,
             "column": 6
           },
           "end": {
-            "line": 259,
+            "line": 263,
             "column": 7
           }
         },
@@ -11950,26 +12080,26 @@
         "locations": [
           {
             "start": {
-              "line": 256,
+              "line": 260,
               "column": 6
             },
             "end": {
-              "line": 259,
+              "line": 263,
               "column": 7
             }
           },
           {
             "start": {
-              "line": 256,
+              "line": 260,
               "column": 6
             },
             "end": {
-              "line": 259,
+              "line": 263,
               "column": 7
             }
           }
         ],
-        "line": 256
+        "line": 260
       }
     },
     "s": {
@@ -12088,11 +12218,11 @@
       "112": 3,
       "113": 3,
       "114": 3,
-      "115": 34,
-      "116": 31,
-      "117": 31,
-      "118": 31,
-      "119": 31,
+      "115": 3,
+      "116": 3,
+      "117": 3,
+      "118": 3,
+      "119": 34,
       "120": 31,
       "121": 31,
       "122": 31,
@@ -12108,11 +12238,11 @@
       "132": 31,
       "133": 31,
       "134": 31,
-      "135": 7,
-      "136": 3,
-      "137": 3,
-      "138": 3,
-      "139": 3,
+      "135": 31,
+      "136": 31,
+      "137": 31,
+      "138": 31,
+      "139": 7,
       "140": 3,
       "141": 3,
       "142": 3,
@@ -12122,31 +12252,35 @@
       "146": 3,
       "147": 3,
       "148": 3,
-      "149": 0,
-      "150": 1,
-      "151": 1,
-      "152": 1,
+      "149": 3,
+      "150": 3,
+      "151": 3,
+      "152": 3,
       "153": 0,
-      "154": 0,
-      "155": 0,
-      "156": 0,
-      "157": 3,
-      "158": 3,
-      "159": 3,
-      "160": 9,
+      "154": 1,
+      "155": 1,
+      "156": 1,
+      "157": 0,
+      "158": 0,
+      "159": 0,
+      "160": 0,
       "161": 3,
-      "162": 0,
-      "163": 7,
-      "164": 3,
-      "165": 7,
-      "166": 49,
-      "167": 3,
+      "162": 3,
+      "163": 3,
+      "164": 9,
+      "165": 3,
+      "166": 0,
+      "167": 7,
       "168": 3,
-      "169": 3,
+      "169": 7,
       "170": 49,
-      "171": 46,
-      "172": 46,
-      "173": 7
+      "171": 3,
+      "172": 3,
+      "173": 3,
+      "174": 49,
+      "175": 46,
+      "176": 46,
+      "177": 7
     },
     "f": {
       "0": 34,
@@ -12228,7 +12362,7 @@
     },
     "inputSourceMap": {
       "version": 3,
-      "mappings": "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",
+      "mappings": "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",
       "names": [
         "i0",
         "DetailComponent",
@@ -12283,12 +12417,12 @@
         "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/sessions/components/detail/detail.component.ts"
       ],
       "sourcesContent": [
-        "<div class=\"m3\">\n  <mat-card *ngIf=\"session\">\n    <mat-card-title>\n      <div fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <div fxLayout=\"row\" fxLayoutAlign=\"start center\">\n          <button mat-icon-button (click)=\"back()\">\n            <mat-icon>arrow_back</mat-icon>\n          </button>\n          <h1>{{session.name | titlecase}}</h1>\n        </div>\n        <div>\n          <button *ngIf=\"isAdmin\" mat-raised-button color=\"warn\" (click)=\"delete()\">\n            <mat-icon>delete</mat-icon>\n            <span class=\"ml1\">Delete</span>\n          </button>\n          <div *ngIf=\"!isAdmin\">\n            <button *ngIf=\"!isParticipate\" mat-raised-button color=\"primary\" (click)=\"participate()\">\n              <mat-icon>person_add</mat-icon>\n              <span class=\"ml1\">Participate</span>\n            </button>\n            <button *ngIf=\"isParticipate\" mat-raised-button color=\"warn\" (click)=\"unParticipate()\">\n              <mat-icon>person_remove</mat-icon>\n              <span class=\"ml1\">Do not participate</span>\n            </button>\n\n          </div>\n\n\n        </div>\n      </div>\n    </mat-card-title>\n    <mat-card-subtitle *ngIf=\"teacher\">\n      <div fxLayoutAlign=\"start center\" class=\"ml3\">\n        <mat-icon>\n          people\n        </mat-icon>\n        <span class=\"ml1\">{{ teacher.firstName }} {{ teacher.lastName | uppercase }}</span>\n      </div>\n    </mat-card-subtitle>\n    <div mat-card-image fxLayoutAlign=\"center center\">\n      <img class=\"picture\" src=\"assets/sessions.png\" alt=\"Yoga session\">\n    </div>\n    <mat-card-content>\n      <div class=\"my2\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <div fxLayoutAlign=\"start center\">\n          <mat-icon>\n            group\n          </mat-icon>\n          <span class=\"ml1\">{{ session.users.length }} attendees</span>\n        </div>\n        <div fxLayoutAlign=\"start center\">\n          <mat-icon>\n            calendar_month\n          </mat-icon>\n          <span class=\"ml1\">{{ session.date | date: 'longDate'}}</span>\n        </div>\n      </div>\n      <div class=\"description\">\n        <p>Description:</p>\n        {{ session.description }}\n        <br>\n      </div>\n      <div class=\"date\" class=\"my2\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <div class=\"created\"><i>Create at: </i> {{ session.createdAt| date: 'longDate'}}</div>\n        <div class=\"updated\"><i>Last update: </i> {{ session.updatedAt| date: 'longDate'}}</div>\n      </div>\n    </mat-card-content>\n  </mat-card>\n</div>\n",
+        "<div class=\"m3\">\n  <mat-card *ngIf=\"session\">\n    <mat-card-title>\n      <div fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <div fxLayout=\"row\" fxLayoutAlign=\"start center\">\n          <!-- Bouton de retour avec data-testid -->\n          <button mat-icon-button (click)=\"back()\" data-testid=\"back-button\">\n            <mat-icon>arrow_back</mat-icon>\n          </button>\n          <h1 data-testid=\"session-title\">{{ session.name | titlecase }}</h1>\n        </div>\n        <div>\n          <!-- Bouton Delete avec data-testid -->\n          <button *ngIf=\"isAdmin\" mat-raised-button color=\"warn\" (click)=\"delete()\" data-testid=\"delete-button\">\n            <mat-icon>delete</mat-icon>\n            <span class=\"ml1\">Delete</span>\n          </button>\n          <div *ngIf=\"!isAdmin\">\n            <!-- Bouton Participer avec data-testid -->\n            <button *ngIf=\"!isParticipate\" mat-raised-button color=\"primary\" (click)=\"participate()\" data-testid=\"participate-button\">\n              <mat-icon>person_add</mat-icon>\n              <span class=\"ml1\">Participate</span>\n            </button>\n            <!-- Bouton Ne plus participer avec data-testid -->\n            <button *ngIf=\"isParticipate\" mat-raised-button color=\"warn\" (click)=\"unParticipate()\" data-testid=\"unparticipate-button\">\n              <mat-icon>person_remove</mat-icon>\n              <span class=\"ml1\">Do not participate</span>\n            </button>\n          </div>\n        </div>\n      </div>\n    </mat-card-title>\n\n    <!-- Professeur assigné avec data-testid -->\n    <mat-card-subtitle *ngIf=\"teacher\">\n      <div fxLayoutAlign=\"start center\" class=\"ml3\">\n        <mat-icon>people</mat-icon>\n        <span class=\"ml1\" data-testid=\"teacher-name\">\n          {{ teacher.firstName }} {{ teacher.lastName | uppercase }}\n        </span>\n      </div>\n    </mat-card-subtitle>\n\n    <div mat-card-image fxLayoutAlign=\"center center\">\n      <img class=\"picture\" src=\"assets/sessions.png\" alt=\"Yoga session\">\n    </div>\n\n    <mat-card-content>\n      <div class=\"my2\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <div fxLayoutAlign=\"start center\">\n          <mat-icon>group</mat-icon>\n          <span class=\"ml1\" data-testid=\"session-attendees\">\n            {{ session.users.length }} attendees\n          </span>\n        </div>\n        <div fxLayoutAlign=\"start center\">\n          <mat-icon>calendar_month</mat-icon>\n          <span class=\"ml1\" data-testid=\"session-date\">\n            {{ session.date | date: 'longDate'}}\n          </span>\n        </div>\n      </div>\n\n      <div class=\"description\">\n        <p>Description:</p>\n        <span data-testid=\"session-description\">{{ session.description }}</span>\n        <br>\n      </div>\n\n      <div class=\"date my2\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <div class=\"created\">\n          <i>Create at: </i>\n          <span data-testid=\"session-createdAt\">{{ session.createdAt | date: 'longDate' }}</span>\n        </div>\n        <div class=\"updated\">\n          <i>Last update: </i>\n          <span data-testid=\"session-updatedAt\">{{ session.updatedAt | date: 'longDate' }}</span>\n        </div>\n      </div>\n    </mat-card-content>\n  </mat-card>\n</div>\n",
         "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder } from '@angular/forms';\nimport { MatSnackBar } from '@angular/material/snack-bar';\nimport { ActivatedRoute, Router } from '@angular/router';\nimport { Teacher } from '../../../../interfaces/teacher.interface';\nimport { SessionService } from '../../../../services/session.service';\nimport { TeacherService } from '../../../../services/teacher.service';\nimport { Session } from '../../interfaces/session.interface';\nimport { SessionApiService } from '../../services/session-api.service';\n\n@Component({\n  selector: 'app-detail',\n  templateUrl: './detail.component.html',\n  styleUrls: ['./detail.component.scss']\n})\nexport class DetailComponent implements OnInit {\n  public session: Session | undefined;\n  public teacher: Teacher | undefined;\n\n  public isParticipate = false;\n  public isAdmin = false;\n\n  public sessionId: string;\n  public userId: string;\n\n  constructor(\n    private route: ActivatedRoute,\n    private fb: FormBuilder,\n    private sessionService: SessionService,\n    private sessionApiService: SessionApiService,\n    private teacherService: TeacherService,\n    private matSnackBar: MatSnackBar,\n    private router: Router) {\n    this.sessionId = this.route.snapshot.paramMap.get('id')!;\n    this.isAdmin = this.sessionService.sessionInformation!.admin;\n    this.userId = this.sessionService.sessionInformation!.id.toString();\n  }\n\n  public ngOnInit(): void {\n    this.fetchSession();\n  }\n\n  public back() {\n    window.history.back();\n  }\n\n  public delete(): void {\n    this.sessionApiService\n      .delete(this.sessionId)\n      .subscribe((_: any) => {\n          this.matSnackBar.open('Session deleted !', 'Close', { duration: 3000 });\n          this.router.navigate(['sessions']);\n        }\n      );\n  }\n\n  public participate(): void {\n    this.sessionApiService.participate(this.sessionId, this.userId).subscribe(_ => this.fetchSession());\n  }\n\n  public unParticipate(): void {\n    this.sessionApiService.unParticipate(this.sessionId, this.userId).subscribe(_ => this.fetchSession());\n  }\n\n  private fetchSession(): void {\n    this.sessionApiService\n      .detail(this.sessionId)\n      .subscribe((session: Session) => {\n        this.session = session;\n        this.isParticipate = session.users.some(u => u === this.sessionService.sessionInformation!.id);\n        this.teacherService\n          .detail(session.teacher_id.toString())\n          .subscribe((teacher: Teacher) => this.teacher = teacher);\n      });\n  }\n\n}\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "bec847fb1454d90d0f0ed53ec4b1e6b2bacc9ad1"
+    "hash": "39a3de159fc0c6d7ea791db7280b410e46b125cb"
   },
   "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/sessions/components/form/form.component.ts": {
     "path": "/Users/coraliehaller/Code/Jupiterjazz15/Testez-une-application-full-stack/front/src/app/features/sessions/components/form/form.component.ts",
@@ -14309,7 +14443,7 @@
       }
     },
     "s": {
-      "0": 178,
+      "0": 180,
       "1": 2,
       "2": 2,
       "3": 2,
@@ -14317,16 +14451,16 @@
       "5": 0,
       "6": 0,
       "7": 0,
-      "8": 332,
+      "8": 336,
       "9": 4,
       "10": 4,
       "11": 4,
-      "12": 332,
-      "13": 328,
-      "14": 328,
-      "15": 328,
-      "16": 328,
-      "17": 178,
+      "12": 336,
+      "13": 332,
+      "14": 332,
+      "15": 332,
+      "16": 332,
+      "17": 180,
       "18": 2,
       "19": 2,
       "20": 2,
@@ -14358,14 +14492,14 @@
       "46": 2,
       "47": 2,
       "48": 2,
-      "49": 178,
-      "50": 176,
-      "51": 176,
-      "52": 176,
-      "53": 176,
-      "54": 176,
-      "55": 176,
-      "56": 176,
+      "49": 180,
+      "50": 178,
+      "51": 178,
+      "52": 178,
+      "53": 178,
+      "54": 178,
+      "55": 178,
+      "56": 178,
       "57": 7,
       "58": 2,
       "59": 2,
@@ -14397,7 +14531,7 @@
       "85": 7,
       "86": 2,
       "87": 7,
-      "88": 178,
+      "88": 180,
       "89": 2,
       "90": 2,
       "91": 2,
@@ -14406,20 +14540,20 @@
       "94": 2,
       "95": 2,
       "96": 2,
-      "97": 178,
-      "98": 176,
-      "99": 176,
-      "100": 176,
-      "101": 176,
-      "102": 176,
-      "103": 176,
+      "97": 180,
+      "98": 178,
+      "99": 178,
+      "100": 178,
+      "101": 178,
+      "102": 178,
+      "103": 178,
       "104": 7
     },
     "f": {
-      "0": 178,
+      "0": 180,
       "1": 0,
-      "2": 332,
-      "3": 178,
+      "2": 336,
+      "3": 180,
       "4": 2,
       "5": 7,
       "6": 2,
@@ -14431,12 +14565,12 @@
       "12": 2,
       "13": 2,
       "14": 2,
-      "15": 178
+      "15": 180
     },
     "b": {
       "0": [
         2,
-        176
+        178
       ],
       "1": [
         0,
@@ -14444,18 +14578,18 @@
       ],
       "2": [
         4,
-        328
+        332
       ],
       "3": [
-        328,
+        332,
         4
       ],
       "4": [
         2,
-        176
+        178
       ],
       "5": [
-        176,
+        178,
         2
       ],
       "6": [
@@ -14492,10 +14626,10 @@
       ],
       "14": [
         2,
-        176
+        178
       ],
       "15": [
-        176,
+        178,
         2
       ]
     },
