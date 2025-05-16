@@ -22,7 +22,6 @@ import { expect } from '@jest/globals';
 
 describe('MeComponent', () => {
 
-
   let component: MeComponent;
   let fixture: ComponentFixture<MeComponent>;
   let router: Router;
@@ -148,7 +147,7 @@ describe('MeComponent', () => {
     );
   });
 
-  // TESTS D'INTEGRATION //
+  // TESTS D'INTEGRATION
 
   describe('ngOnInit method', () => {
     it('should call userService.getById() with the correct ID', fakeAsync(() => {
