@@ -60,6 +60,7 @@ public class TeacherControllerIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(teacher1)));
+                // Vérifie que le contenu JSON retourné est exactement égal à teacher1 converti en JSON via objectMapper.
     }
 
     @Test

@@ -6,15 +6,11 @@ import com.openclassrooms.starterjwt.models.Teacher;
 import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.services.TeacherService;
 import com.openclassrooms.starterjwt.services.UserService;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import static org.mockito.Mockito.when;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,28 +19,25 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
+@SpringBootTest
 public class SessionMapperTest {
 
-    @Mock
+    @Autowired
+    private SessionMapper sessionMapper;
+
+    @MockBean
     private TeacherService teacherService;
 
-    @Mock
+    @MockBean
     private UserService userService;
 
-    @InjectMocks
-    private SessionMapperImpl sessionMapper;
-
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
     @Test
     public void testToEntity() throws ParseException {
-
         SessionDto dto = new SessionDto();
         dto.setId(1L);
         dto.setName("Session 1");
@@ -55,11 +48,9 @@ public class SessionMapperTest {
         dto.setTeacher_id(2L);
         dto.setUsers(Arrays.asList(3L, 4L));
 
-
         Teacher teacher = new Teacher();
         teacher.setId(2L);
         when(teacherService.findById(2L)).thenReturn(teacher);
-
 
         User user1 = new User();
         user1.setId(3L);
@@ -68,9 +59,7 @@ public class SessionMapperTest {
         when(userService.findById(3L)).thenReturn(user1);
         when(userService.findById(4L)).thenReturn(user2);
 
-
         Session session = sessionMapper.toEntity(dto);
-
 
         assertEquals(dto.getId(), session.getId());
         assertEquals(dto.getName(), session.getName());
@@ -85,17 +74,14 @@ public class SessionMapperTest {
     }
 
     @Test
-
     public void testToDto() throws ParseException {
         Teacher teacher = new Teacher();
         teacher.setId(2L);
-
 
         User user1 = new User();
         user1.setId(3L);
         User user2 = new User();
         user2.setId(4L);
-
 
         Session session = new Session();
         session.setId(1L);
@@ -107,9 +93,7 @@ public class SessionMapperTest {
         session.setTeacher(teacher);
         session.setUsers(Arrays.asList(user1, user2));
 
-
         SessionDto dto = sessionMapper.toDto(session);
-
 
         assertEquals(session.getId(), dto.getId());
         assertEquals(session.getName(), dto.getName());
@@ -125,7 +109,6 @@ public class SessionMapperTest {
 
     @Test
     public void testToEntityList() throws ParseException {
-
         SessionDto dto1 = new SessionDto();
         dto1.setId(1L);
         dto1.setName("Session 1");
@@ -146,7 +129,6 @@ public class SessionMapperTest {
         dto2.setTeacher_id(3L);
         dto2.setUsers(Collections.singletonList(5L));
 
-
         Teacher teacher1 = new Teacher();
         teacher1.setId(2L);
         Teacher teacher2 = new Teacher();
@@ -166,12 +148,8 @@ public class SessionMapperTest {
         when(userService.findById(4L)).thenReturn(user2);
         when(userService.findById(5L)).thenReturn(user3);
 
-
         List<SessionDto> dtoList = Arrays.asList(dto1, dto2);
-
-
         List<Session> sessionList = sessionMapper.toEntity(dtoList);
-
 
         assertEquals(dtoList.size(), sessionList.size());
         assertEquals(dtoList.get(0).getId(), sessionList.get(0).getId());
@@ -180,7 +158,6 @@ public class SessionMapperTest {
 
     @Test
     public void testToDtoList() throws ParseException {
-
         Teacher teacher1 = new Teacher();
         teacher1.setId(2L);
 
@@ -188,7 +165,6 @@ public class SessionMapperTest {
         user1.setId(3L);
         User user2 = new User();
         user2.setId(4L);
-
 
         Session session1 = new Session();
         session1.setId(1L);
@@ -210,12 +186,8 @@ public class SessionMapperTest {
         session2.setTeacher(null);
         session2.setUsers(Collections.singletonList(user2));
 
-
         List<Session> sessionList = Arrays.asList(session1, session2);
-
-
         List<SessionDto> dtoList = sessionMapper.toDto(sessionList);
-
 
         assertEquals(sessionList.size(), dtoList.size());
         assertEquals(sessionList.get(0).getId(), dtoList.get(0).getId());

@@ -88,7 +88,7 @@ public class UserTest {
         user.setId(1L);
 
         assertThat(user.equals(null)).isFalse();
-        assertThat(user.equals("a string")).isFalse();
+        assertThat(user.equals("a string")).isFalse();//user n’est pas égal à un objet d’un autre type que String
     }
 
     @Test
@@ -141,7 +141,7 @@ public class UserTest {
     @Test
     void testEquals_SameReference() {
       User user = new User();
-      assertThat(user.equals(user)).isTrue(); // couvre `if (this == o)`
+      assertThat(user.equals(user)).isTrue(); // couvre `if (this == o)` cad si on compare un objet avec lui-même il retourne true
     }
 
 }

@@ -14,6 +14,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 class SessionServiceTest {
@@ -52,18 +53,22 @@ class SessionServiceTest {
 
     @Test
     void testCreate() {
+        // mocke le comportement
         when(sessionRepository.save(any(Session.class))).thenReturn(session);
+        // Quand la méthode save(...) du repository est appelée avec n’importe quelle Session, retourne l'objet session
 
         Session createdSession = sessionService.create(session);
 
         assertNotNull(createdSession);
         assertEquals(session.getName(), createdSession.getName());
         verify(sessionRepository, times(1)).save(session);
+        //Vérifie que la mthd save() du repo a été appelée une seule fois et avec l’objet exact session.
     }
 
     @Test
     void testDelete() {
         doNothing().when(sessionRepository).deleteById(anyLong());
+        // quand la méthode deleteById(...) est appelée avec n'importe quel Long, ne fais rien (évite une vraie suppression, car on est dans un test
 
         sessionService.delete(1L);
 

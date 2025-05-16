@@ -24,4 +24,3 @@ public class MessageResponseTest {
         assertEquals(newMessage, messageResponse.getMessage(), "The message should be correctly updated by the setter.");
     }
 }
-

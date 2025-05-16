@@ -23,14 +23,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     User user = userRepository.findByEmail(username)
         .orElseThrow(() -> new UsernameNotFoundException("User Not Found with email: " + username));
 
-    return UserDetailsImpl
-            .builder()
-            .id(user.getId())
-            .username(user.getEmail())
-            .lastName(user.getLastName())
-            .firstName(user.getFirstName())
-            .password(user.getPassword())
-            .build();
+    return new UserDetailsImpl(
+            user.getId(),
+            user.getEmail(),
+            user.getFirstName(),
+            user.getLastName(),
+            user.getPassword(),
+            user.isAdmin()
+    );
   }
-
 }

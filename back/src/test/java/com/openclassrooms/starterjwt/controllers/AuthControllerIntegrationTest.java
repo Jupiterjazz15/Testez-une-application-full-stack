@@ -48,6 +48,7 @@ public class AuthControllerIntegrationTest {
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(signupRequest)))
+                        // On convertit l'objet Java signupRequest en chaine JSON
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User registered successfully!"));
 

@@ -3,6 +3,7 @@ package com.openclassrooms.starterjwt.security.services;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.GrantedAuthority;
+
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -14,14 +15,14 @@ public class UserDetailsImplTest {
 
     @BeforeEach
     public void setUp() {
-        userDetails = UserDetailsImpl.builder()
-                .id(1L)
-                .username("testUser")
-                .firstName("John")
-                .lastName("Doe")
-                .admin(true)
-                .password("password")
-                .build();
+        userDetails = new UserDetailsImpl(
+                1L,
+                "testUser",
+                "John",
+                "Doe",
+                "password",
+                true
+        );
     }
 
     @Test
@@ -46,8 +47,9 @@ public class UserDetailsImplTest {
 
     @Test
     public void testIsAdmin() {
-        assertTrue(userDetails.getAdmin());
+        assertTrue(userDetails.isAdmin());
     }
+
 
     @Test
     public void testGetPassword() {
@@ -98,28 +100,28 @@ public class UserDetailsImplTest {
 
     @Test
     public void testEquals_DifferentClass() {
-        UserDetailsImpl otherUserDetails = UserDetailsImpl.builder()
-                .id(2L)
-                .username("anotherUser")
-                .firstName("Jane")
-                .lastName("Smith")
-                .admin(false)
-                .password("anotherPassword")
-                .build();
+        UserDetailsImpl otherUserDetails = new UserDetailsImpl(
+                2L,
+                "anotherUser",
+                "Jane",
+                "Smith",
+                "anotherPassword",
+                false
+        );
 
         assertFalse(userDetails.equals(otherUserDetails));
     }
 
     @Test
     public void testEquals_SameId() {
-        UserDetailsImpl sameIdUserDetails = UserDetailsImpl.builder()
-                .id(1L)
-                .username("testUser")
-                .firstName("John")
-                .lastName("Doe")
-                .admin(true)
-                .password("password")
-                .build();
+        UserDetailsImpl sameIdUserDetails = new UserDetailsImpl(
+                1L,
+                "testUser",
+                "John",
+                "Doe",
+                "password",
+                true
+        );
 
         assertTrue(userDetails.equals(sameIdUserDetails));
     }

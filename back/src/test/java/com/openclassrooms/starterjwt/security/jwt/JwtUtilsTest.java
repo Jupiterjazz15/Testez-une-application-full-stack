@@ -43,7 +43,7 @@ public class JwtUtilsTest {
     @Test
     public void testGenerateJwtToken() {
 
-        UserDetailsImpl userDetails = new UserDetailsImpl(1L, "username", "John", "Doe", false,"password");
+        UserDetailsImpl userDetails = new UserDetailsImpl(1L, "username", "John", "Doe", "password", false);
         when(authentication.getPrincipal()).thenReturn(userDetails);
 
 
